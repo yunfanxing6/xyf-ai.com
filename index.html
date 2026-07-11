@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>xyf — AI media × builder</title>
+<meta name="description" content="xyf — 专注于 AI 内容实践与分享。不断探索 AI 边界与商业应用，探索属于 00 后的财富自由之路。" />
+<link rel="icon" href="data:," />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Noto+Serif+SC:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/tokens.css?v=xyf-build-projects-1" />
+<link rel="stylesheet" href="css/base.css?v=xyf-build-projects-1" />
+<link rel="stylesheet" href="css/sections.css?v=xyf-build-projects-1" />
+<link rel="stylesheet" href="css/work-split.css?v=xyf-build-projects-1" />
+</head>
+<body>
+
+<!-- ───── SVG defs:纸纹 + 双色调滤镜 ───── -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- 双色调:灰度 → 墨黑+橙 映射(Work 封面用) -->
+    <filter id="duotone" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="0.33 0.33 0.33 0 0
+                                            0.33 0.33 0.33 0 0
+                                            0.33 0.33 0.33 0 0
+                                            0    0    0    1 0"/>
+      <feComponentTransfer color-interpolation-filters="sRGB">
+        <feFuncR type="table" tableValues="0.102 0.365"/>
+        <feFuncG type="table" tableValues="0.090 0.616"/>
+        <feFuncB type="table" tableValues="0.078 0.902"/>
+      </feComponentTransfer>
+    </filter>
+    <!-- 反相双色调:浅底→墨黑, 暗主体→橙(GitHub 那张用)-->
+    <filter id="duotone-invert" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="0.33 0.33 0.33 0 0
+                                            0.33 0.33 0.33 0 0
+                                            0.33 0.33 0.33 0 0
+                                            0    0    0    1 0"/>
+      <feComponentTransfer color-interpolation-filters="sRGB">
+        <feFuncR type="table" tableValues="0.365 0.102"/>
+        <feFuncG type="table" tableValues="0.616 0.090"/>
+        <feFuncB type="table" tableValues="0.902 0.078"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+</svg>
+
+<!-- ───── 顶部导航 ───── -->
+<header class="nav" id="nav">
+  <a href="#hero" class="nav__brand">xyf</a>
+  <nav class="nav__links" aria-label="主导航">
+    <a href="#about">ABOUT</a><span class="sep">·</span>
+    <a href="#writing">WRITING</a><span class="sep">·</span>
+    <a href="#shoot">VIDEO</a><span class="sep">·</span>
+    <a href="#build">BUILD</a><span class="sep">·</span>
+    <a href="#contact">CONTACT</a>
+    <a class="nav__github" href="https://github.com/yunfanxing6" target="_blank" rel="noopener" aria-label="GitHub source code">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.92.58.1.79-.25.79-.56v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.42-2.69 5.38-5.25 5.67.42.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+    </a>
+  </nav>
+</header>
+
+<!-- ───── 全局结构件:左侧韵律线 + 四角准星 ───── -->
+<div class="rail" aria-hidden="true"><i></i><i></i><i></i></div>
+<span class="cross cross--tr" aria-hidden="true"></span>
+<span class="cross cross--bl" aria-hidden="true"></span>
+<span class="cross cross--br" aria-hidden="true"></span>
+
+<main>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="hero" id="hero">
+    <div class="hero__left">
+      <h1 class="hero__wordmark" data-reveal>xyf</h1>
+      <div class="hero__lower">
+        <p class="hero__kicker" data-reveal><span class="dot"></span> 专注于 AI 内容实践与分享</p>
+        <p class="hero__slogan" data-reveal>
+          不断探索 AI 边界与商业应用<br />
+          探索属于 00 后的财富自由之路
+        </p>
+        <div class="hero__cta" data-reveal>
+          <a href="#writing" class="btn btn--ghost">查看内容 <span class="arr">→</span></a>
+          <a href="#contact" class="btn btn--link">联系我 <span class="arr">→</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="hero__right">
+      <figure class="portrait" data-portrait>
+        <span class="portrait__media">
+          <img src="assets/avatar-cutout.png" alt="xyf 头像" class="portrait__img" />
+        </span>
+        <span class="portrait__cross portrait__cross--tl"></span>
+        <span class="portrait__cross portrait__cross--br"></span>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ═══════════ ABOUT ═══════════ -->
+  <section class="about" id="about">
+    <!-- ── 左栏:标题 + 简介 + 蓝图档案 ── -->
+    <div class="about__left">
+      <h2 class="about__title" data-reveal>About me</h2>
+      <div class="about__bio" data-reveal>
+        <p>我是 xyf，专注于 AI 内容实践与分享</p>
+        <p>不断探索 AI 边界与商业应用</p>
+        <p>探索属于 00 后的财富自由之路</p>
+      </div>
+
+      <!-- 工程蓝图档案:线稿头像 + 标注 -->
+      <figure class="blueprint" data-reveal>
+        <!-- 四角准星 -->
+        <span class="bp__target bp__target--tl"></span>
+        <span class="bp__target bp__target--tr"></span>
+        <span class="bp__target bp__target--bl"></span>
+        <span class="bp__target bp__target--br"></span>
+        <!-- 散落十字标记 -->
+        <span class="bp__plus" style="top:30%;left:25%">+</span>
+        <span class="bp__plus" style="top:70%;left:30%">+</span>
+        <span class="bp__plus" style="top:34%;left:62%">+</span>
+        <span class="bp__plus" style="top:60%;left:58%">+</span>
+
+        <!-- 背景装饰圆环 -->
+        <span class="bp__ring" aria-hidden="true"></span>
+
+        <!-- 线稿头像 -->
+        <img class="bp__img" src="assets/about-portrait-sketch.png" alt="xyf 线稿头像" />
+
+        <!-- 左上:身份签 -->
+        <div class="bp__anno bp__anno--tl">
+          <p class="bp__lead"><i class="bp__sq"></i> AI MEDIA / BUILDER</p>
+          <span class="bp__hr"></span>
+          <p class="bp__mono">WRITE · SHOOT · BUILD</p>
+        </div>
+
+        <!-- 左中:规格表 -->
+        <div class="bp__anno bp__anno--spec">
+          <p class="bp__mono bp__mono--key">SPEC.001</p>
+          <p class="bp__mono">FOCUS&nbsp;&nbsp;: CONTENT &amp; AI</p>
+          <p class="bp__mono">TOPIC&nbsp;&nbsp;: AI 边际 &amp; BIZ</p>
+          <p class="bp__mono">FORMAT&nbsp;: ARTICLE / 视频</p>
+          <p class="bp__mono">PRODUCT: DIGITAL</p>
+          <p class="bp__mono">VALUE&nbsp;&nbsp;: LONG-TERM</p>
+        </div>
+
+        <!-- 左下:版本 + 坐标 -->
+        <div class="bp__anno bp__anno--ver">
+          <p class="bp__mono bp__mono--key">VER. 1.0.0</p>
+          <p class="bp__mono">DATE. 2025</p>
+          <p class="bp__mono bp__mono--mt">ID 7°31′ N</p>
+          <p class="bp__mono">L3114°05′ E</p>
+        </div>
+
+        <!-- 右上:档案号 -->
+        <div class="bp__anno bp__anno--tr">
+          <p class="bp__mono bp__mono--key">ID // XYF</p>
+        </div>
+
+        <!-- 右中:分类 + 关注点 -->
+        <div class="bp__anno bp__anno--cat">
+          <p class="bp__mono">CATEGORY</p>
+          <p class="bp__mono">IN PUBLIC</p>
+          <span class="bp__hatch" aria-hidden="true"></span>
+        </div>
+        <div class="bp__anno bp__anno--focus">
+          <p class="bp__mono bp__mono--key">FOCUS</p>
+          <p class="bp__mono">· CONTENT</p>
+          <p class="bp__mono">· PRODUCT</p>
+          <p class="bp__mono">· TECH</p>
+        </div>
+
+        <!-- 右下:成立年份 -->
+        <div class="bp__anno bp__anno--est">
+          <p class="bp__mono">EST. 2023</p>
+        </div>
+
+        <!-- 底部居中:经纬坐标 -->
+        <figcaption class="bp__coords">N 31° 24′ 37.56″&nbsp;&nbsp;&nbsp;&nbsp;E 121° 35′ 09.81″</figcaption>
+      </figure>
+    </div>
+
+    <!-- ── 右栏:写拍创流程 + 全平台信号台 ── -->
+    <div class="about__right">
+      <!-- 写 · 拍 · 创 三连圆 -->
+      <div class="flow" data-reveal>
+        <div class="flow__node">
+          <span class="flow__zh">写</span>
+          <span class="flow__en">WRITE</span>
+        </div>
+        <span class="flow__link"></span>
+        <div class="flow__node">
+          <span class="flow__zh">拍</span>
+          <span class="flow__en">SHOOT</span>
+        </div>
+        <span class="flow__link"></span>
+        <div class="flow__node">
+          <span class="flow__zh">创</span>
+          <span class="flow__en">BUILD</span>
+        </div>
+      </div>
+
+      <!-- 全平台信号台 -->
+      <div class="signal" data-reveal>
+        <div class="signal__head">
+          <h3 class="signal__title">全平台信号台</h3>
+          <span class="signal__legend"><b>LIVE</b> / SOON</span>
+        </div>
+
+        <ul class="signal__list">
+          <li class="srow srow--live">
+            <a href="https://x.com/xfengbro" target="_blank" rel="noopener">
+              <span class="srow__logo srow__logo--x">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M18.9 2H22l-7.3 8.3L23.3 22h-6.8l-5-6.6L5.7 22H2.6l7.8-8.9L1.3 2h6.9l4.5 6 6.2-6Zm-1.2 18h1.7L7 3.8H5.2L17.7 20Z"/></svg>
+              </span>
+              <span class="srow__handle">@xfengbro</span>
+              <span class="srow__count" aria-hidden="true"></span>
+              <span class="srow__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+              <span class="srow__status"><i class="srow__dot"></i> LIVE</span>
+            </a>
+          </li>
+
+          <li class="srow srow--live">
+            <a href="https://t.me/yunfanxing" target="_blank" rel="noopener">
+              <span class="srow__logo srow__logo--tg">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M21.9 4.3 18.7 20c-.2 1-.9 1.2-1.8.8l-4.9-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5L18 7c.4-.4-.1-.5-.6-.2L6 13.4l-4.9-1.5c-1-.3-1-1 .2-1.5L20.6 2.8c.9-.3 1.6.2 1.3 1.5Z"/></svg>
+              </span>
+              <span class="srow__handle">@yunfanxing</span>
+              <span class="srow__count" aria-hidden="true"></span>
+              <span class="srow__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+              <span class="srow__status"><i class="srow__dot"></i> LIVE</span>
+            </a>
+          </li>
+
+          <li class="srow srow--live">
+            <div class="srow__static" title="小红书账号 · 无可靠主页链接">
+              <span class="srow__logo srow__logo--xhs">
+                <svg viewBox="0 0 48 48" aria-hidden="true">
+                  <path fill="#fff" d="M44.81 19.76c0 .03.02.04.14.04h1.45a1.59 1.59 0 0 0 1.56-1.94 1.59 1.59 0 0 0-1.77-1.24 1.59 1.59 0 0 0-1.38 1.59c0 .2-.01 1.33 0 1.55ZM21.8 29.37c-.41 0-2.71.01-3.37 0a5.06 5.06 0 0 1-1.53-.25.05.05 0 0 0-.06.03l-1.43 3.1a.05.05 0 0 0 .02.06c.22.12.67.25.99.25 1.32.02 2.64 0 3.96 0 .02 0 .04-.01.05-.03l1.42-3.09a.05.05 0 0 0-.05-.07ZM.95 19.82c-.14 0-.15 0-.15.02l-.02.16c-.06.79-.08.99-.47 6.12-.03.48-.07.78-.27 1.21-.05.11-.07.08 0 .22.1.18 1.36 3.05 1.58 3.48.02.03.02.04.03.04.02 0 .07-.05.1-.09.29-.37.53-.78.74-1.21.61-1.27.88-2.65.97-3.41.03-.22.04-.44.06-.66l.41-5.23.04-.59c.01-.06 0-.07-.06-.07H.95Zm14.41 7.51a2.85 2.85 0 0 1-.27-1.21c-.01-.17-.06-.78-.47-6.12-.01-.06-.01-.13-.02-.16-.01-.02-.1-.02-.15-.02h-2.96c-.06 0-.07.01-.06.07l.04.59c.15 1.96.31 3.93.47 5.89.1.8.37 2.17.97 3.41.21.43.45.84.74 1.21.03.04.07.1.1.1.04-.01 1.48-3.28 1.61-3.53.07-.14.06-.11 0-.22Zm7.72-1.83h-1.74a.25.25 0 0 1-.23-.36l2.36-5.25a.05.05 0 0 0-.05-.07l-2.64-.01a.3.3 0 0 1-.27-.42l1.75-3.91a.05.05 0 0 0-.05-.07h-3.12c-.02 0-.04.01-.05.03l-1.85 4.14c-.17.34-.63 1.27-.8 1.88a1.07 1.07 0 0 0-.04.38.92.92 0 0 0 .46.76c.3.18.68.24.92.24h1.18c.08 0-1.38 2.96-1.67 3.94-.02.12-.04.24-.05.34a.93.93 0 0 0 .46.8c.3.18.68.24.95.24h3.32c.02 0 .04-.01.05-.03l1.15-2.56a.05.05 0 0 0-.05-.07ZM9.22 15.63H6.2a.06.06 0 0 0-.07.07c0 2.1-.02 5.59-.02 13.66 0 .58-.54.52-.56.52H4.08c-.08 0-.09.01-.08.09 0 .07.93 2.13 1.11 2.53.02.04.06.07.1.07.31.01 1.53.02 1.88-.03.31-.04.6-.12.88-.26.6-.31.98-.84 1.19-1.53.1-.34.15-.71.15-1.07 0-4.66 0-9.32-.01-13.98a.06.06 0 0 0-.06-.06Zm23.57 13.79c0-.03-.02-.04-.05-.04h-2.93c-.1 0-.1 0-.1-.1v-9.32c0-.14-.01-.14.14-.14h1.73c.16 0 .15.01.15-.15v-2.89c0-.16.01-.15-.16-.15h-7c-.13 0-.15-.01-.15.15v2.89c0 .17-.01.15.16.15h1.71c.15 0 .14-.01.14.14v9.25c0 .19.02.17-.17.17-.74 0-2.22 0-2.61 0-.1 0-.12.06-.12.06l-1.39 3.04s-.03.05-.02.07c.01.02.03.02.12.02 3.5.01 6.99 0 10.49 0 .06 0 .07-.01.07-.07v-3.08Zm8.35-6.86c0 .03-.01.05-.04.05-.69.01-1.38.01-2.07.01-.03 0-.04-.02-.04-.05-.01-.87-.01-1.74-.02-2.61 0-.14-.01-.14.14-.14h1.47c.08 0 .16 0 .24.03.19.05.32.21.33.41.01.86 0 2.31 0 2.31Zm5.34.49a3.91 3.91 0 0 0-1.77-.44h-.36c-.08 0-.08-.01-.08-.08v-2.11c0-.26-.01-.53-.05-.79-.04-.36-.15-.72-.31-1.06a3.07 3.07 0 0 0-1.35-1.42 4.33 4.33 0 0 0-2-.52h-1.44c-.14 0-.14.01-.14-.13v-.99c0-.06-.02-.08-.09-.08h-3.04s-.03 0-.05.01c-.01.01-.02.02-.02.05v1.09c-.02.07-.11.03-.16.04h-1.9c-.04 0-.06.02-.06.06v2.96c0 .18-.01.16.16.16h1.83c.16 0 .14.26.14.26v2.3s.01.23-.12.23h-2.96c-.14 0-.12.16-.12.16v2.89s-.02.14.13.14h2.91c.16 0 .15-.01.15.16v6.45c0 .18-.01.16.16.16h2.86c.18 0 .16.01.16-.16v-6.54c0-.06.01-.07.07-.07l4.65-.01c.2 0 .38.04.56.12.34.16.54.45.55.81.02.79.01 1.58.01 2.37 0 .52-.21.73-.66.73h-2.44c-.05 0-.06.02-.06.07.37.87.75 1.74 1.14 2.61.02.03.04.05.08.05.34.01.68 0 1.02.01.3 0 1.03.01 1.33-.02.28-.03.55-.08.82-.15a2.85 2.85 0 0 0 1.95-2.63v-3.96c0-.26-.02-.51-.07-.76 0 .16-.06-1.28-1.45-2Z"/>
+                </svg>
+              </span>
+              <span class="srow__handle">@Xyf · 26963854120</span>
+              <span class="srow__count" aria-hidden="true"></span>
+              <span class="srow__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+              <span class="srow__status"><i class="srow__dot"></i> LIVE</span>
+            </div>
+          </li>
+
+          <li class="srow srow--live">
+            <div class="srow__static" title="抖音账号 · 无可靠主页链接">
+              <span class="srow__logo srow__logo--tt">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M16.2 3c.3 2.3 1.6 3.9 3.8 4.1v2.6c-1.3 0-2.6-.4-3.8-1.1v5.7c0 3.2-2.7 5.6-5.8 5.2-2.5-.3-4.4-2.4-4.2-5 .2-2.5 2.3-4.4 4.8-4.1v2.7c-.4-.1-.9-.1-1.3 0-1 .3-1.5 1.2-1.3 2.1.2.9 1 1.4 2 1.3.9-.1 1.4-.9 1.4-1.8V3h2.4Z"/></svg>
+            </span>
+              <span class="srow__handle">@Xyf · 52563790709</span>
+              <span class="srow__count" aria-hidden="true"></span>
+              <span class="srow__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+              <span class="srow__status"><i class="srow__dot"></i> LIVE</span>
+            </div>
+          </li>
+
+          <li class="srow srow--live">
+            <a href="https://github.com/yunfanxing6" target="_blank" rel="noopener">
+              <span class="srow__logo srow__logo--gh">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.92.58.1.79-.25.79-.56v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.42-2.69 5.38-5.25 5.67.42.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+              </span>
+              <span class="srow__handle">yunfanxing6</span>
+              <span class="srow__count" aria-hidden="true"></span>
+              <span class="srow__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+              <span class="srow__status"><i class="srow__dot"></i> LIVE</span>
+            </a>
+          </li>
+
+          <li class="srow srow--soon">
+            <span class="srow__logo srow__logo--yt">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 8.5 15.5 12 10 15.5Z" fill="#fff"/></svg>
+            </span>
+            <span class="srow__handle">YouTube</span>
+            <span class="srow__count" aria-hidden="true"></span>
+            <span class="srow__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+            <span class="srow__status srow__status--soon">SOON</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ WRITING ═══════════ -->
+  <section class="writing" id="writing">
+    <header class="writing__head">
+      <h2 class="writing__title" data-reveal>Writing</h2>
+      <div class="writing__cats" data-reveal>
+        <span class="writing__cat-title">写 — WRITE</span>
+        <span class="writing__cat-row">
+          <span class="writing__cat-current">写</span>
+          <i class="dotsep"></i>
+          <span class="cat cat--soon"><b class="cat__zh">拍</b><i class="cat__soon">SOON</i></span>
+          <i class="dotsep"></i>
+          <span class="cat cat--soon"><b class="cat__zh">创</b><i class="cat__soon">SOON</i></span>
+        </span>
+      </div>
+    </header>
+
+    <div class="writing__grid">
+      <!-- 头条 01 -->
+      <a class="feat" href="https://x.com/xfengbro/status/2075534333180621182" target="_blank" rel="noopener" data-reveal>
+        <span class="feat__frame">
+          <img class="feat__img" src="assets/writing-feature.png" alt="" loading="lazy" />
+          <span class="feat__tick feat__tick--tl"></span>
+          <span class="feat__tick feat__tick--br"></span>
+        </span>
+        <div class="feat__body">
+          <span class="feat__idx">01</span>
+          <h3 class="feat__title">X Premium+ 赠送的 SuperGrok，<br />额度可以独立换绑重置</h3>
+          <p class="feat__dek">原理 · 演示 · 教程：Premium+ 与 SuperGrok<br />额度不继承，换绑后额度重置</p>
+          <div class="feat__meta"><span class="feat__tag">AI&nbsp;实践</span><span class="dotsep"></span><span>2026.07.10</span><span class="feat__views"><svg class="viewico" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>323</span></div>
+          <span class="feat__read">阅读 <span class="arr">→</span></span>
+        </div>
+      </a>
+
+      <!-- 02 / 03 / 04 SOON -->
+      <div class="writing__list">
+        <div class="wpost wpost--soon" data-reveal>
+          <span class="wpost__idx">02</span>
+          <div class="wpost__body">
+            <h3 class="wpost__title">敬请期待</h3>
+            <div class="wpost__meta"><span class="wpost__tag">SOON</span></div>
+          </div>
+          <span class="wpost__thumb"><img src="assets/soon-02.png" alt="" loading="lazy" /></span>
+        </div>
+        <div class="wpost wpost--soon" data-reveal>
+          <span class="wpost__idx">03</span>
+          <div class="wpost__body">
+            <h3 class="wpost__title">敬请期待</h3>
+            <div class="wpost__meta"><span class="wpost__tag">SOON</span></div>
+          </div>
+          <span class="wpost__thumb"><img src="assets/soon-03.png" alt="" loading="lazy" /></span>
+        </div>
+        <div class="wpost wpost--soon" data-reveal>
+          <span class="wpost__idx">04</span>
+          <div class="wpost__body">
+            <h3 class="wpost__title">敬请期待</h3>
+            <div class="wpost__meta"><span class="wpost__tag">SOON</span></div>
+          </div>
+          <span class="wpost__thumb"><img src="assets/soon-04.png" alt="" loading="lazy" /></span>
+        </div>
+      </div>
+    </div>
+
+    <a class="writing__all" href="https://x.com/xfengbro" target="_blank" rel="noopener" data-reveal>全部文章 <span class="arr">→</span></a>
+  </section>
+
+  <!-- ═══════════ SHOOT / VIDEO（深色）═══════════ -->
+  <section class="shoot" id="shoot">
+    <div class="shoot__stage" data-reveal>
+      <span class="shoot__bg" style="background-image:url('assets/shoot-bg.png')"></span>
+      <div class="shoot__topbar">
+        <span class="shoot__rec"><i></i> REC · 00:00:00</span>
+        <span class="shoot__ep">SOON · 准备中</span>
+      </div>
+      <div class="shoot__copy">
+        <h3 class="shoot__center">视频方向准备中</h3>
+        <p class="shoot__soon">内容尚未成熟，敬请期待 · 抖音 @Xyf</p>
+      </div>
+      <div class="shoot__player">
+        <span class="shoot__play">▶</span>
+        <span class="shoot__t">00:00</span>
+        <span class="shoot__track"><i></i></span>
+        <span class="shoot__pct">0%</span>
+      </div>
+    </div>
+    <div class="shoot__foot">
+      <div class="shoot__wordwrap">
+        <span class="shoot__kicker" data-reveal>拍 — SHOOT</span>
+        <h2 class="shoot__title" data-reveal>Shoot</h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ BUILD ═══════════ -->
+  <section class="build" id="build">
+    <div class="build__git" aria-hidden="true">
+      <span class="git__branch">⊖&nbsp;&nbsp; main ——</span>
+      <span class="git__line"></span>
+      <span class="git__row"><i></i><b>c3a91e2</b><em>feat: xyf-ai.com site</em></span>
+      <span class="git__row"><i></i><b>7f2b0d1</b><em>feat: xyf-identity-skill</em></span>
+      <span class="git__row"><i></i><b>a9e44c0</b><em>ops: freeai-api.com</em></span>
+      <span class="git__row git__row--head"><i></i><b>HEAD ——</b><em>build: in public</em></span>
+      <span class="git__row git__row--ghost"><i></i></span>
+      <span class="git__row git__row--ghost"><i></i></span>
+    </div>
+
+    <div class="build__left" data-reveal>
+      <span class="build__kicker">创 — BUILD</span>
+      <h2 class="build__title">Build</h2>
+      <p class="build__sub"><span class="dot"></span>公开建造中 · 项目可点击跳转</p>
+      <a class="build__cta" href="https://github.com/yunfanxing6" target="_blank" rel="noopener"><span class="build__cta-text">查看我的&nbsp;GitHub</span><svg class="github-mark" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.92.58.1.79-.25.79-.56v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.42-2.69 5.38-5.25 5.67.42.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg><span class="arr">→</span></a>
+    </div>
+
+    <div class="build__terminal" data-build data-reveal>
+      <div class="term__bar">
+        <i></i><i></i><i></i>
+      </div>
+      <div class="term__body">
+        <pre class="term__code" data-typed aria-hidden="true">$ xyf build --in-public
+10:12:01  checking workspace
+10:12:02  loading modules
+10:12:03  resolving dependencies
+10:12:05  generating bundles
+10:12:07  optimizing assets
+10:12:08  writing artifacts
+10:12:09  linking ideas
+</pre>
+        <div class="term__compile">
+          <span class="term__ver">v0.1.0 · <span data-compile-label>compiling...</span></span>
+          <div class="term__bar2"><i data-progress-bar style="width:0%"></i></div>
+          <span class="term__pct" data-progress-num>0%</span>
+        </div>
+      </div>
+    </div>
+
+    <span class="build__plus" aria-hidden="true">+</span>
+
+    <div class="build__measure build__measure--area" aria-hidden="true">
+      <span></span><b>build area</b><em>960 × 540</em>
+    </div>
+    <div class="build__measure build__measure--progress" aria-hidden="true">
+      <span></span><b>progress</b><em data-progress-measure>0%</em>
+    </div>
+    <div class="build__queue">
+      <span class="queue__label">projects</span>
+      <span class="queue__brace" aria-hidden="true">{</span>
+      <ul>
+        <li>
+          <a class="queue__link" href="https://github.com/yunfanxing6/xyf-ai.com" target="_blank" rel="noopener">
+            xyf-ai.com
+          </a>
+        </li>
+        <li>
+          <a class="queue__link" href="https://github.com/yunfanxing6/xyf-identity-skill" target="_blank" rel="noopener">
+            xyf-identity-skill
+          </a>
+        </li>
+        <li>
+          <a class="queue__link" href="https://freeai-api.com" target="_blank" rel="noopener">
+            freeai-api.com
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="build__ruler" aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i>
+      <span>0</span><span>240</span><span>480</span><span>720</span><span>960</span>
+    </div>
+  </section>
+
+  <!-- ═══════════ CONTACT ═══════════ -->
+  <section class="contact" id="contact">
+    <div class="contact__center">
+      <div class="contact__kicker" data-reveal><span class="ln"></span>GET IN TOUCH / 联系<span class="ln"></span></div>
+      <h2 class="contact__title" data-reveal>
+        Let&rsquo;s talk.
+        <svg class="contact__underline" viewBox="0 0 360 18" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M12 13 Q 180 3, 348 11" fill="none" stroke="currentColor" class="contact__underline-stroke" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </h2>
+      <p class="contact__sub" data-reveal>聊聊 AI、内容，或者一起搞点事情。</p>
+      <p class="contact__status" data-reveal><span class="pulse"></span>当前开放交流 · Available</p>
+    </div>
+
+    <div class="contact__marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span class="marquee__set">AI 实践 · 媒体 · build in public · 搞钱 · AI 实践 · 媒体 · build in public · 搞钱 · AI 实践 · 媒体 · build in public · 搞钱 · AI 实践 · 媒体 · build in public · 搞钱 · AI 实践 · 媒体 · build in public · 搞钱 · </span>
+        <span class="marquee__set">AI 实践 · 媒体 · build in public · 搞钱 · AI 实践 · 媒体 · build in public · 搞钱 · AI 实践 · 媒体 · build in public · 搞钱 · AI 实践 · 媒体 · build in public · 搞钱 · AI 实践 · 媒体 · build in public · 搞钱 · </span>
+      </div>
+    </div>
+
+    <div class="contact__bar">
+      <a class="cbar__item cbar__item--mail" href="mailto:yunfanxing6@gmail.com">
+        <span class="cbar__lbl">EMAIL</span>
+        <span class="cbar__val cbar__val--mail">yunfanxing6@gmail.com</span>
+        <span class="cbar__arr">→</span>
+      </a>
+      <a class="cbar__item" href="https://x.com/xfengbro" target="_blank" rel="noopener">
+        <span class="cbar__logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M18.9 2H22l-7.3 8.3L23.3 22h-6.8l-5-6.6L5.7 22H2.6l7.8-8.9L1.3 2h6.9l4.5 6 6.2-6Zm-1.2 18h1.7L7 3.8H5.2L17.7 20Z"/></svg></span>
+        <span class="cbar__val">@xfengbro <em>· DM</em></span>
+        <span class="cbar__arr">→</span>
+      </a>
+      <a class="cbar__item" href="https://t.me/yunfanxing" target="_blank" rel="noopener">
+        <span class="cbar__logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#29A9EB" d="M21.9 4.3 18.7 20c-.2 1-.9 1.2-1.8.8l-4.9-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5L18 7c.4-.4-.1-.5-.6-.2L6 13.4l-4.9-1.5c-1-.3-1-1 .2-1.5L20.6 2.8c.9-.3 1.6.2 1.3 1.5Z"/></svg></span>
+        <span class="cbar__val">@yunfanxing <em>· 私信</em></span>
+        <span class="cbar__arr">→</span>
+      </a>
+      <!-- TG 社群无二维码：用邀请链接即可（与微信扫码互补） -->
+      <a class="cbar__item cbar__item--tg-group" href="https://t.me/+TXvJqNLp8_9iNGNl" target="_blank" rel="noopener">
+        <span class="cbar__lbl">TELEGRAM 社群</span>
+        <span class="cbar__val cbar__val--stack">
+          <b>AI 交流群</b>
+          <em>点击加入 · 无需二维码</em>
+        </span>
+        <span class="cbar__arr">→</span>
+      </a>
+      <div class="cbar__item cbar__item--wechat cbar__item--wechat-live">
+        <span class="cbar__lbl">微信社群 / WeChat</span>
+        <div class="qr qr--live" aria-label="微信 AI 交流群二维码">
+          <span class="qr__cross qr__cross--tl"></span><span class="qr__cross qr__cross--br"></span>
+          <img class="qr__img" src="assets/wechat-group-qr.jpg" alt="群聊：ai交流群 微信二维码" width="400" height="419" loading="lazy" />
+        </div>
+        <span class="cbar__note">AI 交流群 · 扫码加入</span>
+        <span class="cbar__soon">二维码约 7 天有效，过期请换新图</span>
+      </div>
+    </div>
+
+    <footer class="contact__foot">
+      <span>© 2026 xyf</span>
+      <a href="#hero" class="to-top">回到顶部 <span class="arr">↑</span></a>
+    </footer>
+  </section>
+
+</main>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/particles.js?v=xyf-build-projects-1"></script>
+<script src="js/build.js"></script>
+<script src="js/main.js?v=xyf-build-projects-1"></script>
+</body>
+</html>
