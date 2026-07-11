@@ -9,7 +9,7 @@
   overflow:hidden;
 }
 
-/* 左栏:Sac 顶部、其余沉底(撑满高度,不居中)*/
+/* 左栏：字标顶置，其余在下方排版 */
 .hero__left{
   display:flex;flex-direction:column;justify-content:flex-start;
   padding:calc(var(--nav-h) + 7vh) 0 6vh;
@@ -18,7 +18,7 @@
   z-index:4;
 }
 .hero__lower{
-  /* xyf 的 y/f 下伸比 Sac 深，加大与 wordmark 间距避免叠字 */
+  /* xyf 字标 y/f 下伸较深，加大与 kicker 间距避免叠字 */
   margin-top:clamp(72px,9.5vh,128px);
   margin-left:clamp(8px,1.2vw,22px);
 }

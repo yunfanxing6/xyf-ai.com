@@ -5,7 +5,7 @@ xyf 的个人品牌站：AI 内容实践、公开构建、社群入口。
 **Live（域名上线后）：** [https://xyf-ai.com](https://xyf-ai.com)  
 **GitHub：** [yunfanxing6/xyf-ai.com](https://github.com/yunfanxing6/xyf-ai.com)
 
-> 结构灵感来自编辑式个人站（如 [sac-ai.com](https://sac-ai.com) 的开源形态），**代码与内容为独立实现**，非 fork。
+纯静态 HTML / CSS / JS，独立实现与维护。
 
 ## 功能分区
 

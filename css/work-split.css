@@ -506,7 +506,7 @@ body.theme-shoot .cross::after{
   content:"";display:inline-block;width:10px;height:10px;border:1px solid #b09a8b;
   border-radius:50%;margin-right:16px;vertical-align:middle;background:var(--paper);
 }
-/* 可点击项目（相对 sac 装饰队列的增强） */
+/* Build 项目链接 */
 .queue__link{
   color:inherit;
   text-decoration:none;

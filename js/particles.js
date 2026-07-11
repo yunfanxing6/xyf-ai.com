@@ -18,11 +18,11 @@
     if (L > 200 && S < 48) return true;
     if (L > 182 && S < 32) return true;
     if (L > 215) return true;
-    // 原 sac：又亮又灰
+    // 又亮又灰的残留底
     if (L > 205 && S < 42) return true;
     return false;
   }
-  // 采样色 → 干净 duotone（与 sac「橙+墨混合」同理，xyf 为「冰蓝+深墨蓝」）
+  // 采样色 → 冰蓝 + 深墨蓝 duotone（亮部 Ice，暗部轮廓）
   function colorFor(r, g, b) {
     var mx = Math.max(r, g, b), mn = Math.min(r, g, b);
     var L = (mx + mn) / 2, S = mx - mn;
@@ -56,10 +56,10 @@
       return [r1 | 0, g1 | 0, Math.min(255, b1) | 0];
     }
 
-    // 残留暖色（兼容 sac 逻辑）→ 橙
+    // 残留暖色像素 → 压成中性冷暗，避免脏点
     if (r >= g && g >= b && S > 26 && r > 70) {
-      f = Math.max(0.82, Math.min(1.12, L / 132));
-      return [Math.min(255, 238 * f) | 0, Math.min(255, 78 * f) | 0, Math.min(255, 28 * f) | 0];
+      f = Math.max(0.72, Math.min(1.1, L / 120));
+      return [(22 * f) | 0, (28 * f) | 0, (40 * f) | 0];
     }
 
     // 近黑轮廓/发丝 → 深墨蓝（不是死黑，略带冷调）
