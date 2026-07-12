@@ -2,7 +2,8 @@
 
 const LINKS = {
   articles: {
-    "01": "https://x.com/xfengbro/status/2075534333180621182",
+    "01": "https://x.com/xfengbro/status/2076200076528288134",
+    "02": "https://x.com/xfengbro/status/2075534333180621182",
   },
   social: {
     x: "https://x.com/xfengbro",

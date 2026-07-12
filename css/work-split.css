@@ -71,7 +71,7 @@
   position:relative;
   width:100%;
   aspect-ratio:398/430;
-  background:#f4efe6;
+  background:#0a1220;
   border:1px solid var(--line);
   overflow:visible;
 }
@@ -90,7 +90,11 @@
   border-right:1px solid var(--line);border-bottom:1px solid var(--line);
 }
 .feat__img{
-  width:100%;height:100%;object-fit:cover;
+  display:block;
+  width:100%;height:100%;
+  /* 竖版海报已按框比例落盘；contain 防止任何拉伸变形 */
+  object-fit:contain;
+  object-position:center center;
   filter:none;
   transition:transform .6s var(--ease);
 }
