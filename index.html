@@ -5,14 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>xyf — AI media × builder</title>
 <meta name="description" content="xyf — 专注于 AI 内容实践与分享。不断探索 AI 边界与商业应用，探索属于 00 后的财富自由之路。" />
-<link rel="icon" href="data:," />
+<link rel="icon" href="assets/favicon.ico?v=round4" sizes="any" />
+<link rel="icon" type="image/png" href="assets/favicon-32.png?v=round4" sizes="32x32" />
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=round4" sizes="180x180" />
+<link rel="preload" as="image" href="assets/avatar-cutout.webp" type="image/webp" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Noto+Serif+SC:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/tokens.css?v=xyf-build-projects-1" />
-<link rel="stylesheet" href="css/base.css?v=xyf-build-projects-1" />
-<link rel="stylesheet" href="css/sections.css?v=xyf-build-projects-1" />
-<link rel="stylesheet" href="css/work-split.css?v=xyf-build-projects-1" />
+<!-- 国内访问 Google Fonts 易卡住；非阻塞加载 + display=swap -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Noto+Serif+SC:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Noto+Serif+SC:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" /></noscript>
+<link rel="stylesheet" href="css/tokens.css?v=xyf-views-v1" />
+<link rel="stylesheet" href="css/base.css?v=xyf-views-v1" />
+<link rel="stylesheet" href="css/sections.css?v=xyf-views-v1" />
+<link rel="stylesheet" href="css/work-split.css?v=xyf-views-v1" />
 </head>
 <body>
 
@@ -88,7 +93,10 @@
     <div class="hero__right">
       <figure class="portrait" data-portrait>
         <span class="portrait__media">
-          <img src="assets/avatar-cutout.png" alt="xyf 头像" class="portrait__img" />
+          <picture>
+            <source srcset="assets/avatar-cutout.webp" type="image/webp" />
+            <img src="assets/avatar-cutout-sm.png" alt="xyf 头像" class="portrait__img" width="900" height="900" decoding="async" fetchpriority="high" />
+          </picture>
         </span>
         <span class="portrait__cross portrait__cross--tl"></span>
         <span class="portrait__cross portrait__cross--br"></span>
@@ -232,7 +240,7 @@
           </li>
 
           <li class="srow srow--live">
-            <div class="srow__static" title="小红书账号 · 无可靠主页链接">
+            <a href="https://www.xiaohongshu.com/search_result?keyword=26963854120&source=web_user_page" target="_blank" rel="noopener" title="小红书 · @Xyf · 26963854120">
               <span class="srow__logo srow__logo--xhs">
                 <svg viewBox="0 0 48 48" aria-hidden="true">
                   <path fill="#fff" d="M44.81 19.76c0 .03.02.04.14.04h1.45a1.59 1.59 0 0 0 1.56-1.94 1.59 1.59 0 0 0-1.77-1.24 1.59 1.59 0 0 0-1.38 1.59c0 .2-.01 1.33 0 1.55ZM21.8 29.37c-.41 0-2.71.01-3.37 0a5.06 5.06 0 0 1-1.53-.25.05.05 0 0 0-.06.03l-1.43 3.1a.05.05 0 0 0 .02.06c.22.12.67.25.99.25 1.32.02 2.64 0 3.96 0 .02 0 .04-.01.05-.03l1.42-3.09a.05.05 0 0 0-.05-.07ZM.95 19.82c-.14 0-.15 0-.15.02l-.02.16c-.06.79-.08.99-.47 6.12-.03.48-.07.78-.27 1.21-.05.11-.07.08 0 .22.1.18 1.36 3.05 1.58 3.48.02.03.02.04.03.04.02 0 .07-.05.1-.09.29-.37.53-.78.74-1.21.61-1.27.88-2.65.97-3.41.03-.22.04-.44.06-.66l.41-5.23.04-.59c.01-.06 0-.07-.06-.07H.95Zm14.41 7.51a2.85 2.85 0 0 1-.27-1.21c-.01-.17-.06-.78-.47-6.12-.01-.06-.01-.13-.02-.16-.01-.02-.1-.02-.15-.02h-2.96c-.06 0-.07.01-.06.07l.04.59c.15 1.96.31 3.93.47 5.89.1.8.37 2.17.97 3.41.21.43.45.84.74 1.21.03.04.07.1.1.1.04-.01 1.48-3.28 1.61-3.53.07-.14.06-.11 0-.22Zm7.72-1.83h-1.74a.25.25 0 0 1-.23-.36l2.36-5.25a.05.05 0 0 0-.05-.07l-2.64-.01a.3.3 0 0 1-.27-.42l1.75-3.91a.05.05 0 0 0-.05-.07h-3.12c-.02 0-.04.01-.05.03l-1.85 4.14c-.17.34-.63 1.27-.8 1.88a1.07 1.07 0 0 0-.04.38.92.92 0 0 0 .46.76c.3.18.68.24.92.24h1.18c.08 0-1.38 2.96-1.67 3.94-.02.12-.04.24-.05.34a.93.93 0 0 0 .46.8c.3.18.68.24.95.24h3.32c.02 0 .04-.01.05-.03l1.15-2.56a.05.05 0 0 0-.05-.07ZM9.22 15.63H6.2a.06.06 0 0 0-.07.07c0 2.1-.02 5.59-.02 13.66 0 .58-.54.52-.56.52H4.08c-.08 0-.09.01-.08.09 0 .07.93 2.13 1.11 2.53.02.04.06.07.1.07.31.01 1.53.02 1.88-.03.31-.04.6-.12.88-.26.6-.31.98-.84 1.19-1.53.1-.34.15-.71.15-1.07 0-4.66 0-9.32-.01-13.98a.06.06 0 0 0-.06-.06Zm23.57 13.79c0-.03-.02-.04-.05-.04h-2.93c-.1 0-.1 0-.1-.1v-9.32c0-.14-.01-.14.14-.14h1.73c.16 0 .15.01.15-.15v-2.89c0-.16.01-.15-.16-.15h-7c-.13 0-.15-.01-.15.15v2.89c0 .17-.01.15.16.15h1.71c.15 0 .14-.01.14.14v9.25c0 .19.02.17-.17.17-.74 0-2.22 0-2.61 0-.1 0-.12.06-.12.06l-1.39 3.04s-.03.05-.02.07c.01.02.03.02.12.02 3.5.01 6.99 0 10.49 0 .06 0 .07-.01.07-.07v-3.08Zm8.35-6.86c0 .03-.01.05-.04.05-.69.01-1.38.01-2.07.01-.03 0-.04-.02-.04-.05-.01-.87-.01-1.74-.02-2.61 0-.14-.01-.14.14-.14h1.47c.08 0 .16 0 .24.03.19.05.32.21.33.41.01.86 0 2.31 0 2.31Zm5.34.49a3.91 3.91 0 0 0-1.77-.44h-.36c-.08 0-.08-.01-.08-.08v-2.11c0-.26-.01-.53-.05-.79-.04-.36-.15-.72-.31-1.06a3.07 3.07 0 0 0-1.35-1.42 4.33 4.33 0 0 0-2-.52h-1.44c-.14 0-.14.01-.14-.13v-.99c0-.06-.02-.08-.09-.08h-3.04s-.03 0-.05.01c-.01.01-.02.02-.02.05v1.09c-.02.07-.11.03-.16.04h-1.9c-.04 0-.06.02-.06.06v2.96c0 .18-.01.16.16.16h1.83c.16 0 .14.26.14.26v2.3s.01.23-.12.23h-2.96c-.14 0-.12.16-.12.16v2.89s-.02.14.13.14h2.91c.16 0 .15-.01.15.16v6.45c0 .18-.01.16.16.16h2.86c.18 0 .16.01.16-.16v-6.54c0-.06.01-.07.07-.07l4.65-.01c.2 0 .38.04.56.12.34.16.54.45.55.81.02.79.01 1.58.01 2.37 0 .52-.21.73-.66.73h-2.44c-.05 0-.06.02-.06.07.37.87.75 1.74 1.14 2.61.02.03.04.05.08.05.34.01.68 0 1.02.01.3 0 1.03.01 1.33-.02.28-.03.55-.08.82-.15a2.85 2.85 0 0 0 1.95-2.63v-3.96c0-.26-.02-.51-.07-.76 0 .16-.06-1.28-1.45-2Z"/>
@@ -242,11 +250,11 @@
               <span class="srow__count" aria-hidden="true"></span>
               <span class="srow__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
               <span class="srow__status"><i class="srow__dot"></i> LIVE</span>
-            </div>
+            </a>
           </li>
 
           <li class="srow srow--live">
-            <div class="srow__static" title="抖音账号 · 无可靠主页链接">
+            <a href="https://www.douyin.com/user/MS4wLjABAAAAt2IYDh3RCyOTeeG1pjnfnSfQTT3RPobH2nW8Vh3w4F-p7pafrCtKTrrC1JrtK_ny" target="_blank" rel="noopener" title="抖音 · @Xyf · 52563790709">
               <span class="srow__logo srow__logo--tt">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M16.2 3c.3 2.3 1.6 3.9 3.8 4.1v2.6c-1.3 0-2.6-.4-3.8-1.1v5.7c0 3.2-2.7 5.6-5.8 5.2-2.5-.3-4.4-2.4-4.2-5 .2-2.5 2.3-4.4 4.8-4.1v2.7c-.4-.1-.9-.1-1.3 0-1 .3-1.5 1.2-1.3 2.1.2.9 1 1.4 2 1.3.9-.1 1.4-.9 1.4-1.8V3h2.4Z"/></svg>
             </span>
@@ -254,7 +262,7 @@
               <span class="srow__count" aria-hidden="true"></span>
               <span class="srow__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
               <span class="srow__status"><i class="srow__dot"></i> LIVE</span>
-            </div>
+            </a>
           </li>
 
           <li class="srow srow--live">
@@ -269,14 +277,16 @@
             </a>
           </li>
 
-          <li class="srow srow--soon">
-            <span class="srow__logo srow__logo--yt">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 8.5 15.5 12 10 15.5Z" fill="#fff"/></svg>
-            </span>
-            <span class="srow__handle">YouTube</span>
-            <span class="srow__count" aria-hidden="true"></span>
-            <span class="srow__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
-            <span class="srow__status srow__status--soon">SOON</span>
+          <li class="srow srow--live">
+            <a href="https://www.youtube.com/@xyf-ai" target="_blank" rel="noopener" title="YouTube · @xyf-ai">
+              <span class="srow__logo srow__logo--yt">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 8.5 15.5 12 10 15.5Z" fill="#fff"/></svg>
+              </span>
+              <span class="srow__handle">@xyf-ai</span>
+              <span class="srow__count" aria-hidden="true"></span>
+              <span class="srow__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+              <span class="srow__status"><i class="srow__dot"></i> LIVE</span>
+            </a>
           </li>
         </ul>
       </div>
@@ -311,7 +321,7 @@
           <span class="feat__idx">01</span>
           <h3 class="feat__title">X Premium+ 赠送的 SuperGrok，<br />额度可以独立换绑重置</h3>
           <p class="feat__dek">原理 · 演示 · 教程：Premium+ 与 SuperGrok<br />额度不继承，换绑后额度重置</p>
-          <div class="feat__meta"><span class="feat__tag">AI&nbsp;实践</span><span class="dotsep"></span><span>2026.07.10</span><span class="feat__views"><svg class="viewico" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>323</span></div>
+          <div class="feat__meta"><span class="feat__tag">AI&nbsp;实践</span><span class="dotsep"></span><span>2026.07.10</span><span class="feat__views" data-x-status="2075534333180621182" title="浏览量（来自 X，实时）"><svg class="viewico" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg><span class="views-n" data-views-fallback="323">323</span></span></div>
           <span class="feat__read">阅读 <span class="arr">→</span></span>
         </div>
       </a>
@@ -351,7 +361,7 @@
   <!-- ═══════════ SHOOT / VIDEO（深色）═══════════ -->
   <section class="shoot" id="shoot">
     <div class="shoot__stage" data-reveal>
-      <span class="shoot__bg" style="background-image:url('assets/shoot-bg.png')"></span>
+      <span class="shoot__bg" style="background-image:url('assets/shoot-bg.webp')"></span>
       <div class="shoot__topbar">
         <span class="shoot__rec"><i></i> REC · 00:00:00</span>
         <span class="shoot__ep">SOON · 准备中</span>
@@ -521,8 +531,8 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="js/particles.js?v=xyf-build-projects-1"></script>
+<script src="js/particles.js?v=xyf-views-v1"></script>
 <script src="js/build.js"></script>
-<script src="js/main.js?v=xyf-build-projects-1"></script>
+<script src="js/main.js?v=xyf-views-v1"></script>
 </body>
 </html>

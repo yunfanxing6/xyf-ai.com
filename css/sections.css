@@ -55,23 +55,30 @@
   justify-content:center;
 }
 
-/* 右栏 头像:横向海报裁切,贴近参考图的平直截边与出血比例 */
+/* 右栏 头像: cover 放大裁切版（供对比预览） */
 .hero__right{display:flex;justify-content:flex-start;align-items:flex-start;}
 .portrait{
   position:relative;
   flex:none;
   width:min(68vw,1240px);
-  aspect-ratio:945/638;
-  margin-top:calc(var(--nav-h) - 72px);
+  aspect-ratio:945/700;
+  margin-top:calc(var(--nav-h) - 40px);
   margin-left:clamp(6px,1vw,22px);
 }
 .portrait__media{position:absolute;inset:0;overflow:hidden;}
 .portrait__img{
-  position:absolute;top:0;left:0;
-  width:100%;height:auto;max-width:none;
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  max-width:none;
+  object-fit:cover;
+  /* 略偏上：头顶完整一点；若要更居中可改 28%～40% */
+  object-position:50% 22%;
   opacity:0;
   mix-blend-mode:multiply;
-  transform-origin:50% 46%;
+  transform-origin:50% 40%;
   transition:opacity .35s var(--ease),filter .35s var(--ease);
 }
 /* 默认是细 plus,用于 about 人物和局部装饰 */

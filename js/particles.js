@@ -4,6 +4,22 @@
   "use strict";
 
   var ALPHA = 150;
+  // 跟蓝双曝光头像一致：墨轮廓 + 冰蓝高光（不用橙；橙是 sac 暖色头像那套）
+  var INK = [22, 28, 40];         // 冷墨，比纯黑更贴蓝图
+  var INK_SOFT = [48, 62, 88];
+  var ICE_DEEP = [18, 42, 78];    // 深空蓝
+  var ICE = [93, 157, 230];       // #5D9DE6 品牌 Ice
+  var ICE_HI = [184, 217, 248];   // 星空/雪高光
+  var CYAN = [120, 190, 220];     // 雪山青一点缀
+
+  function lerp3(a, b, t) {
+    return [
+      (a[0] + (b[0] - a[0]) * t) | 0,
+      (a[1] + (b[1] - a[1]) * t) | 0,
+      (a[2] + (b[2] - a[2]) * t) | 0
+    ];
+  }
+
   // 背景判定：透明 / 纸底 / 抠图残留浅灰块（勿把冷蓝主体当背景）
   function isBg(r, g, b, a) {
     if (a < ALPHA) return true;
@@ -14,61 +30,58 @@
     // 冷蓝双曝光主体（含较亮雪山青）→ 保留为粒子
     if (cool > 12 && (S > 10 || L < 210)) return false;
     if (cool > 22) return false;
-    // 浅灰/暖纸/抠图毛边（头像框左侧那几块灰的来源）
+    // 浅灰/暖纸/抠图毛边
     if (L > 200 && S < 48) return true;
     if (L > 182 && S < 32) return true;
     if (L > 215) return true;
-    // 又亮又灰的残留底
     if (L > 205 && S < 42) return true;
     return false;
   }
-  // 采样色 → 冰蓝 + 深墨蓝 duotone（亮部 Ice，暗部轮廓）
-  function colorFor(r, g, b) {
+
+  /**
+   * 采样色 → 冷墨轮廓 + 冰蓝高光/左缘流光（对齐蓝头像）
+   * nx,ny：左缘更亮冰蓝，深部用冷墨
+   */
+  function colorFor(r, g, b, nx, ny) {
     var mx = Math.max(r, g, b), mn = Math.min(r, g, b);
     var L = (mx + mn) / 2, S = mx - mn;
     var cool = b - r;
-    var f;
+    var h = Math.abs(Math.sin(nx * 127.1 + ny * 311.7) * 43758.5453);
+    h = h - Math.floor(h);
 
-    // 冷色主体（头像星空/雪山/青蓝）→ Ice 阶，亮部更亮
-    if (cool > 8 || (b >= g && b >= r && S > 14)) {
-      // t: 0 深空 → 1 高光冰蓝
-      var t = Math.max(0, Math.min(1, (L - 18) / 200));
-      // 再按冷度略提亮高光
-      if (cool > 20) t = Math.min(1, t + 0.08);
-      // #0A1628 → #5D9DE6 → #B8D9F8
-      var r1, g1, b1;
-      if (t < 0.45) {
-        var u = t / 0.45;
-        r1 = 10 + (30 - 10) * u;
-        g1 = 22 + (70 - 22) * u;
-        b1 = 40 + (120 - 40) * u;
-      } else if (t < 0.78) {
-        var u2 = (t - 0.45) / 0.33;
-        r1 = 30 + (93 - 30) * u2;
-        g1 = 70 + (157 - 70) * u2;
-        b1 = 120 + (230 - 120) * u2;
-      } else {
-        var u3 = (t - 0.78) / 0.22;
-        r1 = 93 + (184 - 93) * u3;
-        g1 = 157 + (217 - 157) * u3;
-        b1 = 230 + (248 - 230) * u3;
-      }
-      return [r1 | 0, g1 | 0, Math.min(255, b1) | 0];
+    // ① 深部轮廓 / 发丝 → 冷墨（带一点蓝，不是死黑）
+    if (L < 52) {
+      return lerp3(INK, INK_SOFT, Math.max(0, L / 52) * 0.7 + h * 0.15);
     }
 
-    // 残留暖色像素 → 压成中性冷暗，避免脏点
-    if (r >= g && g >= b && S > 26 && r > 70) {
-      f = Math.max(0.72, Math.min(1.1, L / 120));
-      return [(22 * f) | 0, (28 * f) | 0, (40 * f) | 0];
+    // ② 左缘流散：亮冰蓝（聚合从左来，对应头像高光）
+    var leftEdge = nx < 0.24 ? (0.24 - nx) / 0.24 : 0;
+    if (leftEdge > 0 && h < 0.42 + leftEdge * 0.4) {
+      return lerp3(ICE, ICE_HI, 0.25 + h * 0.55);
     }
 
-    // 近黑轮廓/发丝 → 深墨蓝（不是死黑，略带冷调）
-    f = Math.max(0.55, Math.min(1.15, L / 70));
-    return [
-      Math.min(255, (12 * f + 4) | 0),
-      Math.min(255, (18 * f + 8) | 0),
-      Math.min(255, (32 * f + 14) | 0)
-    ];
+    // ③ 冷色主体（星空 / 雪山 / 青蓝）→ Ice 阶
+    if (cool > 8 || (b >= g && b >= r && S > 12)) {
+      var t = Math.max(0, Math.min(1, (L - 28) / 180));
+      if (cool > 18) t = Math.min(1, t + 0.06);
+      // 高光：冰蓝 → 近白蓝
+      if (t > 0.72) return lerp3(ICE, ICE_HI, (t - 0.72) / 0.28);
+      // 中亮：深空 → Ice；少量雪山青
+      if (h < 0.14 && t > 0.4) return lerp3(ICE, CYAN, 0.35 + h);
+      if (t < 0.4) return lerp3(ICE_DEEP, ICE, t / 0.4 * 0.85);
+      return lerp3(ICE_DEEP, ICE, 0.35 + (t - 0.4) * 1.1);
+    }
+
+    // ④ 轮廓环带：冷墨里掺一点冰蓝，避免死黑块
+    var edge = Math.min(nx, 1 - nx, ny, 1 - ny);
+    if (edge < 0.07 && L < 130) {
+      return lerp3(INK, ICE_DEEP, 0.35 + h * 0.4);
+    }
+
+    // ⑤ 中灰默认：冷墨 → 灰蓝
+    var tm = Math.max(0, Math.min(1, (L - 40) / 140));
+    if (h < 0.2) return lerp3(INK_SOFT, ICE, 0.2 + tm * 0.5);
+    return lerp3(INK, INK_SOFT, 0.3 + tm * 0.7);
   }
 
   var easeOut = function (t) { return 1 - Math.pow(1 - t, 3); };
@@ -106,16 +119,19 @@
     var mouse = { x: -9999, y: -9999, on: false };
 
     function sample() {
-      // 复刻 <img> 的显示裁切：宽 100%、顶对齐（方图 → 取上部）
+      // 复刻 CSS：object-fit:cover + object-position:50% 22%
       var nat = img.naturalWidth, natH = img.naturalHeight;
       var sw = Math.min(window.innerWidth < 760 ? 340 : 420, nat);
-      var scale = sw / nat;
-      var drawnH = natH * scale;            // 方图等比后高度
-      var visH = Math.round(drawnH * (boxH / boxW)); // 盒子可见高度（box 为横向裁切）
+      var boxRatio = boxH / Math.max(1, boxW);
+      var srcW = nat;
+      var srcH = Math.min(natH, Math.round(nat * boxRatio));
+      var maxSy = Math.max(0, natH - srcH);
+      var srcY = Math.round(maxSy * 0.22);
+      var visH = Math.max(1, Math.round(sw * boxRatio));
       var off = document.createElement("canvas");
-      off.width = sw; off.height = Math.max(1, visH);
+      off.width = sw; off.height = visH;
       var octx = off.getContext("2d");
-      octx.drawImage(img, 0, 0, sw, drawnH);
+      octx.drawImage(img, 0, srcY, srcW, srcH, 0, 0, sw, visH);
       var data = octx.getImageData(0, 0, off.width, off.height).data;
       var w = off.width, h = off.height;
 
@@ -130,15 +146,19 @@
         for (var x = 0; x < w; x += step) {
           var idx = (y * w + x) * 4;
           if (isBg(data[idx], data[idx + 1], data[idx + 2], data[idx + 3])) continue;
-          var c = colorFor(data[idx], data[idx + 1], data[idx + 2]);
           var nx = x / w, ny = y / h;
-          var drift = Math.max(0, (0.13 - nx) / 0.13); // 最左缘保留轻微呼吸感
+          var c = colorFor(data[idx], data[idx + 1], data[idx + 2], nx, ny);
+          var drift = Math.max(0, (0.18 - nx) / 0.18); // 左缘呼吸略宽
+          // 亮冰蓝稍大、冷墨更细，层次跟蓝头像一致
+          var isBright = c[2] > 150 || (c[2] > c[0] + 40 && c[1] + c[2] > 220);
+          var baseSize = isBright ? (0.9 + Math.random() * 1.1) : (0.55 + Math.random() * 0.8);
           particles.push({
             nx: nx, ny: ny, r: c[0], g: c[1], b: c[2],
+            warm: isBright ? 1 : 0,
             drift: drift,
             life: Math.random(),
             phase: Math.random() * 6.28,
-            size: 0.72 + Math.random() * 0.9,
+            size: baseSize,
             delay: nx * 640 + Math.random() * 240,
             dur: 760 + Math.random() * 460,
             x: 0, y: 0, tx: 0, ty: 0, sx: 0, sy: 0,
@@ -219,9 +239,12 @@
         if (a <= 0.01) continue;
         ctx.fillStyle = "rgb(" + p.r + "," + p.g + "," + p.b + ")";
         var drawSize = p.size * (1 + hoverBoost * 0.75);
-        ctx.globalAlpha = a * 0.09;
-        ctx.fillRect(px - 0.15, py - 0.15, drawSize + 0.3, drawSize + 0.3);
-        ctx.globalAlpha = a;
+        // 亮冰蓝软光更强，冷墨更实
+        var glow = p.warm ? 0.15 : 0.08;
+        var core = p.warm ? Math.min(1, a * 1.04) : a * 0.94;
+        ctx.globalAlpha = a * glow;
+        ctx.fillRect(px - 0.2, py - 0.2, drawSize + 0.45, drawSize + 0.45);
+        ctx.globalAlpha = core;
         ctx.fillRect(px, py, drawSize, drawSize);
       }
       ctx.globalAlpha = 1;
