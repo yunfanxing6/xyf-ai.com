@@ -97,7 +97,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Writing：从 X 实时同步文章浏览量（优先同域 /api/x-views，回退 fxtwitter）
   hydrateXViews();
+
+  // Video marquee：把源卡片复制到足够宽，再克隆整组做无缝循环
+  initVideoMarquee();
 });
+
+/* ── Video marquee（Contact 同款无限向左）─────────────────── */
+function initVideoMarquee() {
+  const root = document.querySelector("[data-vmarquee]");
+  if (!root) return;
+  const track = root.querySelector(".vmarquee__track");
+  const set = root.querySelector("[data-vmarquee-set]");
+  if (!track || !set) return;
+
+  // 组内至少铺满约 1.2 屏，避免宽屏空档
+  const minWidth = Math.max(window.innerWidth * 1.25, 1200);
+  let guard = 0;
+  while (set.scrollWidth < minWidth && guard < 12) {
+    [...set.children].forEach((child) => {
+      const clone = child.cloneNode(true);
+      if (clone instanceof HTMLElement) {
+        clone.setAttribute("tabindex", "-1");
+        clone.setAttribute("aria-hidden", "true");
+      }
+      set.appendChild(clone);
+    });
+    guard += 1;
+  }
+
+  // 第二组：无缝循环（translateX -50%）
+  const twin = set.cloneNode(true);
+  if (twin instanceof HTMLElement) {
+    twin.setAttribute("aria-hidden", "true");
+    twin.querySelectorAll("a").forEach((a) => a.setAttribute("tabindex", "-1"));
+    track.appendChild(twin);
+  }
+}
 
 /* ── Live X view counts ─────────────────────────────────── */
 const VIEWS_CACHE_KEY = "xyf:x-views:v1";
@@ -217,3 +252,5 @@ async function hydrateXViews() {
   );
   writeViewsCache(cache);
 }
+
+

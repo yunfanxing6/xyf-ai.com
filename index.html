@@ -14,10 +14,10 @@
 <!-- 国内访问 Google Fonts 易卡住；非阻塞加载 + display=swap -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Noto+Serif+SC:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" media="print" onload="this.media='all'" />
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Noto+Serif+SC:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" /></noscript>
-<link rel="stylesheet" href="css/tokens.css?v=xyf-writing-03" />
-<link rel="stylesheet" href="css/base.css?v=xyf-writing-03" />
-<link rel="stylesheet" href="css/sections.css?v=xyf-writing-03" />
-<link rel="stylesheet" href="css/work-split.css?v=xyf-writing-03" />
+<link rel="stylesheet" href="css/tokens.css?v=xyf-video-02" />
+<link rel="stylesheet" href="css/base.css?v=xyf-video-02" />
+<link rel="stylesheet" href="css/sections.css?v=xyf-video-02" />
+<link rel="stylesheet" href="css/work-split.css?v=xyf-video-02" />
 </head>
 <body>
 
@@ -358,31 +358,57 @@
     <a class="writing__all" href="https://x.com/xfengbro" target="_blank" rel="noopener" data-reveal>全部文章 <span class="arr">→</span></a>
   </section>
 
-  <!-- ═══════════ SHOOT / VIDEO（深色）═══════════ -->
+  <!-- ═══════════ SHOOT / VIDEO（深色 · 无限向左 marquee 循环）═══════════ -->
   <section class="shoot" id="shoot">
-    <div class="shoot__stage" data-reveal>
-      <span class="shoot__bg" style="background-image:url('assets/shoot-bg.webp')"></span>
-      <div class="shoot__topbar">
-        <span class="shoot__rec"><i></i> REC · 00:00:00</span>
-        <span class="shoot__ep">SOON · 准备中</span>
+    <header class="shoot__head">
+      <div class="shoot__wordwrap" data-reveal>
+        <span class="shoot__kicker">拍 — SHOOT</span>
+        <h2 class="shoot__title">Shoot</h2>
       </div>
-      <div class="shoot__copy">
-        <h3 class="shoot__center">视频方向准备中</h3>
-        <p class="shoot__soon">内容尚未成熟，敬请期待 · 抖音 @Xyf</p>
-      </div>
-      <div class="shoot__player">
-        <span class="shoot__play">▶</span>
-        <span class="shoot__t">00:00</span>
-        <span class="shoot__track"><i></i></span>
-        <span class="shoot__pct">0%</span>
+      <p class="shoot__lead" data-reveal>封面点进抖音 · 悬停暂停</p>
+    </header>
+
+    <!-- 与 Contact 关键词条同思路：双份轨道 + translateX(-50%) 无缝向左循环；组内多复几遍填满宽屏 -->
+    <div class="vmarquee" data-reveal data-vmarquee>
+      <div class="vmarquee__track">
+        <div class="vmarquee__set" data-vmarquee-set>
+          <a class="vcard" href="https://v.douyin.com/ZlrpqhsNvkA/" target="_blank" rel="noopener"
+             aria-label="在抖音观看：Grok4.5 开发的个人网站">
+            <span class="vcard__media">
+              <img class="vcard__img" src="assets/video-cover-01.jpg?v=dy1" alt="" width="540" height="960" draggable="false" />
+              <span class="vcard__shade" aria-hidden="true"></span>
+              <span class="vcard__play" aria-hidden="true"><i></i></span>
+              <span class="vcard__rec"><i></i> 抖音</span>
+            </span>
+            <span class="vcard__body">
+              <span class="vcard__tag">AI 实践</span>
+              <h3 class="vcard__title">Grok4.5 开发的个人网站</h3>
+              <p class="vcard__dek">普通人 0 基础也能用 AI 做出个性化个人站</p>
+            </span>
+          </a>
+          <a class="vcard" href="https://v.douyin.com/ZVyyWUNtS9M/" target="_blank" rel="noopener"
+             aria-label="在抖音观看：Grok 生成视频">
+            <span class="vcard__media">
+              <img class="vcard__img" src="assets/video-cover-02.jpg?v=dy1" alt="" width="900" height="506" draggable="false" />
+              <span class="vcard__shade" aria-hidden="true"></span>
+              <span class="vcard__play" aria-hidden="true"><i></i></span>
+              <span class="vcard__rec"><i></i> 抖音</span>
+            </span>
+            <span class="vcard__body">
+              <span class="vcard__tag">AI 视频</span>
+              <h3 class="vcard__title">Grok 生成视频</h3>
+              <p class="vcard__dek">第一次用效果意外真实 · 电影感试水</p>
+            </span>
+          </a>
+        </div>
       </div>
     </div>
-    <div class="shoot__foot">
-      <div class="shoot__wordwrap">
-        <span class="shoot__kicker" data-reveal>拍 — SHOOT</span>
-        <h2 class="shoot__title" data-reveal>Shoot</h2>
-      </div>
-    </div>
+
+    <a class="shoot__all"
+       href="https://www.douyin.com/user/MS4wLjABAAAAt2IYDh3RCyOTeeG1pjnfnSfQTT3RPobH2nW8Vh3w4F-p7pafrCtKTrrC1JrtK_ny"
+       target="_blank" rel="noopener" data-reveal>
+      抖音主页 · @Xyf <span class="arr">→</span>
+    </a>
   </section>
 
   <!-- ═══════════ BUILD ═══════════ -->
@@ -531,8 +557,8 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="js/particles.js?v=xyf-writing-03"></script>
+<script src="js/particles.js?v=xyf-video-02"></script>
 <script src="js/build.js"></script>
-<script src="js/main.js?v=xyf-writing-03"></script>
+<script src="js/main.js?v=xyf-video-02"></script>
 </body>
 </html>
