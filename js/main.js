@@ -95,12 +95,158 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Writing：从 X 实时同步文章浏览量（优先同域 /api/x-views，回退 fxtwitter）
-  hydrateXViews();
+  // Writing：JSON 驱动列表 + X 浏览量
+  hydrateWriting().finally(() => hydrateXViews());
 
   // Video marquee：把源卡片复制到足够宽，再克隆整组做无缝循环
   initVideoMarquee();
 });
+
+/* ── Writing：data/writing.json（cron + Grok CLI 同步）─────── */
+const WRITING_JSON = "data/writing.json";
+const VIEW_SVG =
+  '<svg class="viewico" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>';
+
+function displayTitle(item) {
+  return (item && (item.titleDisplay || item.title) || "").trim();
+}
+
+function formatViewsFallback(n) {
+  if (typeof n !== "number" || !Number.isFinite(n)) return null;
+  return formatViews(n);
+}
+
+function dekToHtml(dek) {
+  const raw = (dek || "").replace(/\r/g, "").trim();
+  if (!raw) return "";
+  return raw
+    .split("\n")
+    .map((line) =>
+      line
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;"),
+    )
+    .join("<br />");
+}
+
+function nbspTag(tag) {
+  return String(tag || "AI 实践").replace(/ /g, "\u00a0");
+}
+
+async function hydrateWriting() {
+  const root = document.querySelector("[data-writing-root]");
+  if (!root) return;
+
+  let data;
+  try {
+    const res = await fetch(`${WRITING_JSON}?t=${Date.now()}`, {
+      headers: { Accept: "application/json" },
+      cache: "no-cache",
+    });
+    if (!res.ok) return;
+    data = await res.json();
+  } catch {
+    return;
+  }
+
+  const items = Array.isArray(data?.items) ? data.items : [];
+  if (!items.length) return;
+
+  const listSlots = Math.max(1, Math.min(6, Number(data.listSlots) || 3));
+  const feature = items.find((it) => it.pin) || items[0];
+  const rest = items.filter((it) => it !== feature);
+
+  // Feature card
+  const feat = root.querySelector("[data-writing-feat]");
+  if (feat && feature) {
+    const url = feature.url || `https://x.com/xfengbro/status/${feature.id}`;
+    feat.setAttribute("href", url);
+    const title = displayTitle(feature);
+    const titleEl = feat.querySelector("[data-writing-feat-title]");
+    if (titleEl) titleEl.textContent = title;
+    const dekEl = feat.querySelector("[data-writing-feat-dek]");
+    if (dekEl) dekEl.innerHTML = dekToHtml(feature.dek);
+    const tagEl = feat.querySelector("[data-writing-feat-tag]");
+    if (tagEl) tagEl.innerHTML = nbspTag(feature.tag || "AI 实践");
+    const dateEl = feat.querySelector("[data-writing-feat-date]");
+    if (dateEl) dateEl.textContent = feature.date || "";
+    const frame = feat.querySelector("[data-writing-feat-frame]");
+    const img = feat.querySelector("[data-writing-feat-img]");
+    const featureImg = feature.featureImage;
+    const cover = feature.cover;
+    if (img) {
+      if (featureImg) {
+        img.src = featureImg;
+        frame?.classList.remove("feat__frame--cover");
+      } else if (cover) {
+        img.src = cover;
+        frame?.classList.add("feat__frame--cover");
+      }
+    }
+    const viewsWrap = feat.querySelector("[data-writing-feat-views]");
+    if (viewsWrap && feature.id) {
+      viewsWrap.setAttribute("data-x-status", String(feature.id));
+      const n = viewsWrap.querySelector(".views-n");
+      const fb = formatViewsFallback(feature.viewsFallback);
+      if (n) {
+        if (fb) {
+          n.textContent = fb;
+          n.dataset.viewsFallback = String(feature.viewsFallback);
+        }
+      }
+    }
+  }
+
+  // List rows
+  const list = root.querySelector("[data-writing-list]");
+  if (list) {
+    list.innerHTML = "";
+    for (let i = 0; i < listSlots; i++) {
+      const item = rest[i];
+      const idx = String(i + 2).padStart(2, "0");
+      if (!item) {
+        const soon = document.createElement("div");
+        soon.className = "wpost wpost--soon";
+        soon.setAttribute("data-reveal", "");
+        soon.innerHTML =
+          `<span class="wpost__idx">${idx}</span>` +
+          `<div class="wpost__body"><h3 class="wpost__title">敬请期待</h3>` +
+          `<div class="wpost__meta"><span class="wpost__tag">SOON</span></div></div>` +
+          `<span class="wpost__thumb wpost__thumb--cover"><img src="assets/soon-0${(i % 3) + 2}.png" alt="" loading="lazy" /></span>`;
+        list.appendChild(soon);
+        continue;
+      }
+      const a = document.createElement("a");
+      a.className = "wpost";
+      a.href = item.url || `https://x.com/xfengbro/status/${item.id}`;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.setAttribute("data-reveal", "");
+      const fb = formatViewsFallback(item.viewsFallback) || "—";
+      const thumb = item.cover || "assets/writing-thumb.png";
+      a.innerHTML =
+        `<span class="wpost__idx">${idx}</span>` +
+        `<div class="wpost__body">` +
+        `<h3 class="wpost__title"></h3>` +
+        `<div class="wpost__meta">` +
+        `<span class="wpost__tag"></span><span class="dotsep"></span>` +
+        `<span class="wpost__date"></span>` +
+        `<span class="wpost__views" data-x-status="${String(item.id || "")}" title="浏览量（来自 X，实时）">` +
+        VIEW_SVG +
+        `<span class="views-n" data-views-fallback="${item.viewsFallback ?? ""}">${fb}</span>` +
+        `</span></div></div>` +
+        `<span class="wpost__thumb wpost__thumb--cover"><img src="${thumb}" alt="" loading="lazy" /></span>`;
+      a.querySelector(".wpost__title").textContent = displayTitle(item);
+      a.querySelector(".wpost__tag").innerHTML = nbspTag(item.tag || "AI 实践");
+      a.querySelector(".wpost__date").textContent = item.date || "";
+      list.appendChild(a);
+    }
+  }
+
+  const all = document.querySelector("[data-writing-all]");
+  if (all && data.profileUrl) all.setAttribute("href", data.profileUrl);
+}
 
 /* ── Video marquee（Contact 同款无限向左）─────────────────── */
 function initVideoMarquee() {

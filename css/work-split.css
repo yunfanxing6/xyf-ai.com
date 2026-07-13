@@ -75,6 +75,15 @@
   border:1px solid var(--line);
   overflow:visible;
 }
+/* 无定制竖海报时：用 X Article 宽封面（约 1280×512 ≈ 2.5:1 / 近 16:9 裁切） */
+.feat__frame--cover{
+  aspect-ratio:16/10;
+  overflow:hidden;
+}
+.feat__frame--cover .feat__img{
+  object-fit:cover;
+  object-position:center center;
+}
 .feat__frame::before,
 .feat__frame::after,
 .writing__list::before,
@@ -182,8 +191,12 @@
 .wpost__thumb{
   width:124px;height:70px;overflow:hidden;
   align-self:center;
+  background:#0a1220;
+  border:1px solid var(--line);
 }
-.wpost__thumb img{width:100%;height:100%;object-fit:cover;}
+/* 列表位：固定约 16:9，吃 X 原文宽封面 */
+.wpost__thumb--cover{aspect-ratio:16/9;height:auto;min-height:70px;}
+.wpost__thumb img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block;}
 
 .writing__all{
   display:inline-flex;align-items:center;gap:14px;

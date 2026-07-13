@@ -14,10 +14,10 @@
 <!-- 国内访问 Google Fonts 易卡住；非阻塞加载 + display=swap -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Noto+Serif+SC:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" media="print" onload="this.media='all'" />
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Noto+Serif+SC:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" /></noscript>
-<link rel="stylesheet" href="css/tokens.css?v=xyf-video-02" />
-<link rel="stylesheet" href="css/base.css?v=xyf-video-02" />
-<link rel="stylesheet" href="css/sections.css?v=xyf-video-02" />
-<link rel="stylesheet" href="css/work-split.css?v=xyf-video-02" />
+<link rel="stylesheet" href="css/tokens.css?v=xyf-writing-sync-01" />
+<link rel="stylesheet" href="css/base.css?v=xyf-writing-sync-01" />
+<link rel="stylesheet" href="css/sections.css?v=xyf-writing-sync-01" />
+<link rel="stylesheet" href="css/work-split.css?v=xyf-writing-sync-01" />
 </head>
 <body>
 
@@ -309,53 +309,61 @@
       </div>
     </header>
 
-    <div class="writing__grid">
-      <!-- 头条 01 · AI 做个人网站 -->
-      <a class="feat" href="https://x.com/xfengbro/status/2076200076528288134" target="_blank" rel="noopener" data-reveal>
-        <span class="feat__frame">
-          <img class="feat__img" src="assets/writing-ai-site-feature.png?v=4" alt="" loading="lazy" />
+    <!-- 内容由 data/writing.json 注入（cron + Grok CLI 同步 X Articles） -->
+    <div class="writing__grid" data-writing-root>
+      <a class="feat" href="https://x.com/xfengbro" target="_blank" rel="noopener" data-reveal data-writing-feat>
+        <span class="feat__frame" data-writing-feat-frame>
+          <img class="feat__img" data-writing-feat-img src="assets/writing-ai-site-feature.png?v=4" alt="" loading="lazy" />
           <span class="feat__tick feat__tick--tl"></span>
           <span class="feat__tick feat__tick--br"></span>
         </span>
         <div class="feat__body">
           <span class="feat__idx">01</span>
-          <h3 class="feat__title">AI 做个人网站</h3>
-          <p class="feat__dek">域名 · skill · 内容与风格 · 出图审核 · 部署<br />五步用 AI 做出可上线的个人品牌站</p>
-          <div class="feat__meta"><span class="feat__tag">AI&nbsp;实践</span><span class="dotsep"></span><span>2026.07.12</span><span class="feat__views" data-x-status="2076200076528288134" title="浏览量（来自 X，实时）"><svg class="viewico" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg><span class="views-n" data-views-fallback="7">7</span></span></div>
+          <h3 class="feat__title" data-writing-feat-title>AI 做个人网站</h3>
+          <p class="feat__dek" data-writing-feat-dek>域名 · skill · 内容与风格 · 出图审核 · 部署<br />五步用 AI 做出可上线的个人品牌站</p>
+          <div class="feat__meta">
+            <span class="feat__tag" data-writing-feat-tag>AI&nbsp;实践</span>
+            <span class="dotsep"></span>
+            <span data-writing-feat-date>2026.07.12</span>
+            <span class="feat__views" data-writing-feat-views data-x-status="2076200076528288134" title="浏览量（来自 X，实时）">
+              <svg class="viewico" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+              <span class="views-n" data-views-fallback="7">7</span>
+            </span>
+          </div>
           <span class="feat__read">阅读 <span class="arr">→</span></span>
         </div>
       </a>
 
-      <!-- 02 已发 / 03–04 SOON -->
-      <div class="writing__list">
-        <a class="wpost" href="https://x.com/xfengbro/status/2075534333180621182" target="_blank" rel="noopener" data-reveal>
+      <div class="writing__list" data-writing-list>
+        <!-- list rows injected; SOON placeholders until JSON loads -->
+        <div class="wpost wpost--soon" data-reveal data-writing-soon>
           <span class="wpost__idx">02</span>
           <div class="wpost__body">
-            <h3 class="wpost__title">X Premium+ 赠送的 SuperGrok，额度可以独立换绑重置</h3>
-            <div class="wpost__meta"><span class="wpost__tag">AI&nbsp;实践</span><span class="dotsep"></span><span>2026.07.10</span><span class="wpost__views" data-x-status="2075534333180621182" title="浏览量（来自 X，实时）"><svg class="viewico" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg><span class="views-n" data-views-fallback="323">323</span></span></div>
+            <h3 class="wpost__title">敬请期待</h3>
+            <div class="wpost__meta"><span class="wpost__tag">SOON</span></div>
           </div>
-          <span class="wpost__thumb"><img src="assets/writing-thumb.png" alt="" loading="lazy" /></span>
-        </a>
-        <div class="wpost wpost--soon" data-reveal>
+          <span class="wpost__thumb wpost__thumb--cover"><img src="assets/soon-03.png" alt="" loading="lazy" /></span>
+        </div>
+        <div class="wpost wpost--soon" data-reveal data-writing-soon>
           <span class="wpost__idx">03</span>
           <div class="wpost__body">
             <h3 class="wpost__title">敬请期待</h3>
             <div class="wpost__meta"><span class="wpost__tag">SOON</span></div>
           </div>
-          <span class="wpost__thumb"><img src="assets/soon-03.png" alt="" loading="lazy" /></span>
+          <span class="wpost__thumb wpost__thumb--cover"><img src="assets/soon-04.png" alt="" loading="lazy" /></span>
         </div>
-        <div class="wpost wpost--soon" data-reveal>
+        <div class="wpost wpost--soon" data-reveal data-writing-soon>
           <span class="wpost__idx">04</span>
           <div class="wpost__body">
             <h3 class="wpost__title">敬请期待</h3>
             <div class="wpost__meta"><span class="wpost__tag">SOON</span></div>
           </div>
-          <span class="wpost__thumb"><img src="assets/soon-04.png" alt="" loading="lazy" /></span>
+          <span class="wpost__thumb wpost__thumb--cover"><img src="assets/writing-thumb.png" alt="" loading="lazy" /></span>
         </div>
       </div>
     </div>
 
-    <a class="writing__all" href="https://x.com/xfengbro" target="_blank" rel="noopener" data-reveal>全部文章 <span class="arr">→</span></a>
+    <a class="writing__all" href="https://x.com/xfengbro" target="_blank" rel="noopener" data-reveal data-writing-all>全部文章 <span class="arr">→</span></a>
   </section>
 
   <!-- ═══════════ SHOOT / VIDEO（深色 · 无限向左 marquee 循环）═══════════ -->
@@ -557,8 +565,8 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="js/particles.js?v=xyf-video-02"></script>
+<script src="js/particles.js?v=xyf-writing-sync-01"></script>
 <script src="js/build.js"></script>
-<script src="js/main.js?v=xyf-video-02"></script>
+<script src="js/main.js?v=xyf-writing-sync-01"></script>
 </body>
 </html>
