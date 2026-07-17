@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{title}} — xyf</title>
+  <meta name="description" content="{{dek_attr}}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Noto+Serif+SC:wght@500;600;700&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/tokens.css" />
+  <link rel="stylesheet" href="/css/post.css" />
+</head>
+<body>
+  <nav class="post-nav">
+    <a class="post-nav__logo" href="/">xyf</a>
+    <a class="post-nav__back" href="/#writing">← Writing</a>
+  </nav>
+
+  <article class="post">
+    <div class="post__kicker">
+      <span>{{tag}}</span><span class="dotsep"></span>
+      <span>{{date}}</span><span class="dotsep"></span>
+      <span class="post__views" data-post-views>
+        <svg class="viewico" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+        <span class="views-n">—</span>
+      </span>
+    </div>
+    <h1 class="post__title">{{title}}</h1>
+    <p class="post__dek">{{dek_html}}</p>
+    <hr class="post__rule" />
+    <div class="post__body">
+{{body}}
+    </div>
+    <footer class="post__foot">
+      <a href="/#writing">← 更多文章</a>
+      <span>xyf · <a href="https://x.com/xfengbro" target="_blank" rel="noopener">@xfengbro</a></span>
+    </footer>
+  </article>
+
+  <script>
+    (function () {
+      var slug = {{slug_json}};
+      var KEY = "xyf:viewed:" + slug;
+      var counted = false;
+      try { counted = sessionStorage.getItem(KEY) === "1"; } catch (e) {}
+      var url = "/api/views/" + (counted ? "get" : "hit") + "?slug=" + encodeURIComponent(slug);
+      fetch(url, { method: counted ? "GET" : "POST" })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) {
+          if (!d || typeof d.views !== "number") return;
+          try { sessionStorage.setItem(KEY, "1"); } catch (e) {}
+          var el = document.querySelector("[data-post-views] .views-n");
+          if (el) el.textContent = d.views.toLocaleString("en-US");
+        })
+        .catch(function () {});
+    })();
+  </script>
+</body>
+</html>

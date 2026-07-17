@@ -577,6 +577,8 @@ a.cbar__item:hover .cbar__arr{transform:translateX(5px);color:var(--accent);}
 .to-top:hover{color:var(--ink);}
 .to-top .arr{transition:transform .25s var(--ease);}
 .to-top:hover .arr{transform:translateY(-3px);}
+.foot-link{color:inherit;text-decoration:underline;text-underline-offset:2px;transition:color .25s;}
+.foot-link:hover{color:var(--ink);}
 
 /* ═══════════ 响应式(U10 细化,先给基础堆叠)═══════════ */
 @media (max-width:860px){

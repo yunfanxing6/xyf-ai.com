@@ -53,16 +53,26 @@ def proxy_opener() -> urllib.request.OpenerDirector:
 OPENER = proxy_opener()
 
 
+# urllib hits IncompleteRead through the local Shadowrocket proxy; curl handles it fine.
+def _curl(url: str, accept: str, timeout: float) -> bytes:
+    import subprocess
+
+    proc = subprocess.run(
+        ["curl", "-sSfL", "--max-time", str(int(timeout)),
+         "-A", UA, "-H", f"Accept: {accept}", url],
+        capture_output=True,
+    )
+    if proc.returncode != 0:
+        raise RuntimeError(f"curl failed ({proc.returncode}) for {url}: {proc.stderr.decode(errors='replace')[:200]}")
+    return proc.stdout
+
+
 def http_json(url: str, timeout: float = 25.0) -> dict[str, Any]:
-    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/json"})
-    with OPENER.open(req, timeout=timeout) as resp:
-        return json.loads(resp.read().decode("utf-8", errors="replace"))
+    return json.loads(_curl(url, "application/json", timeout).decode("utf-8", errors="replace"))
 
 
 def http_bytes(url: str, timeout: float = 40.0) -> bytes:
-    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "*/*"})
-    with OPENER.open(req, timeout=timeout) as resp:
-        return resp.read()
+    return _curl(url, "*/*", timeout)
 
 
 def load_seeds() -> list[str]:

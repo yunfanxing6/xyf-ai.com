@@ -95,15 +95,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Writing：JSON 驱动列表 + X 浏览量
-  hydrateWriting().finally(() => hydrateXViews());
+  // Writing：JSON 驱动列表 + X 浏览量 + 站内文章浏览量
+  hydrateWriting().finally(() => { hydrateXViews(); hydrateLocalViews(); });
 
   // Video marquee：把源卡片复制到足够宽，再克隆整组做无缝循环
   initVideoMarquee();
 });
 
-/* ── Writing：data/writing.json（cron + Grok CLI 同步）─────── */
+/* ── Writing：data/writing.json（X 同步）+ data/posts.json（站内博客）── */
 const WRITING_JSON = "data/writing.json";
+const POSTS_JSON = "data/posts.json";
 const VIEW_SVG =
   '<svg class="viewico" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>';
 
@@ -134,26 +135,32 @@ function nbspTag(tag) {
   return String(tag || "AI 实践").replace(/ /g, "\u00a0");
 }
 
+async function fetchJson(url) {
+  try {
+    const res = await fetch(`${url}?t=${Date.now()}`, {
+      headers: { Accept: "application/json" },
+      cache: "no-cache",
+    });
+    return res.ok ? await res.json() : null;
+  } catch {
+    return null;
+  }
+}
+
 async function hydrateWriting() {
   const root = document.querySelector("[data-writing-root]");
   if (!root) return;
 
-  let data;
-  try {
-    const res = await fetch(`${WRITING_JSON}?t=${Date.now()}`, {
-      headers: { Accept: "application/json" },
-      cache: "no-cache",
-    });
-    if (!res.ok) return;
-    data = await res.json();
-  } catch {
-    return;
-  }
+  const [data, posts] = await Promise.all([fetchJson(WRITING_JSON), fetchJson(POSTS_JSON)]);
 
-  const items = Array.isArray(data?.items) ? data.items : [];
+  const xItems = Array.isArray(data?.items) ? data.items : [];
+  const localItems = Array.isArray(posts?.items) ? posts.items : [];
+  const items = [...localItems, ...xItems].sort(
+    (a, b) => (b.createdTimestamp || 0) - (a.createdTimestamp || 0),
+  );
   if (!items.length) return;
 
-  const listSlots = Math.max(1, Math.min(6, Number(data.listSlots) || 3));
+  const listSlots = Math.max(1, Math.min(6, Number(data?.listSlots) || 3));
   const feature = items.find((it) => it.pin) || items[0];
   const rest = items.filter((it) => it !== feature);
 
@@ -162,6 +169,13 @@ async function hydrateWriting() {
   if (feat && feature) {
     const url = feature.url || `https://x.com/xfengbro/status/${feature.id}`;
     feat.setAttribute("href", url);
+    if (feature.local) {
+      feat.removeAttribute("target");
+      feat.removeAttribute("rel");
+    } else {
+      feat.setAttribute("target", "_blank");
+      feat.setAttribute("rel", "noopener");
+    }
     const title = displayTitle(feature);
     const titleEl = feat.querySelector("[data-writing-feat-title]");
     if (titleEl) titleEl.textContent = title;
@@ -175,6 +189,7 @@ async function hydrateWriting() {
     const img = feat.querySelector("[data-writing-feat-img]");
     const featureImg = feature.featureImage;
     const cover = feature.cover;
+    frame?.classList.toggle("feat__frame--paper", !!feature.local);
     if (img) {
       if (featureImg) {
         img.src = featureImg;
@@ -186,14 +201,19 @@ async function hydrateWriting() {
     }
     const viewsWrap = feat.querySelector("[data-writing-feat-views]");
     if (viewsWrap && feature.id) {
-      viewsWrap.setAttribute("data-x-status", String(feature.id));
+      if (feature.local) {
+        viewsWrap.removeAttribute("data-x-status");
+        viewsWrap.setAttribute("data-local-slug", String(feature.id));
+        viewsWrap.setAttribute("title", "浏览量（站内）");
+      } else {
+        viewsWrap.removeAttribute("data-local-slug");
+        viewsWrap.setAttribute("data-x-status", String(feature.id));
+      }
       const n = viewsWrap.querySelector(".views-n");
       const fb = formatViewsFallback(feature.viewsFallback);
       if (n) {
-        if (fb) {
-          n.textContent = fb;
-          n.dataset.viewsFallback = String(feature.viewsFallback);
-        }
+        n.textContent = fb || "—";
+        if (fb) n.dataset.viewsFallback = String(feature.viewsFallback);
       }
     }
   }
@@ -220,11 +240,16 @@ async function hydrateWriting() {
       const a = document.createElement("a");
       a.className = "wpost";
       a.href = item.url || `https://x.com/xfengbro/status/${item.id}`;
-      a.target = "_blank";
-      a.rel = "noopener";
+      if (!item.local) {
+        a.target = "_blank";
+        a.rel = "noopener";
+      }
       a.setAttribute("data-reveal", "");
       const fb = formatViewsFallback(item.viewsFallback) || "—";
       const thumb = item.cover || "assets/writing-thumb.png";
+      const viewsAttr = item.local
+        ? `data-local-slug="${String(item.id || "")}" title="浏览量（站内）"`
+        : `data-x-status="${String(item.id || "")}" title="浏览量（来自 X，实时）"`;
       a.innerHTML =
         `<span class="wpost__idx">${idx}</span>` +
         `<div class="wpost__body">` +
@@ -232,7 +257,7 @@ async function hydrateWriting() {
         `<div class="wpost__meta">` +
         `<span class="wpost__tag"></span><span class="dotsep"></span>` +
         `<span class="wpost__date"></span>` +
-        `<span class="wpost__views" data-x-status="${String(item.id || "")}" title="浏览量（来自 X，实时）">` +
+        `<span class="wpost__views" ${viewsAttr}>` +
         VIEW_SVG +
         `<span class="views-n" data-views-fallback="${item.viewsFallback ?? ""}">${fb}</span>` +
         `</span></div></div>` +
@@ -278,6 +303,32 @@ function initVideoMarquee() {
     twin.querySelectorAll("a").forEach((a) => a.setAttribute("tabindex", "-1"));
     track.appendChild(twin);
   }
+}
+
+/* ── 站内文章浏览量（/api/views，VPS SQLite 计数） ───────── */
+async function hydrateLocalViews() {
+  const nodes = document.querySelectorAll("[data-local-slug]");
+  if (!nodes.length) return;
+  let counts;
+  try {
+    const res = await fetch("/api/views/all", {
+      headers: { Accept: "application/json" },
+      signal: AbortSignal.timeout ? AbortSignal.timeout(8000) : undefined,
+    });
+    if (!res.ok) return;
+    counts = await res.json();
+  } catch {
+    return;
+  }
+  nodes.forEach((el) => {
+    const slug = el.getAttribute("data-local-slug");
+    const n = counts?.[slug];
+    if (typeof n !== "number") return;
+    const label = formatViews(n) || "0";
+    const num = el.querySelector(".views-n");
+    if (num) num.textContent = label;
+    el.setAttribute("title", `浏览量 ${label}（站内）`);
+  });
 }
 
 /* ── Live X view counts ─────────────────────────────────── */

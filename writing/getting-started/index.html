@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>国内从零用上 Claude Code 与 ChatGPT 完全指南 — xyf</title>
+  <meta name="description" content="一篇走完全程：解决网络 → 下载安装 → 账号登录。 官方账号直接用，想接中转站或其他模型就用 CC Switch。所有安装包本站直链下载。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Noto+Serif+SC:wght@500;600;700&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/tokens.css" />
+  <link rel="stylesheet" href="/css/post.css" />
+</head>
+<body>
+  <nav class="post-nav">
+    <a class="post-nav__logo" href="/">xyf</a>
+    <a class="post-nav__back" href="/#writing">← Writing</a>
+  </nav>
+
+  <article class="post">
+    <div class="post__kicker">
+      <span>教程</span><span class="dotsep"></span>
+      <span>2026.07.18</span><span class="dotsep"></span>
+      <span class="post__views" data-post-views>
+        <svg class="viewico" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+        <span class="views-n">—</span>
+      </span>
+    </div>
+    <h1 class="post__title">国内从零用上 Claude Code 与 ChatGPT 完全指南</h1>
+    <p class="post__dek">一篇走完全程：解决网络 → 下载安装 → 账号登录。<br />官方账号直接用，想接中转站或其他模型就用 CC Switch。所有安装包本站直链下载。</p>
+    <hr class="post__rule" />
+    <div class="post__body">
+<p>写给国内完全零基础的朋友。对已经上过 X 的推友来说这些都不是事，但对国内很多人来说，"网络"这一关就卡死了，国内平台又不方便讲。所以我把整条路一次写全：<strong>网络 → 安装 → 账号</strong>，跟着做就能用上。</p>
+<p>所有需要的安装包都放在本站直连下载，<strong>不需要你先会翻墙</strong>。</p>
+<hr>
+<h2 id="_1">第一步：解决网络问题</h2>
+<p>Claude、ChatGPT 这些服务国内直连不通，第一步是准备一个能用的代理环境。分两件事：<strong>代理软件</strong>（本地的壳）+ <strong>机场订阅</strong>（提供节点）。</p>
+<h3 id="11">1.1 下载代理软件</h3>
+<p>推荐开源免费的 <strong>Clash Verge</strong>，本站直连下载（无需翻墙）：</p>
+<ul>
+<li><a href="/dl/Clash.Verge_2.5.1_x64-setup.exe">Windows 64 位</a>（47 MB）</li>
+<li><a href="/dl/Clash.Verge_2.5.1_aarch64.dmg">macOS Apple 芯片（M1/M2/M3/M4）</a>（62 MB）</li>
+<li><a href="/dl/Clash.Verge_2.5.1_x64.dmg">macOS Intel 芯片</a>（66 MB）</li>
+</ul>
+<blockquote>
+<p>不确定 Mac 是什么芯片：点左上角  → 关于本机，"芯片"写 Apple 的选第一个，写 Intel 的选第二个。</p>
+</blockquote>
+<p>下载后正常安装。macOS 首次打开若提示"无法验证开发者"，去 系统设置 → 隐私与安全性 → 点"仍要打开"。</p>
+<h3 id="12">1.2 购买机场订阅</h3>
+<p>代理软件只是个壳，还需要"订阅"提供节点。我目前在用的机场（稳定、够快，支持 Claude / ChatGPT / X）：</p>
+<p><strong>👉 <a href="https://58.77vy.xyz/register?code=F0VGpmAi">点此注册（8 折优惠）</a></strong>，充值时填优惠券码 <strong><code>vyy888</code></strong> 打 8 折。我平时用的就是<strong>一年 20 元、每月 100G 流量</strong>的套餐，日常跑 Claude Code 完全够用。</p>
+<h3 id="13">1.3 导入订阅并开启代理</h3>
+<ol>
+<li>在机场官网复制你的"订阅链接"</li>
+<li>打开 Clash Verge → 左侧「订阅」→ 粘贴链接 → 点「导入」</li>
+<li>左侧「代理」→ 选一个香港或日本节点</li>
+<li>左侧「设置」→ 打开「系统代理」</li>
+</ol>
+<p><strong>验证</strong>：浏览器打开 <a href="https://claude.ai">claude.ai</a>，能打开就说明网络通了。记住 Clash Verge 的混合端口默认是 <strong>7897</strong>（设置里能看到），后面配终端要用。</p>
+<hr>
+<h2 id="_2">第二步：下载安装</h2>
+<p>网络通了，开始装工具。想用 Claude Code 就走 2.1 + 2.2；只想用 ChatGPT 桌面版可以直接跳 2.3。</p>
+<h3 id="21-nodejsclaude-code">2.1 安装 Node.js（Claude Code 的前置）</h3>
+<p>Claude Code 通过 npm 分发，需要 Node.js 18+。从国内镜像直接下载（不走代理也快）：</p>
+<ul>
+<li><a href="https://npmmirror.com/mirrors/node/v22.17.0/node-v22.17.0-x64.msi">Windows 64 位安装包</a></li>
+<li><a href="https://npmmirror.com/mirrors/node/v22.17.0/node-v22.17.0.pkg">macOS 安装包（通用双芯片）</a></li>
+</ul>
+<p>一路下一步装完，打开终端（Windows 用 PowerShell，macOS 用"终端"）检查：</p>
+<pre><code class="language-bash">node -v
+</code></pre>
+<p>显示 <code>v22.x.x</code> 就成功了。</p>
+<h3 id="22-claude-code">2.2 安装 Claude Code</h3>
+<p>终端里执行（先把 npm 源切国内镜像，下载快）：</p>
+<pre><code class="language-bash">npm config set registry https://registry.npmmirror.com
+npm install -g @anthropic-ai/claude-code
+</code></pre>
+<p>装完检查：</p>
+<pre><code class="language-bash">claude --version
+</code></pre>
+<h3 id="23-chatgpt">2.3 （可选）安装 ChatGPT 桌面客户端</h3>
+<p>比网页版更顺手：全局快捷键唤起、可对着截图提问。</p>
+<ul>
+<li><strong>macOS</strong>（需 14 Sonoma+）：<a href="https://persistent.oaistatic.com/sidekick/public/ChatGPT.dmg">官方直接下载 ChatGPT.dmg</a>，打开拖进"应用程序"即可</li>
+<li><strong>Windows</strong>（需 Win 10+）：<a href="https://apps.microsoft.com/detail/9nt1r1c2hh7j">微软应用商店安装</a>，或官方页 <a href="https://chatgpt.com/download">chatgpt.com/download</a></li>
+</ul>
+<p>桌面客户端走系统代理，只要 Clash Verge 的「系统代理」开着就能连上，无需额外设置。</p>
+<hr>
+<h2 id="_3">第三步：账号与登录</h2>
+<p>工具装好了，最后一步是账号。<strong>这里分两条路，看你怎么用。</strong></p>
+<h3 id="claude-code">先让终端走代理（用 Claude Code 必做）</h3>
+<p>Claude Code 在终端里运行，需要手动让终端走代理。端口用 Clash Verge 的 7897：</p>
+<p><strong>macOS / Linux：</strong></p>
+<pre><code class="language-bash">export https_proxy=http://127.0.0.1:7897 http_proxy=http://127.0.0.1:7897
+</code></pre>
+<p><strong>Windows PowerShell：</strong></p>
+<pre><code class="language-powershell">$env:HTTPS_PROXY=&quot;http://127.0.0.1:7897&quot;; $env:HTTP_PROXY=&quot;http://127.0.0.1:7897&quot;
+</code></pre>
+<blockquote>
+<p>每次开新终端都要重新执行。嫌麻烦可以把这行加到 <code>~/.zshrc</code>（macOS）或 PowerShell 配置文件里，一劳永逸。</p>
+</blockquote>
+<h3 id="_4">注册账号时的手机验证：用接码平台</h3>
+<p>没有 Claude / OpenAI 账号的要先注册。注册时通常要<strong>手机号验证</strong>，而 +86 国内手机号大概率不支持（或不想暴露自己的号）。解决办法是用"接码平台"——花几毛钱租一个海外虚拟号收验证码。</p>
+<p>我在用的是 <strong>HeroSMS</strong>（老牌 SMS-Activate 同源技术架构，180+ 国家、每日 50 万+ 新号，价格低，有中文界面）：</p>
+<p><strong>👉 <a href="https://hero-sms.com/?ref=732020">点此注册 HeroSMS</a></strong></p>
+<p>使用流程：</p>
+<ol>
+<li>注册账号（右上角可切换中文）</li>
+<li>充值余额（几美元够用很多次）</li>
+<li>选择服务（如 OpenAI / Claude / Google，找不到就选 "Any Other"）和国家（美国、英国、印尼等，价格不同）</li>
+<li>购买号码，把号码填到注册页发送验证码</li>
+<li>验证码会直接出现在 HeroSMS 的个人账户里，填回去即可</li>
+</ol>
+<blockquote>
+<p>提示：每个号码有效期 20 分钟，期间收不到码的话费用会<strong>自动退回你的余额</strong>，换个号码重试即可。号码用完自动释放，不影响你后续登录（登录一般不再需要收码）。</p>
+</blockquote>
+<h3 id="a">路线 A：用官方账号（最简单）</h3>
+<p>如果你有 Claude 官方订阅（Pro / Max）或愿意用官方 API 按量付费，直接登录即可。</p>
+<p>在项目目录里运行：</p>
+<pre><code class="language-bash">claude
+</code></pre>
+<p>首次运行会弹出浏览器登录。两种方式：</p>
+<ol>
+<li><strong>Claude Pro / Max 订阅</strong>：用 claude.ai 账号登录，按订阅额度使用</li>
+<li><strong>API Key</strong>：在 <a href="https://console.anthropic.com/">console.anthropic.com</a> 创建 Key，按量付费</li>
+</ol>
+<p>登录完就能直接用了。ChatGPT 桌面版同理——打开客户端，用 OpenAI 账号登录即可。</p>
+<h3 id="b">路线 B：用中转站或其他模型（省钱 / 灵活）</h3>
+<p>如果你想接 <strong>API 中转站</strong>（第三方转发，通常更便宜、支付更方便）或切换到别的模型，手动改配置文件很麻烦。用 <strong>CC Switch</strong> 这个桌面工具管理，一键切换。</p>
+<p>本站直连下载：</p>
+<ul>
+<li><a href="/dl/CC-Switch-v3.17.0-Windows.msi">CC Switch · Windows（.msi）</a>（13 MB）</li>
+<li><a href="/dl/CC-Switch-v3.17.0-macOS.dmg">CC Switch · macOS（.dmg）</a>（26 MB）</li>
+</ul>
+<p>macOS 版已 Apple 签名公证，下载拖进"应用程序"即可。</p>
+<p><strong>用法</strong>（以给 Claude Code 加一个中转站为例）：</p>
+<ol>
+<li>打开 CC Switch，左侧选 <strong>Claude Code</strong></li>
+<li>点「添加供应商」，从 50+ 预设里选，或手动填：
+   - <strong>名称</strong>：随便起，如"中转站 A"
+   - <strong>API 地址</strong>：中转站给的 Base URL
+   - <strong>API Key</strong>：中转站给的密钥</li>
+<li>保存后点这个供应商 → 它就成为当前生效的配置</li>
+<li>回终端跑 <code>claude</code> 就用上了（Claude Code 支持热切换，不用重启）</li>
+</ol>
+<p>想换回官方或另一个中转站，列表里点一下即可。CC Switch 还支持 Codex、Claude Desktop、Gemini CLI 等 7 个工具。</p>
+<blockquote>
+<p>什么是中转站？就是第三方搭的转发服务，把请求转发到官方 API，通常更便宜或支付更方便。质量参差不齐，选用前注意甄别，本站不对任何第三方服务做担保（详见<a href="/privacy/">隐私政策</a>）。</p>
+</blockquote>
+<hr>
+<h2 id="_5">常见问题</h2>
+<p><strong>连不上 / 一直转圈？</strong> 九成是终端没走代理，回到第三步检查环境变量；再确认 Clash Verge 的「系统代理」开着、节点可用，多换几个香港/日本/新加坡节点。</p>
+<p><strong><code>command not found: claude</code>？</strong> npm 全局 bin 目录不在 PATH 里。执行 <code>npm config get prefix</code> 找到路径，把 <code>&lt;prefix&gt;/bin</code> 加进 PATH。</p>
+<p><strong>ChatGPT 提示地区不支持？</strong> 当前节点出口地区不在 OpenAI 支持范围，换日本/新加坡节点。</p>
+<p><strong>账号从哪来？</strong> 没有 Claude / OpenAI 账号的需要先注册，注册时的手机号验证用接码平台解决——用法见上文第三步「注册账号时的手机验证」一节。</p>
+<hr>
+<p>有问题可以来 <a href="https://t.me/+TXvJqNLp8_9iNGNl">Telegram 群</a> 交流，或 X 上私信 <a href="https://x.com/xfengbro">@xfengbro</a>。</p>
+    </div>
+    <footer class="post__foot">
+      <a href="/#writing">← 更多文章</a>
+      <span>xyf · <a href="https://x.com/xfengbro" target="_blank" rel="noopener">@xfengbro</a></span>
+    </footer>
+  </article>
+
+  <script>
+    (function () {
+      var slug = "getting-started";
+      var KEY = "xyf:viewed:" + slug;
+      var counted = false;
+      try { counted = sessionStorage.getItem(KEY) === "1"; } catch (e) {}
+      var url = "/api/views/" + (counted ? "get" : "hit") + "?slug=" + encodeURIComponent(slug);
+      fetch(url, { method: counted ? "GET" : "POST" })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) {
+          if (!d || typeof d.views !== "number") return;
+          try { sessionStorage.setItem(KEY, "1"); } catch (e) {}
+          var el = document.querySelector("[data-post-views] .views-n");
+          if (el) el.textContent = d.views.toLocaleString("en-US");
+        })
+        .catch(function () {});
+    })();
+  </script>
+</body>
+</html>

@@ -9,7 +9,8 @@
 1. **先跑确定性脚本**（不要手写爬虫重做一遍）：
    ```bash
    cd ~/projects/xyf-ai.com
-   export http_proxy=http://127.0.0.1:10808 https_proxy=http://127.0.0.1:10808
+   # Shadowrocket local port on this Mac is 1082
+   export http_proxy=http://127.0.0.1:1082 https_proxy=http://127.0.0.1:1082
    export HTTP_PROXY=$http_proxy HTTPS_PROXY=$https_proxy ALL_PROXY=$https_proxy
    python3 scripts/sync_writing.py
    ```

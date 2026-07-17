@@ -1,9 +1,36 @@
 {
   "screenName": "xfengbro",
   "profileUrl": "https://x.com/xfengbro",
-  "updatedAt": "2026-07-13T06:56:11Z",
+  "updatedAt": "2026-07-16T08:45:02Z",
   "listSlots": 3,
   "items": [
+    {
+      "id": "2077607689790914641",
+      "url": "https://x.com/xfengbro/status/2077607689790914641",
+      "title": "3个月supergrok 49元",
+      "dek": "印度区低价内购 SuperGrok 实操：全程不需要绑定印度银行卡。",
+      "date": "2026.07.16",
+      "createdTimestamp": 1784175247,
+      "cover": null,
+      "coverRemote": null,
+      "viewsFallback": 354,
+      "tag": "AI 实践",
+      "titleDisplay": "3 个月 SuperGrok 只要 49 元",
+      "featureImage": "assets/writing-feature-2077607689790914641.jpg"
+    },
+    {
+      "id": "2077316730637177281",
+      "url": "https://x.com/xfengbro/status/2077316730637177281",
+      "title": "Apple Store 印度区(低价区)内购 SuperGrok",
+      "dek": "把 Apple ID 改到印度等低价区，用 App Store 内购 SuperGrok。\n已有美区/土区账号可直接改地区；注意部分域名需外区 VPN。",
+      "date": "2026.07.15",
+      "createdTimestamp": 1784105877,
+      "cover": "assets/writing-covers/2077316730637177281.jpg",
+      "coverRemote": "https://pbs.twimg.com/media/HNQciyGaIAAtPyo.jpg",
+      "viewsFallback": 6029,
+      "tag": "AI 实践",
+      "titleDisplay": "Apple Store 印度区（低价区）内购 SuperGrok"
+    },
     {
       "id": "2076200076528288134",
       "url": "https://x.com/xfengbro/status/2076200076528288134",
@@ -13,11 +40,10 @@
       "createdTimestamp": 1783839646,
       "cover": "assets/writing-covers/2076200076528288134.jpg",
       "coverRemote": "https://pbs.twimg.com/media/HNAk6dQa4AAqMvn.jpg",
-      "viewsFallback": 480,
+      "viewsFallback": 825,
       "tag": "AI 实践",
       "titleDisplay": "AI 做个人网站",
-      "featureImage": "assets/writing-ai-site-feature.png",
-      "pin": true
+      "featureImage": "assets/writing-ai-site-feature.png"
     },
     {
       "id": "2075534333180621182",
@@ -28,7 +54,7 @@
       "createdTimestamp": 1783680921,
       "cover": "assets/writing-covers/2075534333180621182.jpg",
       "coverRemote": "https://pbs.twimg.com/media/HM3HbVWaIAAx4uM.jpg",
-      "viewsFallback": 2559,
+      "viewsFallback": 2788,
       "tag": "AI 实践",
       "titleDisplay": "X Premium+ 赠送的 SuperGrok，额度可以独立换绑重置"
     }

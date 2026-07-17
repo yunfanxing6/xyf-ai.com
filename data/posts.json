@@ -1,0 +1,18 @@
+{
+  "updatedAt": "2026-07-17T06:12:03Z",
+  "items": [
+    {
+      "id": "getting-started",
+      "local": true,
+      "url": "/writing/getting-started/",
+      "title": "国内从零用上 Claude Code 与 ChatGPT 完全指南",
+      "dek": "一篇走完全程：解决网络 → 下载安装 → 账号登录。\n官方账号直接用，想接中转站或其他模型就用 CC Switch。所有安装包本站直链下载。",
+      "date": "2026.07.18",
+      "createdTimestamp": 1784332800,
+      "tag": "教程",
+      "cover": "assets/writing-covers/getting-started-thumb.jpg",
+      "featureImage": "assets/writing-covers/getting-started-feature.jpg",
+      "pin": true
+    }
+  ]
+}

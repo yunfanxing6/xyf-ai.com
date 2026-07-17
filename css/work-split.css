@@ -75,6 +75,8 @@
   border:1px solid var(--line);
   overflow:visible;
 }
+/* 站内文章封面为纸色排版图：框底同为纸色，任何比例下留白都无缝 */
+.feat__frame--paper{background:var(--paper);}
 /* 无定制竖海报时：用 X Article 宽封面（约 1280×512 ≈ 2.5:1 / 近 16:9 裁切） */
 .feat__frame--cover{
   aspect-ratio:16/10;
