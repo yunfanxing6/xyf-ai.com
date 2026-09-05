@@ -30,11 +30,15 @@ except ImportError:
 
 ROOT = Path(__file__).resolve().parents[1]
 POSTS = ROOT / "posts"
+PROMPTS = POSTS / "prompts"
 OUT_DIR = ROOT / "writing"
 TEMPLATE = ROOT / "templates" / "post.html"
 POSTS_JSON = ROOT / "data" / "posts.json"
 
 SLUG_RE = re.compile(r"^[a-z0-9][a-z0-9-]*$")
+INCLUDE_COPY_RE = re.compile(
+    r"<!--\s*INCLUDE_COPY_PROMPT:([a-zA-Z0-9._-]+)\s*-->"
+)
 
 
 def parse_frontmatter(text: str) -> tuple[dict, str]:
@@ -50,6 +54,33 @@ def parse_frontmatter(text: str) -> tuple[dict, str]:
         k, v = line.split(":", 1)
         meta[k.strip()] = v.strip().strip('"').strip("'")
     return meta, text[m.end():]
+
+
+def render_copy_prompt(filename: str) -> str:
+    """Inject a full plain-text prompt block (not markdown-parsed)."""
+    path = PROMPTS / filename
+    if not path.is_file():
+        raise FileNotFoundError(f"prompt 文件不存在: {path}")
+    text = path.read_text(encoding="utf-8").replace("\r\n", "\n").rstrip() + "\n"
+    # Safety: never ship known sample keys from local docs
+    text = text.replace("sk-78f597f63dfa4061836fa977c78ff1c0", "sk-你的DeepSeek_API_Key")
+    escaped = html.escape(text)
+    return (
+        '<div class="copy-prompt" data-copy-prompt>\n'
+        '  <div class="copy-prompt__head">\n'
+        '    <span class="copy-prompt__label">发给 Workbuddy · hy3</span>\n'
+        '    <button type="button" class="copy-prompt__btn" data-copy-btn>一键复制</button>\n'
+        "  </div>\n"
+        f'<pre class="copy-prompt__text" data-copy-text>{escaped}</pre>\n'
+        "</div>"
+    )
+
+
+def inject_copy_prompts(body_md: str) -> str:
+    def repl(m: re.Match[str]) -> str:
+        return render_copy_prompt(m.group(1))
+
+    return INCLUDE_COPY_RE.sub(repl, body_md)
 
 
 def build_one(md_path: Path, tpl: str) -> dict | None:
@@ -69,9 +100,27 @@ def build_one(md_path: Path, tpl: str) -> dict | None:
 
     dek = meta.get("dek", "").replace("\\n", "\n")
     tag = meta.get("tag", "教程")
+    # Expand copy-prompt includes before markdown so fenced code stays intact
+    body_md = inject_copy_prompts(body_md)
+    # Protect raw HTML copy-prompt blocks from markdown mangling
+    holders: list[str] = []
+
+    def hold(m: re.Match[str]) -> str:
+        holders.append(m.group(0))
+        return f"\n\nCOPYPROMPTHOLDER{len(holders) - 1}END\n\n"
+
+    # Outer box ends after </pre></div> — do not stop at inner </div> in the head
+    body_md = re.sub(
+        r'<div class="copy-prompt" data-copy-prompt>[\s\S]*?</pre>\s*</div>',
+        hold,
+        body_md,
+    )
     body_html = markdown.markdown(
         body_md, extensions=["extra", "sane_lists", "toc"], output_format="html5"
     )
+    for i, block in enumerate(holders):
+        body_html = body_html.replace(f"COPYPROMPTHOLDER{i}END", block)
+        body_html = body_html.replace(f"<p>COPYPROMPTHOLDER{i}END</p>", block)
 
     page = (
         tpl.replace("{{title}}", html.escape(title))

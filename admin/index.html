@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>xyf 站点管理台</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="top__brand">
+      <span class="top__mark">xyf</span>
+      <div>
+        <h1>站点管理台</h1>
+        <p class="top__sub">本机 · 仅 127.0.0.1 · 不经过公网</p>
+      </div>
+    </div>
+    <div class="top__meta">
+      <span id="status-dot" class="dot" title="状态"></span>
+      <span id="status-text">加载中…</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- 左：操作 -->
+    <section class="col col--actions">
+      <article class="card" id="card-x">
+        <header class="card__h">
+          <h2>同步 X Article</h2>
+          <p>粘贴推文/长文链接，自动写入 seeds 并拉取到 Writing</p>
+        </header>
+        <form id="form-import" class="stack">
+          <label class="field">
+            <span>X 链接或 status id</span>
+            <input
+              id="x-url"
+              type="text"
+              placeholder="https://x.com/xfengbro/status/123… 或纯数字 id"
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </label>
+          <div class="row">
+            <button type="submit" class="btn btn--primary" id="btn-import">导入并同步</button>
+            <button type="button" class="btn" id="btn-sync-all">刷新全部 X</button>
+          </div>
+        </form>
+        <div id="x-result" class="result" hidden></div>
+      </article>
+
+      <article class="card">
+        <header class="card__h">
+          <h2>部署上线</h2>
+          <p>rsync 静态文件到 VPS（不含 admin / .git）</p>
+        </header>
+        <div class="row">
+          <button type="button" class="btn btn--deploy" id="btn-deploy">发布到线上</button>
+          <button type="button" class="btn" id="btn-build-posts">仅构建本地文章</button>
+        </div>
+        <p class="hint" id="deploy-target">—</p>
+        <div id="deploy-result" class="result" hidden></div>
+      </article>
+
+      <article class="card">
+        <header class="card__h">
+          <h2>运行日志</h2>
+          <p id="log-path" class="mono muted">—</p>
+        </header>
+        <pre id="log-view" class="log">（暂无）</pre>
+        <button type="button" class="btn btn--ghost" id="btn-refresh-log">刷新日志</button>
+      </article>
+    </section>
+
+    <!-- 中：列表 -->
+    <section class="col col--lists">
+      <article class="card">
+        <header class="card__h row-between">
+          <div>
+            <h2>Writing · X</h2>
+            <p id="writing-meta">—</p>
+          </div>
+          <span class="badge" id="writing-count">0</span>
+        </header>
+        <ul id="writing-list" class="list"></ul>
+      </article>
+
+      <article class="card">
+        <header class="card__h row-between">
+          <div>
+            <h2>Seeds</h2>
+            <p>收录的 status id</p>
+          </div>
+          <span class="badge" id="seeds-count">0</span>
+        </header>
+        <ul id="seeds-list" class="list list--compact"></ul>
+      </article>
+    </section>
+
+    <!-- 右：本地文章 -->
+    <section class="col col--posts">
+      <article class="card card--grow">
+        <header class="card__h row-between">
+          <div>
+            <h2>站内文章</h2>
+            <p>posts/*.md → writing/&lt;slug&gt;/</p>
+          </div>
+          <button type="button" class="btn btn--primary" id="btn-new-post">新建</button>
+        </header>
+        <ul id="posts-list" class="list"></ul>
+      </article>
+
+      <article class="card card--grow" id="editor-card" hidden>
+        <header class="card__h row-between">
+          <h2 id="editor-title">编辑文章</h2>
+          <button type="button" class="btn btn--ghost" id="btn-close-editor">关闭</button>
+        </header>
+        <form id="form-post" class="stack">
+          <div class="grid2">
+            <label class="field">
+              <span>slug（URL 路径）</span>
+              <input id="p-slug" type="text" pattern="[a-z0-9][a-z0-9-]*" required placeholder="my-post" />
+            </label>
+            <label class="field">
+              <span>日期</span>
+              <input id="p-date" type="text" required placeholder="2026.07.19" />
+            </label>
+          </div>
+          <label class="field">
+            <span>标题</span>
+            <input id="p-title" type="text" required />
+          </label>
+          <label class="field">
+            <span>摘要 dek（可用 \n 换行）</span>
+            <textarea id="p-dek" rows="2"></textarea>
+          </label>
+          <div class="grid2">
+            <label class="field">
+              <span>标签</span>
+              <input id="p-tag" type="text" value="教程" />
+            </label>
+            <label class="field field--checks">
+              <span>选项</span>
+              <div class="checks">
+                <label><input type="checkbox" id="p-pin" /> 置顶 pin</label>
+                <label><input type="checkbox" id="p-draft" /> 草稿 draft</label>
+              </div>
+            </label>
+          </div>
+          <div class="grid2">
+            <label class="field">
+              <span>列表封面 cover</span>
+              <input id="p-cover" type="text" placeholder="assets/writing-covers/…" />
+            </label>
+            <label class="field">
+              <span>头条图 featureImage</span>
+              <input id="p-feature" type="text" placeholder="assets/…" />
+            </label>
+          </div>
+          <label class="field">
+            <span>正文 Markdown</span>
+            <textarea id="p-body" rows="14" class="mono"></textarea>
+          </label>
+          <div class="row">
+            <button type="submit" class="btn btn--primary">保存并构建</button>
+            <button type="button" class="btn btn--danger" id="btn-delete-post">删除</button>
+          </div>
+        </form>
+        <div id="post-result" class="result" hidden></div>
+      </article>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>

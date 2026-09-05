@@ -12,12 +12,12 @@
 
   const LINES = [
     "$ xyf build --in-public",
-    "10:12:01  checking workspace",
-    "10:12:02  loading modules",
-    "10:12:03  resolving dependencies",
-    "10:12:05  generating bundles",
-    "10:12:07  optimizing assets",
-    "10:12:08  writing artifacts",
+    "10:12:01  checking shareai.network",
+    "10:12:02  checking 1dollar.help",
+    "10:12:03  routing live requests",
+    "10:12:05  monitoring services",
+    "10:12:07  serving customers",
+    "10:12:08  writing updates",
     "10:12:09  linking ideas",
   ];
   const FULL = LINES.join("\n");

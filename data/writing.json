@@ -1,9 +1,97 @@
 {
   "screenName": "xfengbro",
   "profileUrl": "https://x.com/xfengbro",
-  "updatedAt": "2026-07-16T08:45:02Z",
+  "updatedAt": "2026-08-20T14:12:25Z",
   "listSlots": 3,
   "items": [
+    {
+      "id": "2090439726666805613",
+      "url": "https://x.com/xfengbro/status/2090439726666805613",
+      "title": "2026 年 AI 订阅性价比终极对比：Claude / Codex / Grok / DeepSeek / GLM / OpenCode Go 哪家最划算？",
+      "dek": "写这篇文章的原因是 DeepSeek 官方 API 涨价，涨到一个完全不能接受的价格",
+      "date": "2026.08.20",
+      "createdTimestamp": 1787234643,
+      "cover": "assets/writing-covers/2090439726666805613.jpg",
+      "coverRemote": "https://pbs.twimg.com/media/HQK6v4-bcAEKwEL.jpg",
+      "viewsFallback": 70,
+      "tag": "AI 实践"
+    },
+    {
+      "id": "2084055699026587984",
+      "url": "https://x.com/xfengbro/status/2084055699026587984",
+      "title": "免费无限deepseek v4 flash",
+      "dek": "一句话总结：OpenCode Zen 上有一个 完全免费 的DeepSeek V4 Flash Free",
+      "date": "2026.08.02",
+      "createdTimestamp": 1785712573,
+      "cover": "assets/writing-covers/2084055699026587984.jpg",
+      "coverRemote": "https://pbs.twimg.com/media/HOwNXy3bcAAw2ma.jpg",
+      "viewsFallback": 12701,
+      "tag": "AI 实践"
+    },
+    {
+      "id": "2082275038708084979",
+      "url": "https://x.com/xfengbro/status/2082275038708084979",
+      "title": "Wise 封控收紧，平替 Starry blu（合规免费极品虚拟卡）",
+      "dek": "线上开户拿新加坡多币种账户 + 免费 Mastercard 虚拟卡。\n微信支付宝秒绑，新号段订 AI 更稳，资金托管 OCBC。",
+      "date": "2026.07.29",
+      "createdTimestamp": 1785288030,
+      "cover": "assets/writing-covers/2082275038708084979.jpg",
+      "coverRemote": "https://pbs.twimg.com/media/HOWs-M8a0AAdW_q.jpg",
+      "viewsFallback": 4664,
+      "tag": "实操教程",
+      "titleDisplay": "Wise 封控收紧，平替 Starry Blu 免费虚拟卡"
+    },
+    {
+      "id": "2081745638765789651",
+      "url": "https://x.com/xfengbro/status/2081745638765789651",
+      "title": "0 元申请 Plasma / Krak / Bybit / Bybit 欧洲区 U 卡，无需咸鱼",
+      "dek": "Fiat24 风波后还能办哪张：没护照走 Krak / Bybit，有护照走 Bybit EU / Plasma。\n地址证明、接码、邀请与羊毛一次写清，无需咸鱼。",
+      "date": "2026.07.27",
+      "createdTimestamp": 1785161811,
+      "cover": "assets/writing-covers/2081745638765789651.jpg",
+      "coverRemote": "https://pbs.twimg.com/media/HOPYK9UacAA4P4t.jpg",
+      "viewsFallback": 221732,
+      "tag": "实操教程",
+      "titleDisplay": "0 元申请 Plasma / Krak / Bybit / Bybit 欧洲区 U 卡"
+    },
+    {
+      "id": "2080489354070479088",
+      "url": "https://x.com/xfengbro/status/2080489354070479088",
+      "title": "claude和codex 85元pro（玻利维亚）",
+      "dek": "任意节点 TUN 模式 + 安卓 / 模拟器 + Google Play 绑定玻利维亚支付。\n渠道可能不久就没了，老号改区有坑。",
+      "date": "2026.07.24",
+      "createdTimestamp": 1784862290,
+      "cover": "assets/writing-covers/2080489354070479088.jpg",
+      "coverRemote": "https://pbs.twimg.com/media/HN9h9Uva4AAmE--.jpg",
+      "viewsFallback": 171217,
+      "tag": "AI 实践",
+      "titleDisplay": "Claude / Codex 85 元 Pro（玻利维亚通道）"
+    },
+    {
+      "id": "2080147135132209392",
+      "url": "https://x.com/xfengbro/status/2080147135132209392",
+      "title": "10 块域名 + 99 块 VPS，白嫖 Grok 4.5实现token自由",
+      "dek": "自己只做三件事：买域名、买海外 VPS、搭好邮箱。\n装网关、跑注册机、域名反代，一句提示词交给 AI。",
+      "date": "2026.07.23",
+      "createdTimestamp": 1784780698,
+      "cover": "assets/writing-covers/2080147135132209392.jpg",
+      "coverRemote": "https://pbs.twimg.com/media/HN4qtdYaoAAAIlo.jpg",
+      "viewsFallback": 78363,
+      "tag": "AI 实践",
+      "titleDisplay": "10 块域名 + 99 块 VPS，白嫖 Grok 4.5 实现 token 自由"
+    },
+    {
+      "id": "2078437052425892339",
+      "url": "https://x.com/xfengbro/status/2078437052425892339",
+      "title": "k3订阅与claude codex对比",
+      "dek": "Kimi K3 售价\"对标 Claude\"？把订阅补贴算穿之后，结论正好相反",
+      "date": "2026.07.18",
+      "createdTimestamp": 1784372983,
+      "cover": "assets/writing-covers/2078437052425892339.jpg",
+      "coverRemote": "https://pbs.twimg.com/media/HNgYSKTbEAAlpjL.jpg",
+      "viewsFallback": 12294,
+      "tag": "AI 实践"
+    },
     {
       "id": "2077607689790914641",
       "url": "https://x.com/xfengbro/status/2077607689790914641",
@@ -13,7 +101,7 @@
       "createdTimestamp": 1784175247,
       "cover": null,
       "coverRemote": null,
-      "viewsFallback": 354,
+      "viewsFallback": 28484,
       "tag": "AI 实践",
       "titleDisplay": "3 个月 SuperGrok 只要 49 元",
       "featureImage": "assets/writing-feature-2077607689790914641.jpg"
@@ -27,7 +115,7 @@
       "createdTimestamp": 1784105877,
       "cover": "assets/writing-covers/2077316730637177281.jpg",
       "coverRemote": "https://pbs.twimg.com/media/HNQciyGaIAAtPyo.jpg",
-      "viewsFallback": 6029,
+      "viewsFallback": 11387,
       "tag": "AI 实践",
       "titleDisplay": "Apple Store 印度区（低价区）内购 SuperGrok"
     },
@@ -40,7 +128,7 @@
       "createdTimestamp": 1783839646,
       "cover": "assets/writing-covers/2076200076528288134.jpg",
       "coverRemote": "https://pbs.twimg.com/media/HNAk6dQa4AAqMvn.jpg",
-      "viewsFallback": 825,
+      "viewsFallback": 2493,
       "tag": "AI 实践",
       "titleDisplay": "AI 做个人网站",
       "featureImage": "assets/writing-ai-site-feature.png"
@@ -54,7 +142,7 @@
       "createdTimestamp": 1783680921,
       "cover": "assets/writing-covers/2075534333180621182.jpg",
       "coverRemote": "https://pbs.twimg.com/media/HM3HbVWaIAAx4uM.jpg",
-      "viewsFallback": 2788,
+      "viewsFallback": 4414,
       "tag": "AI 实践",
       "titleDisplay": "X Premium+ 赠送的 SuperGrok，额度可以独立换绑重置"
     }

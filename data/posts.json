@@ -1,14 +1,14 @@
 {
-  "updatedAt": "2026-07-17T06:12:03Z",
+  "updatedAt": "2026-08-28T13:37:35Z",
   "items": [
     {
       "id": "getting-started",
       "local": true,
       "url": "/writing/getting-started/",
       "title": "国内从零用上 Claude Code 与 ChatGPT 完全指南",
-      "dek": "一篇走完全程：解决网络 → 下载安装 → 账号登录。\n官方账号直接用，想接中转站或其他模型就用 CC Switch。所有安装包本站直链下载。",
-      "date": "2026.07.18",
-      "createdTimestamp": 1784332800,
+      "dek": "两条路任选，点标签切换。\n方法一：本站直链装 Claude / Codex + CC Switch。\n方法二：先开代理，官网装客户端 + CC Switch。",
+      "date": "2026.07.21",
+      "createdTimestamp": 1784592000,
       "tag": "教程",
       "cover": "assets/writing-covers/getting-started-thumb.jpg",
       "featureImage": "assets/writing-covers/getting-started-feature.jpg",

@@ -1,0 +1,151 @@
+# 任务：将 DeepSeek API Key 配置进 Codex
+
+请在本机严格按下列步骤操作：能自动执行的命令请直接跑；需要我点的先说明。遇到权限弹窗先说明再操作。不要只讲理论。
+
+把文中所有 `sk-你的DeepSeek_API_Key` 换成我的真实 Key（若我已在对话里提供 Key，用我提供的）。
+
+## 步骤
+
+### 0. 先验证方案可行性
+
+在执行任何修改前，先检查以下条件是否满足。如果任一条不满足，立即中止并报告：
+
+**① 检查 Node.js 和 npm**
+```bash
+node --version && npm --version
+```
+要求 Node.js >= 18，npm >= 10。
+
+**② 检查 Codex 是否安装**
+```bash
+# macOS/Linux
+which codex || ls /Applications/ChatGPT.app/Contents/Resources/codex 2>/dev/null
+
+# Windows
+where codex 2>nul || echo "not in PATH"
+```
+如果都没找到，检查常见安装路径：
+- macOS: `/Applications/ChatGPT.app/Contents/Resources/codex`
+- Windows: `%LOCALAPPDATA%\Programs\OpenAI\Codex\codex.exe`
+
+若未安装 Codex：优先用本站直链安装（国内可直连，一般不需要代理）：
+- https://xyf-ai.com/dl/Codex-mac-arm64.dmg
+- https://xyf-ai.com/dl/Codex-mac-intel.dmg
+- https://xyf-ai.com/dl/Codex-Windows-x64.msix
+教程方法一：https://xyf-ai.com/writing/getting-started/#method-1
+
+**③ 检查 Codex 版本是否支持 wire_api="responses"**
+```bash
+codex --version
+```
+要求 v0.130+。如果版本过低，方案不适用（低版本可以直接用 wire_api="chat" 无需 bridge）。
+
+**④ 检查 Codex 配置文件是否存在并读取内容**
+- macOS/Linux: `cat ~/.codex/config.toml 2>/dev/null || echo "文件不存在"`
+- Windows: `Get-Content "$env:USERPROFILE\.codex\config.toml" -ErrorAction SilentlyContinue || Write-Output "文件不存在"`
+如果文件不存在，记下路径后续创建。
+
+**⑤ 检查能否访问 DeepSeek API**
+```bash
+curl -s https://api.deepseek.com/v1/chat/completions -w "\nHTTP %{http_code}" -o /dev/null
+```
+如果返回 200 或 4xx（而非 timeout/无连接），说明网络可达。
+
+**⑥ 输出验证结果**
+汇总以上检查结果，确认是否继续。只有当所有条件满足时才继续执行后续步骤，否则向用户说明哪个条件不满足以及原因。
+
+### 1. 备份当前配置
+
+若 config.toml 存在，先备份：
+- macOS/Linux：`cp ~/.codex/config.toml ~/.codex/config.toml.bak`
+- Windows PowerShell：`Copy-Item "$env:USERPROFILE\.codex\config.toml" "$env:USERPROFILE\.codex\config.toml.bak"`
+
+### 2. 安装 bridge
+
+```bash
+npm install -g aliyun-codex-bridge --registry=https://registry.npmmirror.com
+```
+
+纯 Node.js，无需 Rust。国内用 npmmirror 镜像加速。如果安装失败，去掉 `--registry` 参数重试。
+
+### 3. 启动 bridge（后台运行）
+
+```bash
+export DEEPSEEK_API_KEY="sk-你的DeepSeek_API_Key"
+export AI_API_KEY="$DEEPSEEK_API_KEY"
+export AI_API_BASE="https://api.deepseek.com/v1"
+export ALLOW_TOOLS=1
+export LOG_LEVEL=error
+aliyun-codex-bridge &
+```
+
+Windows PowerShell：
+```powershell
+$env:DEEPSEEK_API_KEY = "sk-你的DeepSeek_API_Key"
+$env:AI_API_KEY = $env:DEEPSEEK_API_KEY
+$env:AI_API_BASE = "https://api.deepseek.com/v1"
+$env:ALLOW_TOOLS = "1"
+$env:LOG_LEVEL = "error"
+Start-Process -NoNewWindow aliyun-codex-bridge
+```
+
+等待 2 秒后用 `curl http://127.0.0.1:31415/health` 确认 bridge 就绪。如果不通，检查是否有端口冲突或进程未启动。
+
+### 4. 写入 Codex 配置
+
+在原有的 `~/.codex/config.toml` 中追加以下内容（保留原有配置不变）：
+
+```toml
+model_provider = "deepseek-bridge"
+model = "deepseek-v4-flash"
+model_reasoning_effort = "high"
+
+[model_providers.deepseek-bridge]
+name = "DeepSeek (via Bridge)"
+base_url = "http://127.0.0.1:31415"
+env_key = "DEEPSEEK_API_KEY"
+wire_api = "responses"
+stream_idle_timeout_ms = 300000
+request_max_retries = 3
+
+[profiles.deepseek-flash]
+model = "deepseek-v4-flash"
+model_provider = "deepseek-bridge"
+model_reasoning_effort = "high"
+
+[profiles.deepseek-pro]
+model = "deepseek-v4-pro"
+model_provider = "deepseek-bridge"
+model_reasoning_effort = "high"
+```
+
+### 5. 验证
+
+```bash
+export DEEPSEEK_API_KEY="sk-你的DeepSeek_API_Key"
+codex exec "用中文说你好"
+```
+
+验证 v4-pro 模型：
+```bash
+codex -c model="deepseek-v4-pro" exec "用中文说你好"
+```
+
+### 6. 还原（仅当用户要求回滚时执行）
+
+```bash
+# macOS/Linux
+cp ~/.codex/config.toml.bak ~/.codex/config.toml
+pkill -f aliyun-codex-bridge
+
+# Windows PowerShell
+Copy-Item "$env:USERPROFILE\.codex\config.toml.bak" "$env:USERPROFILE\.codex\config.toml" -Force
+Stop-Process -Name "node" -Force
+```
+
+### 7. 报告结果
+
+告诉我：
+- 每一步的执行结果（成功/失败）
+- 如果验证步骤不通过，说明哪个条件不满足
+- 最终验证命令是否成功返回

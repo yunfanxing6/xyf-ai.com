@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.xingyunfan.xyf-admin</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/python3</string>
+    <string>/Users/xingyunfan/projects/xyf-ai.com/admin/app.py</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>/Users/xingyunfan/projects/xyf-ai.com</string>
+
+  <!-- 登录即启动；异常退出后自动拉起 -->
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <key>ThrottleInterval</key>
+  <integer>10</integer>
+
+  <!-- 仅图形登录会话（本机管理台，不需要 headless 后台账号） -->
+  <key>LimitLoadToSessionType</key>
+  <string>Aqua</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>XYF_ADMIN_HOST</key>
+    <string>127.0.0.1</string>
+    <key>XYF_ADMIN_PORT</key>
+    <string>8790</string>
+    <key>XYF_PROXY</key>
+    <string>http://127.0.0.1:10808</string>
+    <key>http_proxy</key>
+    <string>http://127.0.0.1:10808</string>
+    <key>https_proxy</key>
+    <string>http://127.0.0.1:10808</string>
+    <key>HTTP_PROXY</key>
+    <string>http://127.0.0.1:10808</string>
+    <key>HTTPS_PROXY</key>
+    <string>http://127.0.0.1:10808</string>
+    <key>ALL_PROXY</key>
+    <string>http://127.0.0.1:10808</string>
+    <key>all_proxy</key>
+    <string>http://127.0.0.1:10808</string>
+    <key>no_proxy</key>
+    <string>localhost,127.0.0.1,::1</string>
+    <key>NO_PROXY</key>
+    <string>localhost,127.0.0.1,::1</string>
+    <key>PATH</key>
+    <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+  </dict>
+
+  <key>StandardOutPath</key>
+  <string>/Users/xingyunfan/.logs/xyf-admin.launchd.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/xingyunfan/.logs/xyf-admin.launchd.err.log</string>
+</dict>
+</plist>

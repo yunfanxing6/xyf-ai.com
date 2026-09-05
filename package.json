@@ -4,6 +4,7 @@
   "description": "xyf personal brand site — AI media × build in public",
   "scripts": {
     "dev": "python3 -m http.server 8765 --bind 127.0.0.1",
-    "start": "python3 -m http.server 8765 --bind 127.0.0.1"
+    "start": "python3 -m http.server 8765 --bind 127.0.0.1",
+    "admin": "bash scripts/admin.sh"
   }
 }

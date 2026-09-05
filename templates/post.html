@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Noto+Serif+SC:wght@500;600;700&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/tokens.css" />
-  <link rel="stylesheet" href="/css/post.css" />
+  <link rel="stylesheet" href="/css/tokens.css?v=20260721g" />
+  <link rel="stylesheet" href="/css/post.css?v=20260721g" />
 </head>
 <body>
   <nav class="post-nav">
@@ -54,6 +54,186 @@
           if (el) el.textContent = d.views.toLocaleString("en-US");
         })
         .catch(function () {});
+    })();
+
+    /* 一键复制提示词 */
+    (function () {
+      function copyText(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          return navigator.clipboard.writeText(text);
+        }
+        return new Promise(function (resolve, reject) {
+          var ta = document.createElement("textarea");
+          ta.value = text;
+          ta.setAttribute("readonly", "");
+          ta.style.position = "fixed";
+          ta.style.left = "-9999px";
+          document.body.appendChild(ta);
+          ta.select();
+          try {
+            if (!document.execCommand("copy")) reject(new Error("copy failed"));
+            else resolve();
+          } catch (err) {
+            reject(err);
+          } finally {
+            document.body.removeChild(ta);
+          }
+        });
+      }
+      document.querySelectorAll("[data-copy-prompt]").forEach(function (box) {
+        var btn = box.querySelector("[data-copy-btn]");
+        var pre = box.querySelector("[data-copy-text]");
+        if (!btn || !pre) return;
+        var idle = btn.textContent;
+        btn.addEventListener("click", function () {
+          var text = (pre.innerText || pre.textContent || "").replace(/\n+$/, "");
+          copyText(text)
+            .then(function () {
+              btn.textContent = "已复制";
+              btn.classList.add("is-copied");
+              setTimeout(function () {
+                btn.textContent = idle;
+                btn.classList.remove("is-copied");
+              }, 1800);
+            })
+            .catch(function () {
+              btn.textContent = "复制失败";
+              setTimeout(function () { btn.textContent = idle; }, 1800);
+            });
+        });
+      });
+    })();
+
+    /* 浏览器标签页：方法一 / 方法二 互斥显示 */
+    (function () {
+      var m1 = document.getElementById("method-1");
+      var m2 = document.getElementById("method-2");
+      if (!m1 || !m2) return;
+      var body = m1.parentNode;
+      if (!body || body !== m2.parentNode) return;
+
+      function takeUntil(start, endExclusive) {
+        var nodes = [];
+        var n = start;
+        while (n && n !== endExclusive) {
+          var next = n.nextSibling;
+          nodes.push(n);
+          n = next;
+        }
+        return nodes;
+      }
+
+      /* 方法二结束：下一个 h2（「两种方法怎么选 / 常见问题」等共享区） */
+      var afterM2 = m2.nextElementSibling;
+      while (afterM2 && afterM2.tagName !== "H2") {
+        afterM2 = afterM2.nextElementSibling;
+      }
+
+      var m1Nodes = takeUntil(m1, m2);
+      /* 跳过方法一和方法二之间的 hr */
+      while (m1Nodes.length && m1Nodes[m1Nodes.length - 1].nodeType === 1) {
+        var last = m1Nodes[m1Nodes.length - 1];
+        if (last.tagName === "HR") {
+          m1Nodes.pop();
+          if (last.parentNode) last.parentNode.removeChild(last);
+        } else break;
+      }
+      var m2Nodes = takeUntil(m2, afterM2);
+
+      var shell = document.createElement("div");
+      shell.className = "path-tabs";
+      shell.setAttribute("data-path-tabs", "1");
+
+      var bar = document.createElement("div");
+      bar.className = "path-tabs__bar";
+      bar.setAttribute("role", "tablist");
+      bar.setAttribute("aria-label", "选择路径");
+
+      function makeTab(id, num, title, desc, active) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "path-tabs__tab" + (active ? " is-active" : "");
+        btn.setAttribute("role", "tab");
+        btn.setAttribute("aria-selected", active ? "true" : "false");
+        btn.setAttribute("aria-controls", "panel-" + id);
+        btn.id = "tab-" + id;
+        btn.dataset.tab = id;
+        btn.innerHTML =
+          '<span class="path-tabs__num">' + num + "</span>" +
+          '<span class="path-tabs__text">' +
+          '<span class="path-tabs__title">' + title + "</span>" +
+          '<span class="path-tabs__desc">' + desc + "</span>" +
+          "</span>";
+        return btn;
+      }
+
+      var tab1 = makeTab(
+        "method-1",
+        "1",
+        "方法一",
+        "本站下载安装 + CC Switch 接入",
+        true
+      );
+      var tab2 = makeTab(
+        "method-2",
+        "2",
+        "方法二",
+        "先开代理 → 官网安装 + CC Switch",
+        false
+      );
+      bar.appendChild(tab1);
+      bar.appendChild(tab2);
+
+      var panel1 = document.createElement("div");
+      panel1.className = "path-tabs__panel is-active";
+      panel1.id = "panel-method-1";
+      panel1.setAttribute("role", "tabpanel");
+      panel1.setAttribute("aria-labelledby", "tab-method-1");
+
+      var panel2 = document.createElement("div");
+      panel2.className = "path-tabs__panel";
+      panel2.id = "panel-method-2";
+      panel2.setAttribute("role", "tabpanel");
+      panel2.setAttribute("aria-labelledby", "tab-method-2");
+      panel2.hidden = true;
+
+      m1Nodes.forEach(function (node) { panel1.appendChild(node); });
+      m2Nodes.forEach(function (node) { panel2.appendChild(node); });
+
+      shell.appendChild(bar);
+      shell.appendChild(panel1);
+      shell.appendChild(panel2);
+
+      if (afterM2) body.insertBefore(shell, afterM2);
+      else body.appendChild(shell);
+
+      /* 去掉方法一前多余的 hr（紧挨标签壳的） */
+      var prev = shell.previousElementSibling;
+      if (prev && prev.tagName === "HR") prev.remove();
+
+      function activate(id) {
+        var is1 = id === "method-1";
+        tab1.classList.toggle("is-active", is1);
+        tab2.classList.toggle("is-active", !is1);
+        tab1.setAttribute("aria-selected", is1 ? "true" : "false");
+        tab2.setAttribute("aria-selected", is1 ? "false" : "true");
+        panel1.classList.toggle("is-active", is1);
+        panel2.classList.toggle("is-active", !is1);
+        panel1.hidden = !is1;
+        panel2.hidden = is1;
+        if (history.replaceState) {
+          history.replaceState(null, "", "#" + id);
+        } else {
+          location.hash = id;
+        }
+      }
+
+      tab1.addEventListener("click", function () { activate("method-1"); });
+      tab2.addEventListener("click", function () { activate("method-2"); });
+
+      var hash = location.hash.replace(/^#/, "");
+      if (hash === "method-2" || hash === "panel-method-2") activate("method-2");
+      else activate("method-1");
     })();
   </script>
 </body>

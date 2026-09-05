@@ -4,11 +4,11 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>xyf — AI media × builder</title>
-<meta name="description" content="xyf — 专注于 AI 内容实践与分享。不断探索 AI 边界与商业应用，探索属于 00 后的财富自由之路。" />
+<meta name="description" content="xyf — 专注于 AI 内容实践与分享，正在运营 ShareAI Network 与 1Dollar Help。" />
 <link rel="icon" href="assets/favicon.ico?v=round4" sizes="any" />
 <link rel="icon" type="image/png" href="assets/favicon-32.png?v=round4" sizes="32x32" />
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=round4" sizes="180x180" />
-<link rel="preload" as="image" href="assets/avatar-cutout.webp" type="image/webp" />
+<link rel="preload" as="image" href="assets/avatar-cutout.webp?v=portrait-cutout-01" type="image/webp" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <!-- 国内访问 Google Fonts 易卡住；非阻塞加载 + display=swap -->
@@ -16,8 +16,8 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Noto+Serif+SC:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" /></noscript>
 <link rel="stylesheet" href="css/tokens.css?v=xyf-blog-02" />
 <link rel="stylesheet" href="css/base.css?v=xyf-blog-02" />
-<link rel="stylesheet" href="css/sections.css?v=xyf-blog-02" />
-<link rel="stylesheet" href="css/work-split.css?v=xyf-blog-02" />
+<link rel="stylesheet" href="css/sections.css?v=xyf-blog-03" />
+<link rel="stylesheet" href="css/work-split.css?v=xyf-blog-03" />
 </head>
 <body>
 
@@ -94,8 +94,8 @@
       <figure class="portrait" data-portrait>
         <span class="portrait__media">
           <picture>
-            <source srcset="assets/avatar-cutout.webp" type="image/webp" />
-            <img src="assets/avatar-cutout-sm.png" alt="xyf 头像" class="portrait__img" width="900" height="900" decoding="async" fetchpriority="high" />
+            <source srcset="assets/avatar-cutout.webp?v=portrait-cutout-01" type="image/webp" />
+            <img src="assets/avatar-cutout-sm.png?v=portrait-cutout-01" alt="xyf 头像" class="portrait__img" width="900" height="900" decoding="async" fetchpriority="high" />
           </picture>
         </span>
         <span class="portrait__cross portrait__cross--tl"></span>
@@ -373,13 +373,69 @@
         <span class="shoot__kicker">拍 — SHOOT</span>
         <h2 class="shoot__title">Shoot</h2>
       </div>
-      <p class="shoot__lead" data-reveal>封面点进抖音 · 悬停暂停</p>
+      <p class="shoot__lead" data-reveal>封面点进抖音 / B 站 · 悬停暂停</p>
     </header>
 
     <!-- 与 Contact 关键词条同思路：双份轨道 + translateX(-50%) 无缝向左循环；组内多复几遍填满宽屏 -->
     <div class="vmarquee" data-reveal data-vmarquee>
       <div class="vmarquee__track">
         <div class="vmarquee__set" data-vmarquee-set>
+          <a class="vcard" href="https://www.bilibili.com/video/BV1YX816bExM" target="_blank" rel="noopener"
+             aria-label="在 B 站观看：2026年8月 AI订阅性价比排行">
+            <span class="vcard__media">
+              <img class="vcard__img" src="assets/video-cover-06.jpg?v=20260822" alt="" width="900" height="1200" draggable="false" />
+              <span class="vcard__shade" aria-hidden="true"></span>
+              <span class="vcard__play" aria-hidden="true"><i></i></span>
+              <span class="vcard__rec"><i></i> B 站</span>
+            </span>
+            <span class="vcard__body">
+              <span class="vcard__tag">AI 教程</span>
+              <h3 class="vcard__title">2026年8月 AI订阅性价比排行</h3>
+              <p class="vcard__dek">Claude / Codex / Grok / DeepSeek / GLM / OpenCode Go 哪家最划算？</p>
+            </span>
+          </a>
+          <a class="vcard" href="https://www.bilibili.com/video/BV1fHge6HEuo" target="_blank" rel="noopener"
+             aria-label="在 B 站观看：实现 Grok 搜索自由">
+            <span class="vcard__media">
+              <img class="vcard__img" src="assets/video-cover-05.jpg?v=bili2" alt="" width="1672" height="940" draggable="false" />
+              <span class="vcard__shade" aria-hidden="true"></span>
+              <span class="vcard__play" aria-hidden="true"><i></i></span>
+              <span class="vcard__rec"><i></i> B 站</span>
+            </span>
+            <span class="vcard__body">
+              <span class="vcard__tag">AI 教程</span>
+              <h3 class="vcard__title">实现 Grok 搜索自由</h3>
+              <p class="vcard__dek">地球最强搜索引擎 · Grok 模型搜索自由</p>
+            </span>
+          </a>
+          <a class="vcard" href="https://www.bilibili.com/video/BV1MRgQ69ESq" target="_blank" rel="noopener"
+             aria-label="在 B 站观看：如何实现 Grok4.5 Token 自由">
+            <span class="vcard__media">
+              <img class="vcard__img" src="assets/video-cover-03.jpg?v=bili1" alt="" width="1920" height="1080" draggable="false" />
+              <span class="vcard__shade" aria-hidden="true"></span>
+              <span class="vcard__play" aria-hidden="true"><i></i></span>
+              <span class="vcard__rec"><i></i> B 站</span>
+            </span>
+            <span class="vcard__body">
+              <span class="vcard__tag">AI 教程</span>
+              <h3 class="vcard__title">如何实现 Grok4.5 Token 自由</h3>
+              <p class="vcard__dek">免费额度 × 自动注册 × 自建中转 · 无限 Token</p>
+            </span>
+          </a>
+          <a class="vcard" href="https://www.bilibili.com/video/BV1w6KY62EYL" target="_blank" rel="noopener"
+             aria-label="在 B 站观看：在国内如何下载安装 Claude Code 和 Codex">
+            <span class="vcard__media">
+              <img class="vcard__img" src="assets/video-cover-04.jpg?v=bili1" alt="" width="1920" height="1080" draggable="false" />
+              <span class="vcard__shade" aria-hidden="true"></span>
+              <span class="vcard__play" aria-hidden="true"><i></i></span>
+              <span class="vcard__rec"><i></i> B 站</span>
+            </span>
+            <span class="vcard__body">
+              <span class="vcard__tag">AI 教程</span>
+              <h3 class="vcard__title">在国内如何下载安装 Claude Code 和 Codex</h3>
+              <p class="vcard__dek">国内安装教程 · 也可接入国产 AI</p>
+            </span>
+          </a>
           <a class="vcard" href="https://v.douyin.com/ZlrpqhsNvkA/" target="_blank" rel="noopener"
              aria-label="在抖音观看：Grok4.5 开发的个人网站">
             <span class="vcard__media">
@@ -424,18 +480,18 @@
     <div class="build__git" aria-hidden="true">
       <span class="git__branch">⊖&nbsp;&nbsp; main ——</span>
       <span class="git__line"></span>
-      <span class="git__row"><i></i><b>c3a91e2</b><em>feat: xyf-ai.com site</em></span>
-      <span class="git__row"><i></i><b>7f2b0d1</b><em>feat: xyf-identity-skill</em></span>
-      <span class="git__row"><i></i><b>a9e44c0</b><em>ops: freeai-api.com</em></span>
-      <span class="git__row git__row--head"><i></i><b>HEAD ——</b><em>build: in public</em></span>
+      <span class="git__row"><i></i><b>c3a91e2</b><em>feat: shareai.network</em></span>
+      <span class="git__row"><i></i><b>7f2b0d1</b><em>ops: 1dollar.help</em></span>
+      <span class="git__row"><i></i><b>a9e44c0</b><em>release: current projects</em></span>
+      <span class="git__row git__row--head"><i></i><b>HEAD ——</b><em>operate: in public</em></span>
       <span class="git__row git__row--ghost"><i></i></span>
       <span class="git__row git__row--ghost"><i></i></span>
     </div>
 
     <div class="build__left" data-reveal>
-      <span class="build__kicker">创 — BUILD</span>
+      <span class="build__kicker">运营 — BUILD</span>
       <h2 class="build__title">Build</h2>
-      <p class="build__sub"><span class="dot"></span>公开建造中 · 项目可点击跳转</p>
+      <p class="build__sub"><span class="dot"></span>正在运营 · 两个项目可直接访问</p>
       <a class="build__cta" href="https://github.com/yunfanxing6" target="_blank" rel="noopener"><span class="build__cta-text">查看我的&nbsp;GitHub</span><svg class="github-mark" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.92.58.1.79-.25.79-.56v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.42-2.69 5.38-5.25 5.67.42.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg><span class="arr">→</span></a>
     </div>
 
@@ -445,12 +501,12 @@
       </div>
       <div class="term__body">
         <pre class="term__code" data-typed aria-hidden="true">$ xyf build --in-public
-10:12:01  checking workspace
-10:12:02  loading modules
-10:12:03  resolving dependencies
-10:12:05  generating bundles
-10:12:07  optimizing assets
-10:12:08  writing artifacts
+10:12:01  checking shareai.network
+10:12:02  checking 1dollar.help
+10:12:03  routing live requests
+10:12:05  monitoring services
+10:12:07  serving customers
+10:12:08  writing updates
 10:12:09  linking ideas
 </pre>
         <div class="term__compile">
@@ -469,24 +525,23 @@
     <div class="build__measure build__measure--progress" aria-hidden="true">
       <span></span><b>progress</b><em data-progress-measure>0%</em>
     </div>
-    <div class="build__queue">
-      <span class="queue__label">projects</span>
+    <div class="build__queue" id="build-projects">
+      <span class="queue__label">live projects / 正在运营</span>
       <span class="queue__brace" aria-hidden="true">{</span>
       <ul>
-        <li>
-          <a class="queue__link" href="https://github.com/yunfanxing6/xyf-ai.com" target="_blank" rel="noopener">
-            xyf-ai.com
+        <li class="queue__project">
+          <a class="queue__link" href="https://shareai.network" target="_blank" rel="noopener">
+            <span class="queue__name">shareai.network</span>
+            <span class="queue__desc">去中心化 AI 中转站</span>
           </a>
+          <span class="queue__status">LIVE</span>
         </li>
-        <li>
-          <a class="queue__link" href="https://github.com/yunfanxing6/xyf-identity-skill" target="_blank" rel="noopener">
-            xyf-identity-skill
+        <li class="queue__project">
+          <a class="queue__link" href="https://1dollar.help" target="_blank" rel="noopener">
+            <span class="queue__name">1dollar.help</span>
+            <span class="queue__desc">AI 会员代充网站</span>
           </a>
-        </li>
-        <li>
-          <a class="queue__link" href="https://freeai-api.com" target="_blank" rel="noopener">
-            freeai-api.com
-          </a>
+          <span class="queue__status">LIVE</span>
         </li>
       </ul>
     </div>
@@ -546,10 +601,10 @@
         <span class="cbar__lbl">微信社群 / WeChat</span>
         <div class="qr qr--live" aria-label="微信 AI 交流群二维码">
           <span class="qr__cross qr__cross--tl"></span><span class="qr__cross qr__cross--br"></span>
-          <img class="qr__img" src="assets/wechat-group-qr.jpg" alt="群聊：ai交流群 微信二维码" width="400" height="419" loading="lazy" />
+          <img class="qr__img" src="assets/wechat-group-qr.jpg?v=20260905" alt="群聊：ai交流群 微信二维码" width="930" height="969" loading="lazy" />
         </div>
         <span class="cbar__note">AI 交流群 · 扫码加入</span>
-        <span class="cbar__soon">二维码约 7 天有效，过期请换新图</span>
+        <span class="cbar__soon">二维码有效期至 9 月 12 日 · 过期请换新图</span>
       </div>
     </div>
 

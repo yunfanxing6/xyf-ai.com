@@ -118,10 +118,10 @@
   filter:saturate(1.05) contrast(1.08) brightness(1.05);
   opacity:0;
 }
-/* 冷蓝主体：再提亮一档，纸底上更易读 */
+/* 冷蓝主体：透明底融入纸色；略提饱和，避免 multiply 过灰 */
 .portrait.is-base-visible .portrait__img{
-  opacity:.68;
-  filter:saturate(1.32) contrast(1.1) brightness(1.28);
+  opacity:.88;
+  filter:saturate(1.18) contrast(1.06) brightness(1.06);
 }
 
 /* 入场前隐藏(JS 接管;无 JS/reduced-motion 时由 .is-ready 兜底显示) */

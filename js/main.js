@@ -14,11 +14,11 @@ const LINKS = {
     xiaohongshu: "https://www.xiaohongshu.com/search_result?keyword=26963854120&source=web_user_page",
     // 抖音号 52563790709 对应 sec_uid（网页主页必须用 sec_uid，不能用抖音号）
     douyin: "https://www.douyin.com/user/MS4wLjABAAAAt2IYDh3RCyOTeeG1pjnfnSfQTT3RPobH2nW8Vh3w4F-p7pafrCtKTrrC1JrtK_ny",
-    bilibili: null,
+    bilibili: "https://space.bilibili.com/3493107681200460",
     youtube: "https://www.youtube.com/@xyf-ai",
   },
   email: "yunfanxing6@gmail.com",
-  wechatQr: "assets/wechat-group-qr.jpg",
+  wechatQr: "assets/wechat-group-qr.jpg?v=20260905",
 };
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
@@ -449,5 +449,4 @@ async function hydrateXViews() {
   );
   writeViewsCache(cache);
 }
-
 

@@ -20,9 +20,9 @@ trap 'rmdir "$LOCK_DIR" 2>/dev/null || true' EXIT
 export PATH="$HOME/.local/bin:$HOME/.grok/bin:$HOME/miniconda3/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
 
 # Mainland proxy for X / xAI / GitHub
-# Shadowrocket on this Mac listens on 1082 (not Clash default 10808)
-export http_proxy="${http_proxy:-http://127.0.0.1:1082}"
-export https_proxy="${https_proxy:-http://127.0.0.1:1082}"
+# V2RayN on this Mac listens on 10808
+export http_proxy="${http_proxy:-http://127.0.0.1:10808}"
+export https_proxy="${https_proxy:-http://127.0.0.1:10808}"
 export HTTP_PROXY="$http_proxy"
 export HTTPS_PROXY="$https_proxy"
 export ALL_PROXY="$https_proxy"

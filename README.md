@@ -38,18 +38,42 @@ python3 -m http.server 8765 --bind 127.0.0.1
 npm start
 ```
 
-## Writing 自动同步（本机）
+## 本机管理台（推荐）
+
+固定地址：**http://127.0.0.1:8790/**（仅本机，不对外）
+
+```bash
+# 安装开机（登录）自启（推荐，装一次即可）
+./scripts/install-admin-autostart.sh
+
+# 前台临时启动（若 launchd 已占用 8790 会直接提示打开浏览器）
+./scripts/admin.sh
+
+# 取消自启
+./scripts/uninstall-admin-autostart.sh
+```
+
+| 功能 | 说明 |
+| --- | --- |
+| 粘贴 X 链接 | 解析 status id → 写入 seeds → `sync_writing.py` |
+| 刷新全部 X | 重跑已收录 Article |
+| 站内文章 | 新建 / 编辑 `posts/*.md`，自动 `build_posts.py` |
+| 发布到线上 | rsync 到 VPS（默认 `root@47.82.145.104:/opt/xyf-ai.com/`，排除 `admin/`） |
+
+- launchd：`com.xingyunfan.xyf-admin` → `~/Library/LaunchAgents/`
+- 应用日志：`~/.logs/xyf-admin.log`
+- 自启 stdout/err：`~/.logs/xyf-admin.launchd.*.log`
+- 部署相关环境变量（可选）：`XYF_PROXY`、`XYF_DEPLOY_HOST`、`XYF_DEPLOY_USER`、`XYF_DEPLOY_PATH`、`XYF_DEPLOY_SSH`
+
+## Writing 同步（脚本）
 
 - 数据：`data/writing.json`（前端读取）
 - 种子 ID：`data/writing-seeds.txt`
 - 人工润色/精装图：`data/writing-overrides.json`
 - 确定性拉数：`python3 scripts/sync_writing.py`（fxtwitter + 本地下载封面）
-- Grok CLI 编排：`scripts/sync-writing.prompt.md` + `scripts/cron-sync-writing.sh`
-- 定时：本机 crontab **每天 10:00 / 22:00**（`cron-sync-writing.sh` → `grok -p --yolo`）
-- 日志：`~/.logs/xyf-writing-sync.log`
-- 手动：在 Grok CLI 说「同步 writing」或跑 `./scripts/cron-sync-writing.sh`
-
-鉴权跟**当前 Grok CLI 登录会员号**走；换号后仍用新号执行（均为会员即可）。
+- 站内博客：`posts/*.md` → `python3 scripts/build_posts.py`
+- 可选 cron：`scripts/cron-sync-writing.sh`（依赖本机开机；关机会跳过）
+- Grok CLI 编排（润色/生图，可选）：`scripts/sync-writing.prompt.md`
 
 ## 相关项目
 

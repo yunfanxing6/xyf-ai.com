@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>国内从零用上 Claude Code 与 ChatGPT 完全指南 — xyf</title>
-  <meta name="description" content="一篇走完全程：解决网络 → 下载安装 → 账号登录。 官方账号直接用，想接中转站或其他模型就用 CC Switch。所有安装包本站直链下载。" />
+  <meta name="description" content="两条路任选，点标签切换。 方法一：本站直链装 Claude / Codex + CC Switch。 方法二：先开代理，官网装客户端 + CC Switch。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Noto+Serif+SC:wght@500;600;700&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/tokens.css" />
-  <link rel="stylesheet" href="/css/post.css" />
+  <link rel="stylesheet" href="/css/tokens.css?v=20260721g" />
+  <link rel="stylesheet" href="/css/post.css?v=20260721g" />
 </head>
 <body>
   <nav class="post-nav">
@@ -20,141 +20,262 @@
   <article class="post">
     <div class="post__kicker">
       <span>教程</span><span class="dotsep"></span>
-      <span>2026.07.18</span><span class="dotsep"></span>
+      <span>2026.07.21</span><span class="dotsep"></span>
       <span class="post__views" data-post-views>
         <svg class="viewico" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
         <span class="views-n">—</span>
       </span>
     </div>
     <h1 class="post__title">国内从零用上 Claude Code 与 ChatGPT 完全指南</h1>
-    <p class="post__dek">一篇走完全程：解决网络 → 下载安装 → 账号登录。<br />官方账号直接用，想接中转站或其他模型就用 CC Switch。所有安装包本站直链下载。</p>
+    <p class="post__dek">两条路任选，点标签切换。<br />方法一：本站直链装 Claude / Codex + CC Switch。<br />方法二：先开代理，官网装客户端 + CC Switch。</p>
     <hr class="post__rule" />
     <div class="post__body">
-<p>写给国内完全零基础的朋友。对已经上过 X 的推友来说这些都不是事，但对国内很多人来说，"网络"这一关就卡死了，国内平台又不方便讲。所以我把整条路一次写全：<strong>网络 → 安装 → 账号</strong>，跟着做就能用上。</p>
-<p>所有需要的安装包都放在本站直连下载，<strong>不需要你先会翻墙</strong>。</p>
+<p>写给国内完全零基础的朋友。Claude Code、ChatGPT / Codex 很好用，但网络、安装、配 API 经常卡人。</p>
+<p><strong>别想一次搞懂全部。</strong> 下面用 <strong>浏览器标签</strong> 分成两条路——点一下只看一条：</p>
+<ol>
+<li><strong>方法一（推荐）</strong>：本站直连下载安装包 → 装 <strong>CC Switch</strong> 接中转站 / 国产 API  </li>
+<li><strong>方法二</strong>：先开代理 → 官网下载安装 → 同样用 <strong>CC Switch</strong> 接入  </li>
+</ol>
+<p>两条路的接入方式一样，都是 <strong>CC Switch</strong>（图形界面加供应商，不用手改配置文件、也不靠 AI 代配）。差别只在于：<strong>安装包从哪下、要不要先有代理</strong>。</p>
+<p>本站 <code>/dl/</code> 为官方安装包镜像，约 <strong>2026-07-21</strong>（v2rayN <strong>7.23.4</strong>、CC Switch <strong>v3.17.0</strong>）；过旧可到官网更新。</p>
 <hr>
-<h2 id="_1">第一步：解决网络问题</h2>
-<p>Claude、ChatGPT 这些服务国内直连不通，第一步是准备一个能用的代理环境。分两件事：<strong>代理软件</strong>（本地的壳）+ <strong>机场订阅</strong>（提供节点）。</p>
-<h3 id="11">1.1 下载代理软件</h3>
-<p>推荐开源免费的 <strong>Clash Verge</strong>，本站直连下载（无需翻墙）：</p>
+<h2 id="method-1">方法一：本站下载安装 + CC Switch</h2>
+<p>思路：<strong>不先翻墙也能下安装包</strong>（本站 Cloudflare 直连）→ 装好 Claude / Codex → 用 <strong>CC Switch</strong> 填 Base URL + API Key。</p>
+<p>适合：不想先搞机场、只想尽快用上客户端，并用中转站 / DeepSeek 等。</p>
+<h3 id="1-claude-codex">第 1 步：下载安装 Claude / Codex（本站直链）</h3>
+<h4 id="claude-claude-code">Claude 桌面端（内含 Claude Code）</h4>
+<p>应用内有 <strong>Code</strong> 标签 = 图形版 Claude Code，不必先装 Node。</p>
 <ul>
-<li><a href="/dl/Clash.Verge_2.5.1_x64-setup.exe">Windows 64 位</a>（47 MB）</li>
-<li><a href="/dl/Clash.Verge_2.5.1_aarch64.dmg">macOS Apple 芯片（M1/M2/M3/M4）</a>（62 MB）</li>
-<li><a href="/dl/Clash.Verge_2.5.1_x64.dmg">macOS Intel 芯片</a>（66 MB）</li>
+<li><a href="/dl/Claude-macOS.dmg">macOS（Intel + Apple）</a>（208 MB）</li>
+<li><a href="/dl/Claude-Setup-x64.exe">Windows 64 位</a>（126 MB）</li>
+<li><a href="/dl/Claude-Setup-arm64.exe">Windows ARM64</a>（126 MB）</li>
+</ul>
+<p>macOS 拖进应用程序；Windows 双击安装。要用 Code 时，Windows 建议先装 <a href="https://git-scm.com/download/win">Git for Windows</a>。</p>
+<h4 id="chatgpt-codex">ChatGPT / Codex 桌面端（同一个应用）</h4>
+<p>OpenAI 已合并为<strong>一个</strong>官方桌面应用，装一套即可对话 + Codex。</p>
+<ul>
+<li><a href="/dl/Codex-mac-arm64.dmg">macOS Apple 芯片</a>（591 MB）</li>
+<li><a href="/dl/Codex-mac-intel.dmg">macOS Intel</a>（554 MB）</li>
+<li><a href="/dl/Codex-Windows-x64.msix">Windows 64 位（.msix）</a>（702 MB）</li>
+</ul>
+<p>文件较大，建议 Wi‑Fi。Windows 若装不了 <code>.msix</code>：设置 → 隐私和安全性 → 开发者选项 → 允许侧载。</p>
+<h4 id="claude-code">（可选）Claude Code 命令行</h4>
+<p>需要 Node.js 18+。国内镜像装 Node：</p>
+<ul>
+<li><a href="https://npmmirror.com/mirrors/node/v22.17.0/node-v22.17.0-x64.msi">Windows 安装包</a></li>
+<li><a href="https://npmmirror.com/mirrors/node/v22.17.0/node-v22.17.0.pkg">macOS 安装包</a></li>
+</ul>
+<pre><code class="language-bash">node -v
+npm config set registry https://registry.npmmirror.com
+npm install -g @anthropic-ai/claude-code
+claude --version
+</code></pre>
+<h3 id="2-cc-switch">第 2 步：安装 CC Switch</h3>
+<p>用 <strong>CC Switch</strong> 管理 Claude Code / Codex 的供应商（官方、中转站、DeepSeek 等），左侧选工具 → 添加 → 一键切换。</p>
+<p>本站直连下载：</p>
+<ul>
+<li><a href="/dl/CC-Switch-v3.17.0-Windows.msi">CC Switch · Windows（.msi）</a>（约 13 MB）</li>
+<li><a href="/dl/CC-Switch-v3.17.0-macOS.dmg">CC Switch · macOS（.dmg）</a>（约 25 MB）</li>
+</ul>
+<p>macOS 版一般已签名，拖进「应用程序」即可。</p>
+<h3 id="3-cc-switch-api">第 3 步：在 CC Switch 里接入 API</h3>
+<p>服务商给你两样东西即可：</p>
+<ol>
+<li><strong>Base URL</strong>（API 地址，常见带 <code>/v1</code>）  </li>
+<li><strong>API Key</strong>（如 <code>sk-...</code>）  </li>
+</ol>
+<h4 id="claude-code-codex">接中转站（Claude Code / Codex）</h4>
+<ol>
+<li>打开 CC Switch，左侧选 <strong>Claude Code</strong> 或 <strong>Codex</strong>  </li>
+<li>点「添加供应商」，选预设或手动填：<br>
+   - <strong>名称</strong>：随便起，如「中转站 A」<br>
+   - <strong>API 地址</strong>：中转站给的 Base URL<br>
+   - <strong>API Key</strong>：中转站给的密钥  </li>
+<li>保存后点这个供应商，设为当前生效  </li>
+<li>回 Claude / ChatGPT·Codex 客户端使用（不行就重启一次客户端）  </li>
+</ol>
+<h4 id="deepseek">接 DeepSeek（示例）</h4>
+<ol>
+<li>打开 <a href="https://platform.deepseek.com/">platform.deepseek.com</a> 注册并创建 API Key  </li>
+<li>CC Switch 左侧选 <strong>Codex</strong> 或 <strong>Claude Code</strong>  </li>
+<li>添加供应商：有 DeepSeek 预设就选预设贴 Key；否则手动填<br>
+   - <strong>API 地址</strong>：<code>https://api.deepseek.com</code> 或文档写的 <code>/v1</code> 兼容地址<br>
+   - <strong>API Key</strong>：刚复制的 Key<br>
+   - <strong>模型</strong>（可选）：如 <code>deepseek-chat</code>、<code>deepseek-reasoner</code>  </li>
+<li>启用该供应商；若有「本地路由 / 本地代理」开关，一并打开对应工具  </li>
+<li>重启客户端试一条请求  </li>
+</ol>
+<h4 id="openai">其他 OpenAI 兼容模型</h4>
+<p>通义 / 百炼、Kimi、智谱、豆包等：控制台里的 <strong>OpenAI 兼容 Base URL + Key</strong>，按上面同样步骤添加。</p>
+<table>
+<thead>
+<tr>
+<th>方向</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DeepSeek</td>
+<td><code>https://api.deepseek.com</code> + API Key</td>
+</tr>
+<tr>
+<td>通义 / Kimi / 智谱 / 豆包等</td>
+<td>控制台「OpenAI 兼容」URL + Key</td>
+</tr>
+<tr>
+<td>各类中转站</td>
+<td>商家转发地址 + Key</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>中转站质量参差，自行甄别；本站不做担保（见<a href="/privacy/">隐私政策</a>）。计费以各控制台为准。</p>
+</blockquote>
+<h3 id="_1">方法一小结</h3>
+<ol>
+<li>本站 <code>/dl/</code> 装 Claude / Codex（可选 CLI）  </li>
+<li>本站装 <strong>CC Switch</strong>  </li>
+<li>填 Base URL + Key，启用供应商  </li>
+</ol>
+<hr>
+<h2 id="method-2">方法二：先开代理 → 官网安装 + CC Switch</h2>
+<p>思路：<strong>代理通了</strong>之后，从官方渠道装客户端（或仍用本站包）→ 用 <strong>CC Switch</strong> 接入（步骤与方法一第 2～3 步相同）。</p>
+<p>适合：要用 <strong>官方 Claude / ChatGPT 订阅登录</strong>，或习惯从官网下安装包。</p>
+<h3 id="1">第 1 步：解决网络（代理 + 机场）</h3>
+<p>官方 Claude、ChatGPT / Codex <strong>国内直连往往不通</strong>。需要：</p>
+<ol>
+<li><strong>代理软件</strong>（本机的壳）  </li>
+<li><strong>机场订阅</strong>（提供节点）  </li>
+</ol>
+<h4 id="v2rayn">下载 v2rayN（本站直连，无需翻墙）</h4>
+<p>开源客户端 <strong><a href="https://github.com/2dust/v2rayN">v2rayN</a></strong>，当前镜像 <strong>v7.23.4</strong>：</p>
+<ul>
+<li><a href="/dl/v2rayN-7.23.4-windows-64.zip">Windows 64 位（.zip）</a>（159 MB）</li>
+<li><a href="/dl/v2rayN-7.23.4-macos-arm64.dmg">macOS Apple 芯片（M1/M2/M3/M4）</a>（118 MB）</li>
+<li><a href="/dl/v2rayN-7.23.4-macos-64.dmg">macOS Intel 芯片</a>（124 MB）</li>
 </ul>
 <blockquote>
-<p>不确定 Mac 是什么芯片：点左上角  → 关于本机，"芯片"写 Apple 的选第一个，写 Intel 的选第二个。</p>
+<p>不确定 Mac 芯片：左上角  → 关于本机，「芯片」写 Apple 选第一个，写 Intel 选第二个。</p>
 </blockquote>
-<p>下载后正常安装。macOS 首次打开若提示"无法验证开发者"，去 系统设置 → 隐私与安全性 → 点"仍要打开"。</p>
-<h3 id="12">1.2 购买机场订阅</h3>
-<p>代理软件只是个壳，还需要"订阅"提供节点。我目前在用的机场（稳定、够快，支持 Claude / ChatGPT / X）：</p>
-<p><strong>👉 <a href="https://58.77vy.xyz/register?code=F0VGpmAi">点此注册（8 折优惠）</a></strong>，充值时填优惠券码 <strong><code>vyy888</code></strong> 打 8 折。我平时用的就是<strong>一年 20 元、每月 100G 流量</strong>的套餐，日常跑 Claude Code 完全够用。</p>
-<h3 id="13">1.3 导入订阅并开启代理</h3>
-<ol>
-<li>在机场官网复制你的"订阅链接"</li>
-<li>打开 Clash Verge → 左侧「订阅」→ 粘贴链接 → 点「导入」</li>
-<li>左侧「代理」→ 选一个香港或日本节点</li>
-<li>左侧「设置」→ 打开「系统代理」</li>
-</ol>
-<p><strong>验证</strong>：浏览器打开 <a href="https://claude.ai">claude.ai</a>，能打开就说明网络通了。记住 Clash Verge 的混合端口默认是 <strong>7897</strong>（设置里能看到），后面配终端要用。</p>
-<hr>
-<h2 id="_2">第二步：下载安装</h2>
-<p>网络通了，开始装工具。想用 Claude Code 就走 2.1 + 2.2；只想用 ChatGPT 桌面版可以直接跳 2.3。</p>
-<h3 id="21-nodejsclaude-code">2.1 安装 Node.js（Claude Code 的前置）</h3>
-<p>Claude Code 通过 npm 分发，需要 Node.js 18+。从国内镜像直接下载（不走代理也快）：</p>
 <ul>
-<li><a href="https://npmmirror.com/mirrors/node/v22.17.0/node-v22.17.0-x64.msi">Windows 64 位安装包</a></li>
-<li><a href="https://npmmirror.com/mirrors/node/v22.17.0/node-v22.17.0.pkg">macOS 安装包（通用双芯片）</a></li>
+<li><strong>Windows</strong>：解压后运行 <code>v2rayN.exe</code>（路径尽量别带中文空格）；杀软拦截就加白名单  </li>
+<li><strong>macOS</strong>：<code>.dmg</code> 拖进「应用程序」；无法验证时 → 系统设置 → 隐私与安全性 →「仍要打开」  </li>
 </ul>
-<p>一路下一步装完，打开终端（Windows 用 PowerShell，macOS 用"终端"）检查：</p>
-<pre><code class="language-bash">node -v
+<h4 id="_2">购买机场订阅</h4>
+<p>软件只是壳，还要订阅节点。我在用的（支持 Claude / ChatGPT / X）：</p>
+<p><strong>👉 <a href="https://58.77vy.xyz/register?code=F0VGpmAi">点此注册（8 折）</a></strong>，充值填优惠券 <strong><code>vyy888</code></strong>。我常用 <strong>一年 20 元 / 每月 100G</strong>，跑 Claude Code 够用。</p>
+<h4 id="_3">导入订阅并打开代理</h4>
+<ol>
+<li>机场后台复制「订阅链接」  </li>
+<li>v2rayN → 订阅 / Subscription → 添加 → 更新节点  </li>
+<li>选 <strong>香港 / 日本 / 新加坡</strong> 节点  </li>
+<li>打开 <strong>系统代理</strong>（System Proxy）  </li>
+</ol>
+<p><strong>验证</strong>：浏览器能打开 <a href="https://claude.ai">claude.ai</a> 即可。</p>
+<p><strong>终端代理端口</strong>（仅命令行 Claude Code 需要）：本机常见 <strong><code>10808</code></strong>（以 v2rayN 设置里为准）。</p>
+<p>macOS / Linux：</p>
+<pre><code class="language-bash">export https_proxy=http://127.0.0.1:10808 http_proxy=http://127.0.0.1:10808
 </code></pre>
-<p>显示 <code>v22.x.x</code> 就成功了。</p>
-<h3 id="22-claude-code">2.2 安装 Claude Code</h3>
-<p>终端里执行（先把 npm 源切国内镜像，下载快）：</p>
+<p>Windows PowerShell：</p>
+<pre><code class="language-powershell">$env:HTTPS_PROXY=&quot;http://127.0.0.1:10808&quot;; $env:HTTP_PROXY=&quot;http://127.0.0.1:10808&quot;
+</code></pre>
+<p>可写入 <code>~/.zshrc</code> 或 PowerShell 配置文件。桌面端一般只靠系统代理即可。</p>
+<h3 id="2-claude-codex">第 2 步：下载安装 Claude / Codex</h3>
+<p>代理通了再装。可二选一：</p>
+<p><strong>A. 官网（推荐走官方渠道时）</strong></p>
+<ul>
+<li>Claude 桌面 / 账号：<a href="https://claude.ai">claude.ai</a>（应用商店或官网下载入口以页面为准）  </li>
+<li>ChatGPT / Codex 桌面：<a href="https://chatgpt.com/download">chatgpt.com/download</a>  </li>
+</ul>
+<p><strong>B. 本站直链（与方法一相同，不需要翻墙下安装包）</strong></p>
+<ul>
+<li>Claude：<a href="/dl/Claude-macOS.dmg">macOS</a> · <a href="/dl/Claude-Setup-x64.exe">Win x64</a> · <a href="/dl/Claude-Setup-arm64.exe">Win ARM</a>  </li>
+<li>Codex：<a href="/dl/Codex-mac-arm64.dmg">mac arm</a> · <a href="/dl/Codex-mac-intel.dmg">mac intel</a> · <a href="/dl/Codex-Windows-x64.msix">Win</a>  </li>
+</ul>
+<h4 id="claude-code-cli">（可选）Claude Code CLI</h4>
 <pre><code class="language-bash">npm config set registry https://registry.npmmirror.com
 npm install -g @anthropic-ai/claude-code
 </code></pre>
-<p>装完检查：</p>
-<pre><code class="language-bash">claude --version
-</code></pre>
-<h3 id="23-chatgpt">2.3 （可选）安装 ChatGPT 桌面客户端</h3>
-<p>比网页版更顺手：全局快捷键唤起、可对着截图提问。</p>
+<p>CLI 在终端里跑，务必先设好上面的代理环境变量。</p>
+<h3 id="3-cc-switch">第 3 步：账号 —— 官方登录 或 CC Switch</h3>
+<h4 id="_4">有官方订阅：直接登录</h4>
 <ul>
-<li><strong>macOS</strong>（需 14 Sonoma+）：<a href="https://persistent.oaistatic.com/sidekick/public/ChatGPT.dmg">官方直接下载 ChatGPT.dmg</a>，打开拖进"应用程序"即可</li>
-<li><strong>Windows</strong>（需 Win 10+）：<a href="https://apps.microsoft.com/detail/9nt1r1c2hh7j">微软应用商店安装</a>，或官方页 <a href="https://chatgpt.com/download">chatgpt.com/download</a></li>
+<li><strong>Claude</strong>：应用内用 <a href="https://claude.ai">claude.ai</a> 账号 → 切到 <strong>Code</strong>  </li>
+<li><strong>CLI</strong>：项目目录执行 <code>claude</code>，浏览器登录（Pro/Max 或 <a href="https://console.anthropic.com/">console.anthropic.com</a> API Key）  </li>
+<li><strong>ChatGPT / Codex</strong>：应用内用 OpenAI / ChatGPT 账号登录  </li>
 </ul>
-<p>桌面客户端走系统代理，只要 Clash Verge 的「系统代理」开着就能连上，无需额外设置。</p>
-<hr>
-<h2 id="_3">第三步：账号与登录</h2>
-<p>工具装好了，最后一步是账号。<strong>这里分两条路，看你怎么用。</strong></p>
-<h3 id="claude-code">先让终端走代理（用 Claude Code 必做）</h3>
-<p>Claude Code 在终端里运行，需要手动让终端走代理。端口用 Clash Verge 的 7897：</p>
-<p><strong>macOS / Linux：</strong></p>
-<pre><code class="language-bash">export https_proxy=http://127.0.0.1:7897 http_proxy=http://127.0.0.1:7897
-</code></pre>
-<p><strong>Windows PowerShell：</strong></p>
-<pre><code class="language-powershell">$env:HTTPS_PROXY=&quot;http://127.0.0.1:7897&quot;; $env:HTTP_PROXY=&quot;http://127.0.0.1:7897&quot;
-</code></pre>
-<blockquote>
-<p>每次开新终端都要重新执行。嫌麻烦可以把这行加到 <code>~/.zshrc</code>（macOS）或 PowerShell 配置文件里，一劳永逸。</p>
-</blockquote>
-<h3 id="_4">注册账号时的手机验证：用接码平台</h3>
-<p>没有 Claude / OpenAI 账号的要先注册。注册时通常要<strong>手机号验证</strong>，而 +86 国内手机号大概率不支持（或不想暴露自己的号）。解决办法是用"接码平台"——花几毛钱租一个海外虚拟号收验证码。</p>
-<p>我在用的是 <strong>HeroSMS</strong>（老牌 SMS-Activate 同源技术架构，180+ 国家、每日 50 万+ 新号，价格低，有中文界面）：</p>
+<h4 id="herosms">注册时的手机验证：HeroSMS</h4>
+<p>没有 Claude / OpenAI 账号时通常要<strong>手机号验证</strong>，+86 往往不行。用接码平台租海外号：</p>
 <p><strong>👉 <a href="https://hero-sms.com/?ref=732020">点此注册 HeroSMS</a></strong></p>
-<p>使用流程：</p>
 <ol>
-<li>注册账号（右上角可切换中文）</li>
-<li>充值余额（几美元够用很多次）</li>
-<li>选择服务（如 OpenAI / Claude / Google，找不到就选 "Any Other"）和国家（美国、英国、印尼等，价格不同）</li>
-<li>购买号码，把号码填到注册页发送验证码</li>
-<li>验证码会直接出现在 HeroSMS 的个人账户里，填回去即可</li>
+<li>注册账号（可切中文）  </li>
+<li>充值（几美元够多次）  </li>
+<li>选服务（OpenAI / Claude / Google 等）和国家  </li>
+<li>买号 → 填到注册页 → 在 HeroSMS 收验证码  </li>
 </ol>
 <blockquote>
-<p>提示：每个号码有效期 20 分钟，期间收不到码的话费用会<strong>自动退回你的余额</strong>，换个号码重试即可。号码用完自动释放，不影响你后续登录（登录一般不再需要收码）。</p>
+<p>号码约 20 分钟有效，收不到会退余额。适用于 <strong>Claude Code</strong> 与 <strong>ChatGPT / Codex</strong> 注册。</p>
 </blockquote>
-<h3 id="a">路线 A：用官方账号（最简单）</h3>
-<p>如果你有 Claude 官方订阅（Pro / Max）或愿意用官方 API 按量付费，直接登录即可。</p>
-<p>在项目目录里运行：</p>
-<pre><code class="language-bash">claude
-</code></pre>
-<p>首次运行会弹出浏览器登录。两种方式：</p>
+<h4 id="apicc-switch">用中转站 / 国产 API：CC Switch</h4>
+<p>与方法一相同：</p>
 <ol>
-<li><strong>Claude Pro / Max 订阅</strong>：用 claude.ai 账号登录，按订阅额度使用</li>
-<li><strong>API Key</strong>：在 <a href="https://console.anthropic.com/">console.anthropic.com</a> 创建 Key，按量付费</li>
+<li>下载 <a href="/dl/CC-Switch-v3.17.0-Windows.msi">CC Switch Windows</a> / <a href="/dl/CC-Switch-v3.17.0-macOS.dmg">macOS</a>  </li>
+<li>左侧选 <strong>Claude Code</strong> 或 <strong>Codex</strong> → 添加供应商（Base URL + Key）  </li>
+<li>启用 → 重启客户端验证  </li>
 </ol>
-<p>登录完就能直接用了。ChatGPT 桌面版同理——打开客户端，用 OpenAI 账号登录即可。</p>
-<h3 id="b">路线 B：用中转站或其他模型（省钱 / 灵活）</h3>
-<p>如果你想接 <strong>API 中转站</strong>（第三方转发，通常更便宜、支付更方便）或切换到别的模型，手动改配置文件很麻烦。用 <strong>CC Switch</strong> 这个桌面工具管理，一键切换。</p>
-<p>本站直连下载：</p>
-<ul>
-<li><a href="/dl/CC-Switch-v3.17.0-Windows.msi">CC Switch · Windows（.msi）</a>（13 MB）</li>
-<li><a href="/dl/CC-Switch-v3.17.0-macOS.dmg">CC Switch · macOS（.dmg）</a>（26 MB）</li>
-</ul>
-<p>macOS 版已 Apple 签名公证，下载拖进"应用程序"即可。</p>
-<p><strong>用法</strong>（以给 Claude Code 加一个中转站为例）：</p>
+<p>DeepSeek 示例：Key 在 <a href="https://platform.deepseek.com/">platform.deepseek.com</a> 创建，Base URL 常见 <code>https://api.deepseek.com</code>。</p>
+<h3 id="_5">方法二小结</h3>
 <ol>
-<li>打开 CC Switch，左侧选 <strong>Claude Code</strong></li>
-<li>点「添加供应商」，从 50+ 预设里选，或手动填：
-   - <strong>名称</strong>：随便起，如"中转站 A"
-   - <strong>API 地址</strong>：中转站给的 Base URL
-   - <strong>API Key</strong>：中转站给的密钥</li>
-<li>保存后点这个供应商 → 它就成为当前生效的配置</li>
-<li>回终端跑 <code>claude</code> 就用上了（Claude Code 支持热切换，不用重启）</li>
+<li>v2rayN + 机场 → 系统代理  </li>
+<li>官网或本站装 Claude / Codex  </li>
+<li>官方订阅就登录；否则 <strong>CC Switch</strong> 接 API  </li>
 </ol>
-<p>想换回官方或另一个中转站，列表里点一下即可。CC Switch 还支持 Codex、Claude Desktop、Gemini CLI 等 7 个工具。</p>
+<hr>
+<h2 id="_6">两种方法怎么选</h2>
+<table>
+<thead>
+<tr>
+<th>你的情况</th>
+<th>走哪条</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>先不想搞代理，本站下包装客户端</td>
+<td><strong>方法一</strong></td>
+</tr>
+<tr>
+<td>要用官方订阅、或坚持官网下载</td>
+<td><strong>方法二</strong></td>
+</tr>
+<tr>
+<td>接中转站 / DeepSeek 等</td>
+<td>两条路都用 <strong>CC Switch</strong></td>
+</tr>
+<tr>
+<td>注册要海外手机号</td>
+<td>方法二里的 <strong>HeroSMS</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="_7">常见问题</h2>
+<p><strong>连不上 / 一直转圈？</strong> 方法二先查代理：系统代理是否开着、节点是否香港/日本/新加坡。CLI 再查端口是否 <code>10808</code>。</p>
+<p><strong>v2rayN 订阅更新失败？</strong> 校对系统时间；换订阅链接；Windows 用完整解压目录运行。</p>
+<p><strong>下载很慢？</strong> Codex 包大，用 Wi‑Fi；本站 <code>/dl/</code> 不需要翻墙。</p>
+<p><strong>Windows 装不了 <code>.msix</code>？</strong> 开发者选项允许侧载，或改官方/商店渠道。</p>
+<p><strong><code>command not found: claude</code>？</strong> <code>npm config get prefix</code>，把 <code>&lt;prefix&gt;/bin</code> 加进 PATH。</p>
+<p><strong>提示地区不支持？</strong> 换日本/新加坡出口节点。</p>
+<p><strong>注册要手机验证？</strong> 方法二 <strong>HeroSMS</strong>：<a href="https://hero-sms.com/?ref=732020">hero-sms.com/?ref=732020</a>。</p>
+<p><strong>CC Switch 加了供应商但客户端无响应？</strong> 确认已启用、本地路由开关打开、重启客户端；检查 Base URL 是否漏 <code>/v1</code>、Key 是否有空格。</p>
+<p><strong>不会改配置文件？</strong> 不用改。装 CC Switch，图形界面填 URL 和 Key 即可。</p>
+<hr>
+<p>有问题可以来 <a href="https://t.me/+TXvJqNLp8_9iNGNl">Telegram 群</a> 交流，扫码加入 <strong>微信 AI 交流群</strong>，或 X 上私信 <a href="https://x.com/xfengbro">@xfengbro</a>。</p>
+<p><img alt="微信 AI 交流群二维码" src="/assets/wechat-group-qr.jpg?v=20260828"></p>
 <blockquote>
-<p>什么是中转站？就是第三方搭的转发服务，把请求转发到官方 API，通常更便宜或支付更方便。质量参差不齐，选用前注意甄别，本站不对任何第三方服务做担保（详见<a href="/privacy/">隐私政策</a>）。</p>
+<p>微信群二维码约 7 天有效，过期可到<a href="/#contact">首页联系区</a>扫最新码，或私信更新。</p>
 </blockquote>
-<hr>
-<h2 id="_5">常见问题</h2>
-<p><strong>连不上 / 一直转圈？</strong> 九成是终端没走代理，回到第三步检查环境变量；再确认 Clash Verge 的「系统代理」开着、节点可用，多换几个香港/日本/新加坡节点。</p>
-<p><strong><code>command not found: claude</code>？</strong> npm 全局 bin 目录不在 PATH 里。执行 <code>npm config get prefix</code> 找到路径，把 <code>&lt;prefix&gt;/bin</code> 加进 PATH。</p>
-<p><strong>ChatGPT 提示地区不支持？</strong> 当前节点出口地区不在 OpenAI 支持范围，换日本/新加坡节点。</p>
-<p><strong>账号从哪来？</strong> 没有 Claude / OpenAI 账号的需要先注册，注册时的手机号验证用接码平台解决——用法见上文第三步「注册账号时的手机验证」一节。</p>
-<hr>
-<p>有问题可以来 <a href="https://t.me/+TXvJqNLp8_9iNGNl">Telegram 群</a> 交流，或 X 上私信 <a href="https://x.com/xfengbro">@xfengbro</a>。</p>
     </div>
     <footer class="post__foot">
       <a href="/#writing">← 更多文章</a>
@@ -178,6 +299,186 @@ npm install -g @anthropic-ai/claude-code
           if (el) el.textContent = d.views.toLocaleString("en-US");
         })
         .catch(function () {});
+    })();
+
+    /* 一键复制提示词 */
+    (function () {
+      function copyText(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          return navigator.clipboard.writeText(text);
+        }
+        return new Promise(function (resolve, reject) {
+          var ta = document.createElement("textarea");
+          ta.value = text;
+          ta.setAttribute("readonly", "");
+          ta.style.position = "fixed";
+          ta.style.left = "-9999px";
+          document.body.appendChild(ta);
+          ta.select();
+          try {
+            if (!document.execCommand("copy")) reject(new Error("copy failed"));
+            else resolve();
+          } catch (err) {
+            reject(err);
+          } finally {
+            document.body.removeChild(ta);
+          }
+        });
+      }
+      document.querySelectorAll("[data-copy-prompt]").forEach(function (box) {
+        var btn = box.querySelector("[data-copy-btn]");
+        var pre = box.querySelector("[data-copy-text]");
+        if (!btn || !pre) return;
+        var idle = btn.textContent;
+        btn.addEventListener("click", function () {
+          var text = (pre.innerText || pre.textContent || "").replace(/\n+$/, "");
+          copyText(text)
+            .then(function () {
+              btn.textContent = "已复制";
+              btn.classList.add("is-copied");
+              setTimeout(function () {
+                btn.textContent = idle;
+                btn.classList.remove("is-copied");
+              }, 1800);
+            })
+            .catch(function () {
+              btn.textContent = "复制失败";
+              setTimeout(function () { btn.textContent = idle; }, 1800);
+            });
+        });
+      });
+    })();
+
+    /* 浏览器标签页：方法一 / 方法二 互斥显示 */
+    (function () {
+      var m1 = document.getElementById("method-1");
+      var m2 = document.getElementById("method-2");
+      if (!m1 || !m2) return;
+      var body = m1.parentNode;
+      if (!body || body !== m2.parentNode) return;
+
+      function takeUntil(start, endExclusive) {
+        var nodes = [];
+        var n = start;
+        while (n && n !== endExclusive) {
+          var next = n.nextSibling;
+          nodes.push(n);
+          n = next;
+        }
+        return nodes;
+      }
+
+      /* 方法二结束：下一个 h2（「两种方法怎么选 / 常见问题」等共享区） */
+      var afterM2 = m2.nextElementSibling;
+      while (afterM2 && afterM2.tagName !== "H2") {
+        afterM2 = afterM2.nextElementSibling;
+      }
+
+      var m1Nodes = takeUntil(m1, m2);
+      /* 跳过方法一和方法二之间的 hr */
+      while (m1Nodes.length && m1Nodes[m1Nodes.length - 1].nodeType === 1) {
+        var last = m1Nodes[m1Nodes.length - 1];
+        if (last.tagName === "HR") {
+          m1Nodes.pop();
+          if (last.parentNode) last.parentNode.removeChild(last);
+        } else break;
+      }
+      var m2Nodes = takeUntil(m2, afterM2);
+
+      var shell = document.createElement("div");
+      shell.className = "path-tabs";
+      shell.setAttribute("data-path-tabs", "1");
+
+      var bar = document.createElement("div");
+      bar.className = "path-tabs__bar";
+      bar.setAttribute("role", "tablist");
+      bar.setAttribute("aria-label", "选择路径");
+
+      function makeTab(id, num, title, desc, active) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "path-tabs__tab" + (active ? " is-active" : "");
+        btn.setAttribute("role", "tab");
+        btn.setAttribute("aria-selected", active ? "true" : "false");
+        btn.setAttribute("aria-controls", "panel-" + id);
+        btn.id = "tab-" + id;
+        btn.dataset.tab = id;
+        btn.innerHTML =
+          '<span class="path-tabs__num">' + num + "</span>" +
+          '<span class="path-tabs__text">' +
+          '<span class="path-tabs__title">' + title + "</span>" +
+          '<span class="path-tabs__desc">' + desc + "</span>" +
+          "</span>";
+        return btn;
+      }
+
+      var tab1 = makeTab(
+        "method-1",
+        "1",
+        "方法一",
+        "本站下载安装 + CC Switch 接入",
+        true
+      );
+      var tab2 = makeTab(
+        "method-2",
+        "2",
+        "方法二",
+        "先开代理 → 官网安装 + CC Switch",
+        false
+      );
+      bar.appendChild(tab1);
+      bar.appendChild(tab2);
+
+      var panel1 = document.createElement("div");
+      panel1.className = "path-tabs__panel is-active";
+      panel1.id = "panel-method-1";
+      panel1.setAttribute("role", "tabpanel");
+      panel1.setAttribute("aria-labelledby", "tab-method-1");
+
+      var panel2 = document.createElement("div");
+      panel2.className = "path-tabs__panel";
+      panel2.id = "panel-method-2";
+      panel2.setAttribute("role", "tabpanel");
+      panel2.setAttribute("aria-labelledby", "tab-method-2");
+      panel2.hidden = true;
+
+      m1Nodes.forEach(function (node) { panel1.appendChild(node); });
+      m2Nodes.forEach(function (node) { panel2.appendChild(node); });
+
+      shell.appendChild(bar);
+      shell.appendChild(panel1);
+      shell.appendChild(panel2);
+
+      if (afterM2) body.insertBefore(shell, afterM2);
+      else body.appendChild(shell);
+
+      /* 去掉方法一前多余的 hr（紧挨标签壳的） */
+      var prev = shell.previousElementSibling;
+      if (prev && prev.tagName === "HR") prev.remove();
+
+      function activate(id) {
+        var is1 = id === "method-1";
+        tab1.classList.toggle("is-active", is1);
+        tab2.classList.toggle("is-active", !is1);
+        tab1.setAttribute("aria-selected", is1 ? "true" : "false");
+        tab2.setAttribute("aria-selected", is1 ? "false" : "true");
+        panel1.classList.toggle("is-active", is1);
+        panel2.classList.toggle("is-active", !is1);
+        panel1.hidden = !is1;
+        panel2.hidden = is1;
+        if (history.replaceState) {
+          history.replaceState(null, "", "#" + id);
+        } else {
+          location.hash = id;
+        }
+      }
+
+      tab1.addEventListener("click", function () { activate("method-1"); });
+      tab2.addEventListener("click", function () { activate("method-2"); });
+
+      var hash = location.hash.replace(/^#/, "");
+      if (hash === "method-2" || hash === "panel-method-2") activate("method-2");
+      else activate("method-1");
     })();
   </script>
 </body>

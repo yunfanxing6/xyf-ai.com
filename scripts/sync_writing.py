@@ -181,7 +181,7 @@ def download_cover(status_id: str, url: str) -> str | None:
 def fetch_article(status_id: str) -> dict[str, Any] | None:
     try:
         data = http_json(FXT.format(id=status_id))
-    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as e:
+    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, RuntimeError, OSError) as e:
         print(f"[warn] status {status_id}: {e}", file=sys.stderr)
         return None
     tweet = data.get("tweet") if isinstance(data, dict) else None
@@ -235,14 +235,39 @@ def apply_overrides(item: dict[str, Any], ovr: dict[str, Any]) -> dict[str, Any]
     return out
 
 
+def load_previous_items() -> dict[str, dict[str, Any]]:
+    """Keep last-good items when fxtwitter 404s / flakes."""
+    if not OUT.exists():
+        return {}
+    try:
+        prev = json.loads(OUT.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {}
+    out: dict[str, dict[str, Any]] = {}
+    for it in prev.get("items") or []:
+        sid = str(it.get("id") or "").strip()
+        if ID_RE.match(sid) and isinstance(it, dict):
+            out[sid] = it
+    return out
+
+
 def build(ids: list[str], overrides: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    previous = load_previous_items()
     items: list[dict[str, Any]] = []
+    seen: set[str] = set()
     for sid in ids:
         raw = fetch_article(sid)
         if not raw:
-            continue
+            cached = previous.get(sid)
+            if cached:
+                print(f"[cache] reuse previous item for {sid}", file=sys.stderr)
+                raw = dict(cached)
+                # Drop fields that overrides will re-apply cleanly
+            else:
+                continue
         ovr = overrides.get(sid) or {}
         items.append(apply_overrides(raw, ovr))
+        seen.add(sid)
 
     # pin first, then by time desc
     def sort_key(it: dict[str, Any]) -> tuple:

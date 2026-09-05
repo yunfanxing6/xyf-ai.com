@@ -162,7 +162,7 @@
 }
 .wpost{
   display:grid;
-  grid-template-columns:92px minmax(0,1fr) 124px;
+  grid-template-columns:92px minmax(0,1fr) 160px;
   align-items:center;gap:18px;
   min-height:126px;
   padding:18px 28px;
@@ -191,13 +191,13 @@
 .wpost__like{color:var(--ink);}
 .wpost:hover .wpost__like{color:var(--accent);}
 .wpost__thumb{
-  width:124px;height:70px;overflow:hidden;
+  width:160px;height:auto;overflow:hidden;
   align-self:center;
   background:#0a1220;
   border:1px solid var(--line);
 }
-/* 列表位：固定约 16:9，吃 X 原文宽封面 */
-.wpost__thumb--cover{aspect-ratio:16/9;height:auto;min-height:70px;}
+/* 列表位：与 X Article 封面同比例（约 2.5:1 / 1672×669），完整呈现不左右裁切 */
+.wpost__thumb--cover{aspect-ratio:5/2;height:auto;min-height:0;}
 .wpost__thumb img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block;}
 
 .writing__all{
@@ -610,7 +610,7 @@ body.theme-shoot .cross::after{
 .build__measure--progress em{left:122px;top:55px;}
 
 .build__queue{
-  position:absolute;left:48%;top:79.6vh;z-index:4;
+  position:absolute;left:48%;bottom:150px;z-index:4;
   font-family:'SF Mono','Menlo','Roboto Mono',monospace;
   color:#b09a8b;
   pointer-events:auto;
@@ -623,11 +623,28 @@ body.theme-shoot .cross::after{
 }
 .build__queue ul{list-style:none;margin-left:48px;padding:0;}
 .build__queue li{
-  position:relative;font-size:12px;line-height:2;
+  position:relative;font-size:12px;line-height:1.35;
 }
 .build__queue li::before{
-  content:"";display:inline-block;width:10px;height:10px;border:1px solid #b09a8b;
-  border-radius:50%;margin-right:16px;vertical-align:middle;background:var(--paper);
+  content:"";display:block;width:10px;height:10px;border:1px solid #b09a8b;
+  border-radius:50%;margin:4px 0 0;flex:none;background:var(--paper);
+}
+.queue__project{
+  display:flex;align-items:flex-start;gap:12px;
+}
+.queue__project + .queue__project{margin-top:14px;}
+.queue__link{
+  display:flex;flex:1;min-width:0;flex-direction:column;gap:4px;
+}
+.queue__name{
+  color:inherit;font-size:13px;line-height:1.2;
+}
+.queue__desc{
+  color:#918a81;font-family:var(--sans-cjk);font-size:11px;line-height:1.4;
+}
+.queue__status{
+  flex:none;padding-top:1px;color:var(--accent);font-family:var(--sans);
+  font-size:9px;letter-spacing:.12em;line-height:1.2;
 }
 /* Build 项目链接 */
 .queue__link{
@@ -694,7 +711,13 @@ body.theme-shoot .cross::after{
     position:relative;left:auto;right:auto;top:auto;bottom:auto;width:auto;
   }
   .build__terminal{width:100%;}
-  .build__git,.build__queue,.build__measure,.build__ruler,.build__plus{display:none;}
+  .build__git,.build__measure,.build__ruler,.build__plus{display:none;}
+  .build__queue{
+    display:block;margin-top:0;padding-top:24px;border-top:1px solid var(--line);
+  }
+  .queue__brace{display:none;}
+  .build__queue ul{margin-left:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 24px;}
+  .queue__project + .queue__project{margin-top:0;}
 }
 
 @media (max-width:860px){
@@ -721,6 +744,7 @@ body.theme-shoot .cross::after{
   .term__code::first-line{font-size:16px;}
   .term__compile{gap:10px;flex-wrap:wrap;}
   .term__bar2{order:3;flex-basis:100%;}
+  .build__queue ul{grid-template-columns:1fr;}
 }
 
 

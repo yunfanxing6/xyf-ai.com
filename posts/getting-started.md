@@ -1,191 +1,281 @@
 ---
 title: 国内从零用上 Claude Code 与 ChatGPT 完全指南
-dek: 一篇走完全程：解决网络 → 下载安装 → 账号登录。\n官方账号直接用，想接中转站或其他模型就用 CC Switch。所有安装包本站直链下载。
-date: 2026.07.18
+dek: 两条路任选，点标签切换。\n方法一：本站直链装 Claude / Codex + CC Switch。\n方法二：先开代理，官网装客户端 + CC Switch。
+date: 2026.07.21
 tag: 教程
 cover: assets/writing-covers/getting-started-thumb.jpg
 featureImage: assets/writing-covers/getting-started-feature.jpg
 pin: true
 ---
 
-写给国内完全零基础的朋友。对已经上过 X 的推友来说这些都不是事，但对国内很多人来说，"网络"这一关就卡死了，国内平台又不方便讲。所以我把整条路一次写全：**网络 → 安装 → 账号**，跟着做就能用上。
+写给国内完全零基础的朋友。Claude Code、ChatGPT / Codex 很好用，但网络、安装、配 API 经常卡人。
 
-所有需要的安装包都放在本站直连下载，**不需要你先会翻墙**。
+**别想一次搞懂全部。** 下面用 **浏览器标签** 分成两条路——点一下只看一条：
 
----
+1. **方法一（推荐）**：本站直连下载安装包 → 装 **CC Switch** 接中转站 / 国产 API  
+2. **方法二**：先开代理 → 官网下载安装 → 同样用 **CC Switch** 接入  
 
-## 第一步：解决网络问题
+两条路的接入方式一样，都是 **CC Switch**（图形界面加供应商，不用手改配置文件、也不靠 AI 代配）。差别只在于：**安装包从哪下、要不要先有代理**。
 
-Claude、ChatGPT 这些服务国内直连不通，第一步是准备一个能用的代理环境。分两件事：**代理软件**（本地的壳）+ **机场订阅**（提供节点）。
-
-### 1.1 下载代理软件
-
-推荐开源免费的 **Clash Verge**，本站直连下载（无需翻墙）：
-
-- [Windows 64 位](/dl/Clash.Verge_2.5.1_x64-setup.exe)（47 MB）
-- [macOS Apple 芯片（M1/M2/M3/M4）](/dl/Clash.Verge_2.5.1_aarch64.dmg)（62 MB）
-- [macOS Intel 芯片](/dl/Clash.Verge_2.5.1_x64.dmg)（66 MB）
-
-> 不确定 Mac 是什么芯片：点左上角  → 关于本机，"芯片"写 Apple 的选第一个，写 Intel 的选第二个。
-
-下载后正常安装。macOS 首次打开若提示"无法验证开发者"，去 系统设置 → 隐私与安全性 → 点"仍要打开"。
-
-### 1.2 购买机场订阅
-
-代理软件只是个壳，还需要"订阅"提供节点。我目前在用的机场（稳定、够快，支持 Claude / ChatGPT / X）：
-
-**👉 [点此注册（8 折优惠）](https://58.77vy.xyz/register?code=F0VGpmAi)**，充值时填优惠券码 **`vyy888`** 打 8 折。我平时用的就是**一年 20 元、每月 100G 流量**的套餐，日常跑 Claude Code 完全够用。
-
-### 1.3 导入订阅并开启代理
-
-1. 在机场官网复制你的"订阅链接"
-2. 打开 Clash Verge → 左侧「订阅」→ 粘贴链接 → 点「导入」
-3. 左侧「代理」→ 选一个香港或日本节点
-4. 左侧「设置」→ 打开「系统代理」
-
-**验证**：浏览器打开 [claude.ai](https://claude.ai)，能打开就说明网络通了。记住 Clash Verge 的混合端口默认是 **7897**（设置里能看到），后面配终端要用。
+本站 `/dl/` 为官方安装包镜像，约 **2026-07-21**（v2rayN **7.23.4**、CC Switch **v3.17.0**）；过旧可到官网更新。
 
 ---
 
-## 第二步：下载安装
+## 方法一：本站下载安装 + CC Switch {#method-1}
 
-网络通了，开始装工具。想用 Claude Code 就走 2.1 + 2.2；只想用 ChatGPT 桌面版可以直接跳 2.3。
+思路：**不先翻墙也能下安装包**（本站 Cloudflare 直连）→ 装好 Claude / Codex → 用 **CC Switch** 填 Base URL + API Key。
 
-### 2.1 安装 Node.js（Claude Code 的前置）
+适合：不想先搞机场、只想尽快用上客户端，并用中转站 / DeepSeek 等。
 
-Claude Code 通过 npm 分发，需要 Node.js 18+。从国内镜像直接下载（不走代理也快）：
+### 第 1 步：下载安装 Claude / Codex（本站直链）
 
-- [Windows 64 位安装包](https://npmmirror.com/mirrors/node/v22.17.0/node-v22.17.0-x64.msi)
-- [macOS 安装包（通用双芯片）](https://npmmirror.com/mirrors/node/v22.17.0/node-v22.17.0.pkg)
+#### Claude 桌面端（内含 Claude Code）
 
-一路下一步装完，打开终端（Windows 用 PowerShell，macOS 用"终端"）检查：
+应用内有 **Code** 标签 = 图形版 Claude Code，不必先装 Node。
+
+- [macOS（Intel + Apple）](/dl/Claude-macOS.dmg)（208 MB）
+- [Windows 64 位](/dl/Claude-Setup-x64.exe)（126 MB）
+- [Windows ARM64](/dl/Claude-Setup-arm64.exe)（126 MB）
+
+macOS 拖进应用程序；Windows 双击安装。要用 Code 时，Windows 建议先装 [Git for Windows](https://git-scm.com/download/win)。
+
+#### ChatGPT / Codex 桌面端（同一个应用）
+
+OpenAI 已合并为**一个**官方桌面应用，装一套即可对话 + Codex。
+
+- [macOS Apple 芯片](/dl/Codex-mac-arm64.dmg)（591 MB）
+- [macOS Intel](/dl/Codex-mac-intel.dmg)（554 MB）
+- [Windows 64 位（.msix）](/dl/Codex-Windows-x64.msix)（702 MB）
+
+文件较大，建议 Wi‑Fi。Windows 若装不了 `.msix`：设置 → 隐私和安全性 → 开发者选项 → 允许侧载。
+
+#### （可选）Claude Code 命令行
+
+需要 Node.js 18+。国内镜像装 Node：
+
+- [Windows 安装包](https://npmmirror.com/mirrors/node/v22.17.0/node-v22.17.0-x64.msi)
+- [macOS 安装包](https://npmmirror.com/mirrors/node/v22.17.0/node-v22.17.0.pkg)
 
 ```bash
 node -v
+npm config set registry https://registry.npmmirror.com
+npm install -g @anthropic-ai/claude-code
+claude --version
 ```
 
-显示 `v22.x.x` 就成功了。
+### 第 2 步：安装 CC Switch
 
-### 2.2 安装 Claude Code
+用 **CC Switch** 管理 Claude Code / Codex 的供应商（官方、中转站、DeepSeek 等），左侧选工具 → 添加 → 一键切换。
 
-终端里执行（先把 npm 源切国内镜像，下载快）：
+本站直连下载：
+
+- [CC Switch · Windows（.msi）](/dl/CC-Switch-v3.17.0-Windows.msi)（约 13 MB）
+- [CC Switch · macOS（.dmg）](/dl/CC-Switch-v3.17.0-macOS.dmg)（约 25 MB）
+
+macOS 版一般已签名，拖进「应用程序」即可。
+
+### 第 3 步：在 CC Switch 里接入 API
+
+服务商给你两样东西即可：
+
+1. **Base URL**（API 地址，常见带 `/v1`）  
+2. **API Key**（如 `sk-...`）  
+
+#### 接中转站（Claude Code / Codex）
+
+1. 打开 CC Switch，左侧选 **Claude Code** 或 **Codex**  
+2. 点「添加供应商」，选预设或手动填：  
+   - **名称**：随便起，如「中转站 A」  
+   - **API 地址**：中转站给的 Base URL  
+   - **API Key**：中转站给的密钥  
+3. 保存后点这个供应商，设为当前生效  
+4. 回 Claude / ChatGPT·Codex 客户端使用（不行就重启一次客户端）  
+
+#### 接 DeepSeek（示例）
+
+1. 打开 [platform.deepseek.com](https://platform.deepseek.com/) 注册并创建 API Key  
+2. CC Switch 左侧选 **Codex** 或 **Claude Code**  
+3. 添加供应商：有 DeepSeek 预设就选预设贴 Key；否则手动填  
+   - **API 地址**：`https://api.deepseek.com` 或文档写的 `/v1` 兼容地址  
+   - **API Key**：刚复制的 Key  
+   - **模型**（可选）：如 `deepseek-chat`、`deepseek-reasoner`  
+4. 启用该供应商；若有「本地路由 / 本地代理」开关，一并打开对应工具  
+5. 重启客户端试一条请求  
+
+#### 其他 OpenAI 兼容模型
+
+通义 / 百炼、Kimi、智谱、豆包等：控制台里的 **OpenAI 兼容 Base URL + Key**，按上面同样步骤添加。
+
+| 方向 | 说明 |
+| --- | --- |
+| DeepSeek | `https://api.deepseek.com` + API Key |
+| 通义 / Kimi / 智谱 / 豆包等 | 控制台「OpenAI 兼容」URL + Key |
+| 各类中转站 | 商家转发地址 + Key |
+
+> 中转站质量参差，自行甄别；本站不做担保（见[隐私政策](/privacy/)）。计费以各控制台为准。
+
+### 方法一小结
+
+1. 本站 `/dl/` 装 Claude / Codex（可选 CLI）  
+2. 本站装 **CC Switch**  
+3. 填 Base URL + Key，启用供应商  
+
+---
+
+## 方法二：先开代理 → 官网安装 + CC Switch {#method-2}
+
+思路：**代理通了**之后，从官方渠道装客户端（或仍用本站包）→ 用 **CC Switch** 接入（步骤与方法一第 2～3 步相同）。
+
+适合：要用 **官方 Claude / ChatGPT 订阅登录**，或习惯从官网下安装包。
+
+### 第 1 步：解决网络（代理 + 机场）
+
+官方 Claude、ChatGPT / Codex **国内直连往往不通**。需要：
+
+1. **代理软件**（本机的壳）  
+2. **机场订阅**（提供节点）  
+
+#### 下载 v2rayN（本站直连，无需翻墙）
+
+开源客户端 **[v2rayN](https://github.com/2dust/v2rayN)**，当前镜像 **v7.23.4**：
+
+- [Windows 64 位（.zip）](/dl/v2rayN-7.23.4-windows-64.zip)（159 MB）
+- [macOS Apple 芯片（M1/M2/M3/M4）](/dl/v2rayN-7.23.4-macos-arm64.dmg)（118 MB）
+- [macOS Intel 芯片](/dl/v2rayN-7.23.4-macos-64.dmg)（124 MB）
+
+> 不确定 Mac 芯片：左上角  → 关于本机，「芯片」写 Apple 选第一个，写 Intel 选第二个。
+
+- **Windows**：解压后运行 `v2rayN.exe`（路径尽量别带中文空格）；杀软拦截就加白名单  
+- **macOS**：`.dmg` 拖进「应用程序」；无法验证时 → 系统设置 → 隐私与安全性 →「仍要打开」  
+
+#### 购买机场订阅
+
+软件只是壳，还要订阅节点。我在用的（支持 Claude / ChatGPT / X）：
+
+**👉 [点此注册（8 折）](https://58.77vy.xyz/register?code=F0VGpmAi)**，充值填优惠券 **`vyy888`**。我常用 **一年 20 元 / 每月 100G**，跑 Claude Code 够用。
+
+#### 导入订阅并打开代理
+
+1. 机场后台复制「订阅链接」  
+2. v2rayN → 订阅 / Subscription → 添加 → 更新节点  
+3. 选 **香港 / 日本 / 新加坡** 节点  
+4. 打开 **系统代理**（System Proxy）  
+
+**验证**：浏览器能打开 [claude.ai](https://claude.ai) 即可。
+
+**终端代理端口**（仅命令行 Claude Code 需要）：本机常见 **`10808`**（以 v2rayN 设置里为准）。
+
+macOS / Linux：
+
+```bash
+export https_proxy=http://127.0.0.1:10808 http_proxy=http://127.0.0.1:10808
+```
+
+Windows PowerShell：
+
+```powershell
+$env:HTTPS_PROXY="http://127.0.0.1:10808"; $env:HTTP_PROXY="http://127.0.0.1:10808"
+```
+
+可写入 `~/.zshrc` 或 PowerShell 配置文件。桌面端一般只靠系统代理即可。
+
+### 第 2 步：下载安装 Claude / Codex
+
+代理通了再装。可二选一：
+
+**A. 官网（推荐走官方渠道时）**
+
+- Claude 桌面 / 账号：[claude.ai](https://claude.ai)（应用商店或官网下载入口以页面为准）  
+- ChatGPT / Codex 桌面：[chatgpt.com/download](https://chatgpt.com/download)  
+
+**B. 本站直链（与方法一相同，不需要翻墙下安装包）**
+
+- Claude：[macOS](/dl/Claude-macOS.dmg) · [Win x64](/dl/Claude-Setup-x64.exe) · [Win ARM](/dl/Claude-Setup-arm64.exe)  
+- Codex：[mac arm](/dl/Codex-mac-arm64.dmg) · [mac intel](/dl/Codex-mac-intel.dmg) · [Win](/dl/Codex-Windows-x64.msix)  
+
+#### （可选）Claude Code CLI
 
 ```bash
 npm config set registry https://registry.npmmirror.com
 npm install -g @anthropic-ai/claude-code
 ```
 
-装完检查：
+CLI 在终端里跑，务必先设好上面的代理环境变量。
 
-```bash
-claude --version
-```
+### 第 3 步：账号 —— 官方登录 或 CC Switch
 
-### 2.3 （可选）安装 ChatGPT 桌面客户端
+#### 有官方订阅：直接登录
 
-比网页版更顺手：全局快捷键唤起、可对着截图提问。
+- **Claude**：应用内用 [claude.ai](https://claude.ai) 账号 → 切到 **Code**  
+- **CLI**：项目目录执行 `claude`，浏览器登录（Pro/Max 或 [console.anthropic.com](https://console.anthropic.com/) API Key）  
+- **ChatGPT / Codex**：应用内用 OpenAI / ChatGPT 账号登录  
 
-- **macOS**（需 14 Sonoma+）：[官方直接下载 ChatGPT.dmg](https://persistent.oaistatic.com/sidekick/public/ChatGPT.dmg)，打开拖进"应用程序"即可
-- **Windows**（需 Win 10+）：[微软应用商店安装](https://apps.microsoft.com/detail/9nt1r1c2hh7j)，或官方页 [chatgpt.com/download](https://chatgpt.com/download)
+#### 注册时的手机验证：HeroSMS
 
-桌面客户端走系统代理，只要 Clash Verge 的「系统代理」开着就能连上，无需额外设置。
-
----
-
-## 第三步：账号与登录
-
-工具装好了，最后一步是账号。**这里分两条路，看你怎么用。**
-
-### 先让终端走代理（用 Claude Code 必做）
-
-Claude Code 在终端里运行，需要手动让终端走代理。端口用 Clash Verge 的 7897：
-
-**macOS / Linux：**
-
-```bash
-export https_proxy=http://127.0.0.1:7897 http_proxy=http://127.0.0.1:7897
-```
-
-**Windows PowerShell：**
-
-```powershell
-$env:HTTPS_PROXY="http://127.0.0.1:7897"; $env:HTTP_PROXY="http://127.0.0.1:7897"
-```
-
-> 每次开新终端都要重新执行。嫌麻烦可以把这行加到 `~/.zshrc`（macOS）或 PowerShell 配置文件里，一劳永逸。
-
-### 注册账号时的手机验证：用接码平台
-
-没有 Claude / OpenAI 账号的要先注册。注册时通常要**手机号验证**，而 +86 国内手机号大概率不支持（或不想暴露自己的号）。解决办法是用"接码平台"——花几毛钱租一个海外虚拟号收验证码。
-
-我在用的是 **HeroSMS**（老牌 SMS-Activate 同源技术架构，180+ 国家、每日 50 万+ 新号，价格低，有中文界面）：
+没有 Claude / OpenAI 账号时通常要**手机号验证**，+86 往往不行。用接码平台租海外号：
 
 **👉 [点此注册 HeroSMS](https://hero-sms.com/?ref=732020)**
 
-使用流程：
+1. 注册账号（可切中文）  
+2. 充值（几美元够多次）  
+3. 选服务（OpenAI / Claude / Google 等）和国家  
+4. 买号 → 填到注册页 → 在 HeroSMS 收验证码  
 
-1. 注册账号（右上角可切换中文）
-2. 充值余额（几美元够用很多次）
-3. 选择服务（如 OpenAI / Claude / Google，找不到就选 "Any Other"）和国家（美国、英国、印尼等，价格不同）
-4. 购买号码，把号码填到注册页发送验证码
-5. 验证码会直接出现在 HeroSMS 的个人账户里，填回去即可
+> 号码约 20 分钟有效，收不到会退余额。适用于 **Claude Code** 与 **ChatGPT / Codex** 注册。
 
-> 提示：每个号码有效期 20 分钟，期间收不到码的话费用会**自动退回你的余额**，换个号码重试即可。号码用完自动释放，不影响你后续登录（登录一般不再需要收码）。
+#### 用中转站 / 国产 API：CC Switch
 
-### 路线 A：用官方账号（最简单）
+与方法一相同：
 
-如果你有 Claude 官方订阅（Pro / Max）或愿意用官方 API 按量付费，直接登录即可。
+1. 下载 [CC Switch Windows](/dl/CC-Switch-v3.17.0-Windows.msi) / [macOS](/dl/CC-Switch-v3.17.0-macOS.dmg)  
+2. 左侧选 **Claude Code** 或 **Codex** → 添加供应商（Base URL + Key）  
+3. 启用 → 重启客户端验证  
 
-在项目目录里运行：
+DeepSeek 示例：Key 在 [platform.deepseek.com](https://platform.deepseek.com/) 创建，Base URL 常见 `https://api.deepseek.com`。
 
-```bash
-claude
-```
+### 方法二小结
 
-首次运行会弹出浏览器登录。两种方式：
+1. v2rayN + 机场 → 系统代理  
+2. 官网或本站装 Claude / Codex  
+3. 官方订阅就登录；否则 **CC Switch** 接 API  
 
-1. **Claude Pro / Max 订阅**：用 claude.ai 账号登录，按订阅额度使用
-2. **API Key**：在 [console.anthropic.com](https://console.anthropic.com/) 创建 Key，按量付费
+---
 
-登录完就能直接用了。ChatGPT 桌面版同理——打开客户端，用 OpenAI 账号登录即可。
+## 两种方法怎么选
 
-### 路线 B：用中转站或其他模型（省钱 / 灵活）
-
-如果你想接 **API 中转站**（第三方转发，通常更便宜、支付更方便）或切换到别的模型，手动改配置文件很麻烦。用 **CC Switch** 这个桌面工具管理，一键切换。
-
-本站直连下载：
-
-- [CC Switch · Windows（.msi）](/dl/CC-Switch-v3.17.0-Windows.msi)（13 MB）
-- [CC Switch · macOS（.dmg）](/dl/CC-Switch-v3.17.0-macOS.dmg)（26 MB）
-
-macOS 版已 Apple 签名公证，下载拖进"应用程序"即可。
-
-**用法**（以给 Claude Code 加一个中转站为例）：
-
-1. 打开 CC Switch，左侧选 **Claude Code**
-2. 点「添加供应商」，从 50+ 预设里选，或手动填：
-   - **名称**：随便起，如"中转站 A"
-   - **API 地址**：中转站给的 Base URL
-   - **API Key**：中转站给的密钥
-3. 保存后点这个供应商 → 它就成为当前生效的配置
-4. 回终端跑 `claude` 就用上了（Claude Code 支持热切换，不用重启）
-
-想换回官方或另一个中转站，列表里点一下即可。CC Switch 还支持 Codex、Claude Desktop、Gemini CLI 等 7 个工具。
-
-> 什么是中转站？就是第三方搭的转发服务，把请求转发到官方 API，通常更便宜或支付更方便。质量参差不齐，选用前注意甄别，本站不对任何第三方服务做担保（详见[隐私政策](/privacy/)）。
+| 你的情况 | 走哪条 |
+| --- | --- |
+| 先不想搞代理，本站下包装客户端 | **方法一** |
+| 要用官方订阅、或坚持官网下载 | **方法二** |
+| 接中转站 / DeepSeek 等 | 两条路都用 **CC Switch** |
+| 注册要海外手机号 | 方法二里的 **HeroSMS** |
 
 ---
 
 ## 常见问题
 
-**连不上 / 一直转圈？** 九成是终端没走代理，回到第三步检查环境变量；再确认 Clash Verge 的「系统代理」开着、节点可用，多换几个香港/日本/新加坡节点。
+**连不上 / 一直转圈？** 方法二先查代理：系统代理是否开着、节点是否香港/日本/新加坡。CLI 再查端口是否 `10808`。
 
-**`command not found: claude`？** npm 全局 bin 目录不在 PATH 里。执行 `npm config get prefix` 找到路径，把 `<prefix>/bin` 加进 PATH。
+**v2rayN 订阅更新失败？** 校对系统时间；换订阅链接；Windows 用完整解压目录运行。
 
-**ChatGPT 提示地区不支持？** 当前节点出口地区不在 OpenAI 支持范围，换日本/新加坡节点。
+**下载很慢？** Codex 包大，用 Wi‑Fi；本站 `/dl/` 不需要翻墙。
 
-**账号从哪来？** 没有 Claude / OpenAI 账号的需要先注册，注册时的手机号验证用接码平台解决——用法见上文第三步「注册账号时的手机验证」一节。
+**Windows 装不了 `.msix`？** 开发者选项允许侧载，或改官方/商店渠道。
+
+**`command not found: claude`？** `npm config get prefix`，把 `<prefix>/bin` 加进 PATH。
+
+**提示地区不支持？** 换日本/新加坡出口节点。
+
+**注册要手机验证？** 方法二 **HeroSMS**：[hero-sms.com/?ref=732020](https://hero-sms.com/?ref=732020)。
+
+**CC Switch 加了供应商但客户端无响应？** 确认已启用、本地路由开关打开、重启客户端；检查 Base URL 是否漏 `/v1`、Key 是否有空格。
+
+**不会改配置文件？** 不用改。装 CC Switch，图形界面填 URL 和 Key 即可。
 
 ---
 
-有问题可以来 [Telegram 群](https://t.me/+TXvJqNLp8_9iNGNl) 交流，或 X 上私信 [@xfengbro](https://x.com/xfengbro)。
+有问题可以来 [Telegram 群](https://t.me/+TXvJqNLp8_9iNGNl) 交流，扫码加入 **微信 AI 交流群**，或 X 上私信 [@xfengbro](https://x.com/xfengbro)。
+
+![微信 AI 交流群二维码](/assets/wechat-group-qr.jpg?v=20260828)
+
+> 微信群二维码约 7 天有效，过期可到[首页联系区](/#contact)扫最新码，或私信更新。
