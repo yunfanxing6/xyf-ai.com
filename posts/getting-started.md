@@ -276,6 +276,6 @@ DeepSeek 示例：Key 在 [platform.deepseek.com](https://platform.deepseek.com/
 
 有问题可以来 [Telegram 群](https://t.me/+TXvJqNLp8_9iNGNl) 交流，扫码加入 **微信 AI 交流群**，或 X 上私信 [@xfengbro](https://x.com/xfengbro)。
 
-![微信 AI 交流群二维码](/assets/wechat-group-qr.jpg?v=20260828)
+![微信 AI 交流群二维码](/assets/wechat-group-qr.jpg?v=20260913)
 
-> 微信群二维码约 7 天有效，过期可到[首页联系区](/#contact)扫最新码，或私信更新。
+> 微信群二维码约 7 天有效（本张至 9 月 20 日），过期可到[首页联系区](/#contact)扫最新码，或私信更新。

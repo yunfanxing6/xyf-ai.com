@@ -18,7 +18,7 @@ const LINKS = {
     youtube: "https://www.youtube.com/@xyf-ai",
   },
   email: "yunfanxing6@gmail.com",
-  wechatQr: "assets/wechat-group-qr.jpg?v=20260905",
+  wechatQr: "assets/wechat-group-qr.jpg?v=20260913",
 };
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
@@ -449,4 +449,3 @@ async function hydrateXViews() {
   );
   writeViewsCache(cache);
 }
-

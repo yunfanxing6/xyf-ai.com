@@ -1,9 +1,33 @@
 {
   "screenName": "xfengbro",
   "profileUrl": "https://x.com/xfengbro",
-  "updatedAt": "2026-08-20T14:12:25Z",
+  "updatedAt": "2026-09-14T12:04:12Z",
   "listSlots": 3,
   "items": [
+    {
+      "id": "2099429401721184384",
+      "url": "https://x.com/006xyf/status/2099429401721184384",
+      "title": "ChatGPT2026edu免费四个月叠加plus是5个月（210元）",
+      "dek": "x 代充、认证、蓝v聚合网站。plus 120 ，单认证90 ，全包5个月 210",
+      "date": "2026.09.14",
+      "createdTimestamp": 1789377949,
+      "cover": "assets/writing-covers/2099429401721184384.jpg",
+      "coverRemote": "https://pbs.twimg.com/media/HSKEOQLawAAiH70.jpg",
+      "viewsFallback": 153,
+      "tag": "AI 实践"
+    },
+    {
+      "id": "2098711877861949947",
+      "url": "https://x.com/006xyf/status/2098711877861949947",
+      "title": "0额外成本2.46u 3个月 4.93u 6个月x premium蓝v",
+      "dek": "写这篇文章的原因就是实在看不下去那些代充的价格了，不到17块钱的成本你卖50，我绷不住了关键真有人买😂",
+      "date": "2026.09.12",
+      "createdTimestamp": 1789206878,
+      "cover": "assets/writing-covers/2098711877861949947.jpg",
+      "coverRemote": "https://pbs.twimg.com/media/HSAfS6SaIAAbv8B.jpg",
+      "viewsFallback": 711,
+      "tag": "AI 实践"
+    },
     {
       "id": "2090439726666805613",
       "url": "https://x.com/xfengbro/status/2090439726666805613",
@@ -132,19 +156,6 @@
       "tag": "AI 实践",
       "titleDisplay": "AI 做个人网站",
       "featureImage": "assets/writing-ai-site-feature.png"
-    },
-    {
-      "id": "2075534333180621182",
-      "url": "https://x.com/xfengbro/status/2075534333180621182",
-      "title": "无限刷新supergrok额度",
-      "dek": "原理: X的Premium+订阅会赠送SuperGrok的订阅,X Premium+额度与赠送的SuperGrok的额度独立,并且订阅并不是强绑X登录 可以自由绑定到其他账号并随时解绑,被换绑的号订阅会消失",
-      "date": "2026.07.10",
-      "createdTimestamp": 1783680921,
-      "cover": "assets/writing-covers/2075534333180621182.jpg",
-      "coverRemote": "https://pbs.twimg.com/media/HM3HbVWaIAAx4uM.jpg",
-      "viewsFallback": 4414,
-      "tag": "AI 实践",
-      "titleDisplay": "X Premium+ 赠送的 SuperGrok，额度可以独立换绑重置"
     }
   ]
 }

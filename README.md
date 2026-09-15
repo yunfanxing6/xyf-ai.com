@@ -16,7 +16,7 @@ xyf 的个人品牌站：AI 内容实践、公开构建、社群入口。
 | Writing | X Articles 索引（`data/writing.json`，本机 cron + Grok CLI 同步） |
 | Video | 横向滑动视频卡片（封面 → 抖音/YouTube 外链） |
 | Build | 公开构建队列与 GitHub |
-| Contact | 邮件、X、TG 私信、TG 社群、微信群二维码 |
+| Contact | 邮件、X、TG 私信、TG 社群、个人微信、微信群二维码 |
 
 ## 技术栈
 

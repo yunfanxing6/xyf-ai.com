@@ -485,7 +485,7 @@
 .marquee__set{font-family:var(--serif-cjk);font-size:18px;color:var(--muted);letter-spacing:.06em;white-space:nowrap;flex:none;}
 @keyframes marquee{to{transform:translateX(-50%)}}
 
-/* 底部联系栏：5 槽（Email / X / TG私信 / TG社群 / 微信QR） */
+/* 底部联系栏：5 槽（Email / X账号组 / TG私信 / TG社群 / 微信QR） */
 .contact__bar{
   display:grid;
   grid-template-columns:1.15fr 0.95fr 0.95fr 1.05fr 1.15fr;
@@ -500,6 +500,13 @@
 .cbar__item--mail{align-items:center;gap:14px;}
 .cbar__item--mail .cbar__lbl{flex:none;}
 .cbar__item--mail .cbar__arr{margin-left:auto;}
+.cbar__item--x-group{
+  flex-direction:column;align-items:flex-start;justify-content:center;gap:10px;
+}
+.cbar__x-links{display:flex;flex-direction:column;gap:7px;width:100%;}
+.cbar__x-link{display:flex;align-items:center;gap:10px;min-width:0;}
+.cbar__x-link .cbar__val{font-size:15px;}
+.cbar__x-link .cbar__arr{margin-left:auto;}
 .cbar__item--tg-group{
   flex-direction:column;align-items:flex-start;justify-content:center;gap:10px;
 }
@@ -507,8 +514,17 @@
 .cbar__item--wechat{
   flex-direction:column;align-items:center;justify-content:center;gap:8px;
 }
+.cbar__wechat-id{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  color:var(--muted);font-size:11px;letter-spacing:.04em;
+}
+.cbar__wechat-id strong{
+  color:var(--ink);font-size:15px;font-weight:500;letter-spacing:0;
+}
 .cbar__item + .cbar__item{border-left:1px solid var(--line);}
 a.cbar__item:hover{background:rgba(26,23,20,.025);}
+a.cbar__x-link:hover .cbar__val{color:var(--accent);}
+a.cbar__x-link:hover .cbar__arr{transform:translateX(5px);color:var(--accent);}
 .cbar__lbl{font-size:11px;letter-spacing:.14em;color:var(--muted);}
 .cbar__logo{width:22px;height:22px;flex:none;}
 .cbar__logo svg{width:100%;height:100%;}
