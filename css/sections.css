@@ -485,10 +485,10 @@
 .marquee__set{font-family:var(--serif-cjk);font-size:18px;color:var(--muted);letter-spacing:.06em;white-space:nowrap;flex:none;}
 @keyframes marquee{to{transform:translateX(-50%)}}
 
-/* 底部联系栏：5 槽（Email / X账号组 / TG私信 / TG社群 / 微信QR） */
+/* 底部联系栏：5 槽（Email / X账号组 / Telegram组 / 微信QR / QQ群QR） */
 .contact__bar{
   display:grid;
-  grid-template-columns:1.15fr 0.95fr 0.95fr 1.05fr 1.15fr;
+  grid-template-columns:1.15fr 1fr 1fr .95fr .95fr;
   border-top:1px solid var(--line);
 }
 .cbar__item{
@@ -500,25 +500,25 @@
 .cbar__item--mail{align-items:center;gap:14px;}
 .cbar__item--mail .cbar__lbl{flex:none;}
 .cbar__item--mail .cbar__arr{margin-left:auto;}
-.cbar__item--x-group{
+.cbar__item--x-group,
+.cbar__item--tg-group{
   flex-direction:column;align-items:flex-start;justify-content:center;gap:10px;
 }
 .cbar__x-links{display:flex;flex-direction:column;gap:7px;width:100%;}
 .cbar__x-link{display:flex;align-items:center;gap:10px;min-width:0;}
 .cbar__x-link .cbar__val{font-size:15px;}
 .cbar__x-link .cbar__arr{margin-left:auto;}
-.cbar__item--tg-group{
-  flex-direction:column;align-items:flex-start;justify-content:center;gap:10px;
-}
-.cbar__item--tg-group .cbar__arr{align-self:flex-end;}
-.cbar__item--wechat{
+.cbar__item--wechat,
+.cbar__item--qq{
   flex-direction:column;align-items:center;justify-content:center;gap:8px;
 }
-.cbar__wechat-id{
+.cbar__wechat-id,
+.cbar__qq-id{
   display:flex;flex-direction:column;align-items:center;gap:3px;
   color:var(--muted);font-size:11px;letter-spacing:.04em;
 }
-.cbar__wechat-id strong{
+.cbar__wechat-id strong,
+.cbar__qq-id strong{
   color:var(--ink);font-size:15px;font-weight:500;letter-spacing:0;
 }
 .cbar__item + .cbar__item{border-left:1px solid var(--line);}
@@ -530,10 +530,6 @@ a.cbar__x-link:hover .cbar__arr{transform:translateX(5px);color:var(--accent);}
 .cbar__logo svg{width:100%;height:100%;}
 .cbar__val{font-size:17px;color:var(--ink);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .cbar__val em{font-style:normal;font-size:12px;color:var(--muted);}
-.cbar__val--stack{
-  flex-direction:column;align-items:flex-start;gap:4px;
-}
-.cbar__val--stack b{font-weight:600;font-size:17px;letter-spacing:.01em;}
 .cbar__val--mail{flex:none !important;border-bottom:1px solid var(--ink);padding-bottom:3px;transition:color .25s,border-color .25s;}
 a.cbar__item:hover .cbar__val--mail{color:var(--accent);border-color:var(--accent);}
 .cbar__arr{color:var(--ink);transition:transform .25s var(--ease),color .25s;}
@@ -577,7 +573,7 @@ a.cbar__item:hover .cbar__arr{transform:translateX(5px);color:var(--accent);}
   .cbar__item:nth-child(even){border-left:1px solid var(--line);}
   .cbar__item:nth-child(1),
   .cbar__item:nth-child(2){border-top:0;}
-  .cbar__item--wechat{
+  .cbar__item--qq{
     grid-column:1 / -1;
     border-left:0 !important;
   }
