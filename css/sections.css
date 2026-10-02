@@ -512,12 +512,10 @@
 .cbar__item--qq{
   flex-direction:column;align-items:center;justify-content:center;gap:8px;
 }
-.cbar__wechat-id,
 .cbar__qq-id{
   display:flex;flex-direction:column;align-items:center;gap:3px;
   color:var(--muted);font-size:11px;letter-spacing:.04em;
 }
-.cbar__wechat-id strong,
 .cbar__qq-id strong{
   color:var(--ink);font-size:15px;font-weight:500;letter-spacing:0;
 }
