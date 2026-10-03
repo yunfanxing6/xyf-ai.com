@@ -18,7 +18,6 @@ const LINKS = {
     youtube: "https://www.youtube.com/@xyf-ai",
   },
   email: "yunfanxing6@gmail.com",
-  wechatQr: "assets/wechat-group-qr.jpg?v=20260930",
   qqGroupQr: "assets/qq-group-qr.jpg?v=20260930",
   qqGroupId: "1059908891",
 };
